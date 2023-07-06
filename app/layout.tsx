@@ -1,9 +1,9 @@
 import './globals.scss'
 import {Inter} from 'next/font/google'
 import {ReactNode} from 'react'
-import {Providers} from '@/components/Providers/Providers'
-import Header from '@/components/Header/Header'
-import Footer from '@/components/Footer/Footer'
+import {Providers} from '../components/Providers/Providers'
+import Header from '../components/Header/Header'
+import Footer from '../components/Footer/Footer'
 
 const inter = Inter({subsets: ['latin']})
 

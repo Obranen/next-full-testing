@@ -36,8 +36,8 @@ const Navbar = () => {
           <DrawerHeader borderBottomWidth="1px">
             <Button variant={'ghost'} colorScheme="blue" onClick={onClose}>
               <AiOutlineMenuFold/>
-              Menu
             </Button>
+            Menu
           </DrawerHeader>
           <DrawerBody>
             {navigation.map((nav) =>

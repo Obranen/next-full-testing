@@ -22,8 +22,8 @@ const Navbar = () => {
     },
     {
       id: 2,
-      href: '/about',
-      name: 'About'
+      href: '/reviews',
+      name: 'Reviews'
     }
   ]
 
@@ -46,6 +46,7 @@ const Navbar = () => {
                 as={NextLink}
                 href={nav.href}
                 onClick={onClose}
+                style={{display: 'block'}}
               >{nav.name}</Link>
             )}
           </DrawerBody>

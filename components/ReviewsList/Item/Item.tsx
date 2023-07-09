@@ -9,8 +9,10 @@ import {
   CardHeader,
   Container,
   Divider,
-  Flex
+  Flex, Heading
 } from '@chakra-ui/react'
+import UpdateReview from './UpdateReview/UpdateReview'
+import {useRouter} from 'next/navigation'
 
 interface IItem {
   review: IReview
@@ -18,6 +20,14 @@ interface IItem {
 
 const Item: FC<IItem> = ({review}) => {
   const [isEdit, setIsEdit] = useState(false)
+  const router = useRouter()
+
+  const deleteReview = async (id: string) => {
+    const response = await fetch(`http://localhost:3000/api/reviews/${id}`, {
+      method: 'DELETE'
+    })
+    return response.json()
+  }
 
   const cancelEdit = (isCancel: boolean) => {
     setIsEdit(isCancel)
@@ -26,13 +36,13 @@ const Item: FC<IItem> = ({review}) => {
   return (
     <Container marginTop={'20px'} marginBottom={'20px'}>
       {isEdit ?
-        // <UpdatePost cancelEdit={cancelEdit} post={post}/>
-        <></>
+        <UpdateReview cancelEdit={cancelEdit} review={review}/>
         :
         <Card>
           <CardHeader>
             <Flex gap="2" alignItems="center">
               <Avatar name={review.nameReview}/>
+              <Heading size="sm">{review.nameReview}</Heading>
             </Flex>
           </CardHeader>
           <Divider color={'lightgray'}/>
@@ -42,10 +52,10 @@ const Item: FC<IItem> = ({review}) => {
           <CardFooter justify={'space-between'}>
             <Button
               colorScheme="red" variant="outline"
-              // onClick={() => deletePostMutation.mutate(post.id)}
+              onClick={() => deleteReview(review.id).finally(router.refresh)}
             >Delete</Button>
             <Button
-              // onClick={() => setIsEdit(true)}
+              onClick={() => setIsEdit(true)}
               colorScheme="blue"
               variant="outline"
             >Edit</Button>

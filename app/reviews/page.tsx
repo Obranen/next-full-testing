@@ -1,4 +1,5 @@
 import ReviewsList from '../../components/ReviewsList/ReviewsList'
+import CreateReview from '../../components/CreateReview/CreateReview'
 
 export const metadata = {
   title: 'Reviews',
@@ -13,9 +14,7 @@ export interface IReview {
 
 const fetchReviews = async () => {
   const response = await fetch('http://localhost:3000/api/reviews', {
-    next: {
-      revalidate: 20
-    }
+    cache: 'no-store'
   })
   return response.json()
 }
@@ -24,6 +23,7 @@ const Reviews = async () => {
   const reviews: IReview[] = await fetchReviews()
   return (
     <>
+      <CreateReview/>
       <ReviewsList reviews={reviews}/>
     </>
   )

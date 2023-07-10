@@ -1,11 +1,11 @@
 'use client'
 
 import {Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, useDisclosure} from '@chakra-ui/react'
-import NextLink from 'next/link'
-import { Link } from '@chakra-ui/react'
 import {AiOutlineMenu, AiOutlineMenuFold} from 'react-icons/ai'
+import PublicItem from './PublicItem/PublicItem'
+import PrivateItem from './PrivateItem/PrivateItem'
 
-interface INavigation {
+export interface INavigation {
   id: number
   href: string
   name: string
@@ -40,15 +40,12 @@ const Navbar = () => {
             Menu
           </DrawerHeader>
           <DrawerBody>
-            {navigation.map((nav) =>
-              <Link
-                key={nav.id}
-                as={NextLink}
-                href={nav.href}
-                onClick={onClose}
-                style={{display: 'block'}}
-              >{nav.name}</Link>
-            )}
+            <>
+              {navigation.map((nav) =>
+                <PublicItem key={nav.id} onClose={onClose} nav={nav}/>
+              )}
+              <PrivateItem onClose={onClose}/>
+            </>
           </DrawerBody>
         </DrawerContent>
       </Drawer>

@@ -1,7 +1,7 @@
 import {NextResponse} from 'next/server'
 import {prisma} from '../../../prisma/db'
 
-export const GET = async (req: Request, res: NextResponse) => {
+export const GET = async () => {
   try {
     const reviews = await prisma.reviews.findMany()
     return NextResponse.json(reviews)
@@ -10,7 +10,7 @@ export const GET = async (req: Request, res: NextResponse) => {
   }
 }
 
-export const POST = async (req: Request, res: NextResponse) => {
+export const POST = async (req: Request) => {
   try {
     const {nameReview, descReview} = await req.json()
     const review = await prisma.reviews.create({data: {descReview, nameReview}})

@@ -1,7 +1,7 @@
 import {NextResponse} from 'next/server'
 import {prisma} from '../../../../prisma/db'
 
-export const GET = async (req: Request, res: NextResponse) => {
+export const GET = async (req: Request) => {
   try {
     const id = req.url.split('/reviews/')[1]
     const review = await prisma.reviews.findFirst({where: {id}})
@@ -13,7 +13,7 @@ export const GET = async (req: Request, res: NextResponse) => {
   }
 }
 
-export const PUT = async (req: Request, res: NextResponse) => {
+export const PUT = async (req: Request) => {
   try {
     const id = req.url.split('/reviews/')[1]
     const {nameReview, descReview} = await req.json()
@@ -24,7 +24,7 @@ export const PUT = async (req: Request, res: NextResponse) => {
   }
 }
 
-export const DELETE = async (req: Request, res: NextResponse) => {
+export const DELETE = async (req: Request) => {
   try {
     const id = req.url.split('/reviews/')[1]
     const review = await prisma.reviews.delete({where: {id}})

@@ -28,12 +28,20 @@ const PrivateItem: FC<IPrivateItem> = ({onClose}) => {
           })}
           style={{display: 'block'}}
         >Sign Out</Link> :
-        <Link
-          as={NextLink}
-          href={'/api/auth/signin'}
-          onClick={onClose}
-          style={{display: 'block'}}
-        >Sign In</Link>
+        <>
+          <Link
+            as={NextLink}
+            href={'/api/auth/signin'}
+            onClick={onClose}
+            style={{display: 'block'}}
+          >Sign In</Link>
+          <Link
+            as={NextLink}
+            href={'signin'}
+            onClick={onClose}
+            style={{display: 'block'}}
+          >Sign In Custom</Link>
+        </>
       }
     </>
   )

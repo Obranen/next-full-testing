@@ -1,5 +1,5 @@
-import {getServerSession} from 'next-auth'
-import {authConfig} from '../../configs/auth'
+import { getServerSession } from 'next-auth'
+import { authConfig } from '../../lib/auth'
 
 const Profile = async () => {
   const session = await getServerSession(authConfig)
@@ -7,7 +7,9 @@ const Profile = async () => {
   return (
     <>
       <h1>Profile of {session?.user?.name}</h1>
-      {session?.user?.image && <img src={session.user.image} alt={session.user.image}/>}
+      {session?.user?.image && (
+        <img src={session.user.image} alt={session.user.image} />
+      )}
     </>
   )
 }

@@ -10,6 +10,13 @@ interface IReviewsList {
 }
 
 const ReviewsList: FC<IReviewsList> = ({reviews}) => {
+
+  if (!reviews.length) {
+    return <Heading as={'h2'} size={'lg'} textAlign={'center'} marginTop={'30px'} color={'red'}>
+      No Reviews
+    </Heading>
+  }
+
   return (
     <>
       <Heading as={'h2'} size={'lg'} textAlign={'center'} marginTop={'30px'}>

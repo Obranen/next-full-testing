@@ -4,7 +4,7 @@ import {prisma} from '../../../../prisma/db'
 export const GET = async (req: Request) => {
   try {
     const email = req.url.split('/users/')[1]
-    const reviews = await prisma.users.findFirst({
+    const reviews = await prisma.user.findFirst({
         where: {
           email
         },

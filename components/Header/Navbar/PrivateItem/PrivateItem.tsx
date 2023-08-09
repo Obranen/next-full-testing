@@ -12,22 +12,23 @@ const PrivateItem: FC<IPrivateItem> = ({onClose}) => {
 
   return (
     <>
-      {session.data &&
-        <Link
-          as={NextLink}
-          href={'/profile'}
-          onClick={onClose}
-          style={{display: 'block'}}
-        >Profile</Link>}
       {session.data ?
-        <Link
-          as={NextLink}
-          href={'#'}
-          onClick={() => signOut({
-            callbackUrl: '/'
-          })}
-          style={{display: 'block'}}
-        >Sign Out</Link> :
+        <>
+          <Link
+            as={NextLink}
+            href={'/profile'}
+            onClick={onClose}
+            style={{display: 'block'}}
+          >Profile</Link>
+          <Link
+            as={NextLink}
+            href={'#'}
+            onClick={() => signOut({
+              callbackUrl: '/'
+            })}
+            style={{display: 'block'}}
+          >Sign Out</Link>
+        </> :
         <>
           <Link
             as={NextLink}

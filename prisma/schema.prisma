@@ -10,18 +10,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Reviews {
-  id         String @id @default(auto()) @map("_id") @db.ObjectId
-  nameReview String
-  descReview String
-  // author     Users  @relation(fields: [usersId], references: [id])
-  // usersId    String @db.ObjectId
+model User {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  name     String?
+  email    String   @unique
+  password String
+  reviews  Review[]
 }
 
-model Users {
-  id       String  @id @default(auto()) @map("_id") @db.ObjectId
-  name     String?
-  email    String  @unique
-  password String
-  // Reviews  Reviews[]
+model Review {
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  nameReview String
+  descReview String
+  author     User?   @relation(fields: [authorId], references: [id])
+  authorId   String? @db.ObjectId
 }

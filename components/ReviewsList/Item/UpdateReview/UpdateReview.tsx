@@ -1,8 +1,9 @@
 import {FC, useState} from 'react'
-import {IReview} from '../../../../app/reviews/page'
 import {Controller, SubmitHandler, useForm, useFormState} from 'react-hook-form'
 import {Button, Card, CardFooter, CardHeader, FormControl, FormErrorMessage, FormLabel, Input} from '@chakra-ui/react'
 import {useRouter} from 'next/navigation'
+import {IReview} from '../../../../interface/review'
+import {updateReview} from '../../../../async/review'
 
 interface IUpdateReview {
   review: IReview
@@ -12,14 +13,6 @@ interface IUpdateReview {
 const UpdateReview: FC<IUpdateReview> = ({review, cancelEdit}) => {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
-
-  const updateReview = async (data: IReview) => {
-    const response = await fetch(`http://localhost:3000/api/reviews/${data.id}`, {
-      method: 'PUT',
-      body: JSON.stringify({nameReview: data.nameReview, descReview: data.descReview})
-    })
-    return response.json()
-  }
 
   const {handleSubmit, control, resetField} = useForm<IReview>({
     defaultValues: {nameReview: `${review.nameReview}`, descReview: `${review.descReview}`}

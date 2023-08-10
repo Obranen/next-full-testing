@@ -1,5 +1,4 @@
 import {FC, useState} from 'react'
-import {IReview} from '../../../app/reviews/page'
 import {
   Avatar,
   Button,
@@ -13,6 +12,8 @@ import {
 } from '@chakra-ui/react'
 import UpdateReview from './UpdateReview/UpdateReview'
 import {useRouter} from 'next/navigation'
+import {IReview} from '../../../interface/review'
+import {deleteReview} from '../../../async/review'
 
 interface IItem {
   review: IReview
@@ -21,13 +22,6 @@ interface IItem {
 const Item: FC<IItem> = ({review}) => {
   const [isEdit, setIsEdit] = useState(false)
   const router = useRouter()
-
-  const deleteReview = async (id: string) => {
-    const response = await fetch(`http://localhost:3000/api/reviews/${id}`, {
-      method: 'DELETE'
-    })
-    return response.json()
-  }
 
   const cancelEdit = (isCancel: boolean) => {
     setIsEdit(isCancel)

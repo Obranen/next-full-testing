@@ -1,22 +1,11 @@
 import ReviewsList from '../../components/ReviewsList/ReviewsList'
 import CreateReview from '../../components/CreateReview/CreateReview'
+import {fetchReviews} from '../../async/review'
+import {IReview} from '../../interface/review'
 
 export const metadata = {
   title: 'Reviews',
   description: 'page Reviews'
-}
-
-export interface IReview {
-  id: string
-  nameReview: string
-  descReview: string
-}
-
-const fetchReviews = async () => {
-  const response = await fetch('http://localhost:3000/api/reviews', {
-    cache: 'no-store'
-  })
-  return response.json()
 }
 
 const Reviews = async () => {

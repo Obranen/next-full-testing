@@ -1,22 +1,15 @@
 'use client'
 
 import {Controller, SubmitHandler, useForm, useFormState} from 'react-hook-form'
-import {IReview} from '../../app/reviews/page'
 import {Button, Center, Container, FormControl, FormErrorMessage, FormLabel, Heading, Input} from '@chakra-ui/react'
 import {useState} from 'react'
 import {useRouter} from 'next/navigation'
+import {createReview} from '../../async/review'
+import {IReview} from '../../interface/review'
 
 const CreateReview = () => {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
-
-  const createReview = async (data: IReview) => {
-    const response = await fetch(`http://localhost:3000/api/reviews`, {
-      method: 'POST',
-      body: JSON.stringify({nameReview: data.nameReview, descReview: data.descReview})
-    })
-    return response.json()
-  }
 
   const {handleSubmit, control, resetField} = useForm<IReview>({
     defaultValues: {nameReview: '', descReview: ''}
@@ -24,6 +17,7 @@ const CreateReview = () => {
   const {errors} = useFormState({control})
   const onSubmit: SubmitHandler<IReview> = async (data) => {
     setIsLoading(true)
+
     await createReview({
       id: data.id,
       nameReview: data.nameReview,

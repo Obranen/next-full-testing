@@ -4,6 +4,7 @@ import {Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, 
 import {AiOutlineMenu, AiOutlineMenuFold} from 'react-icons/ai'
 import PublicItem from './PublicItem/PublicItem'
 import PrivateItem from './PrivateItem/PrivateItem'
+import {useSession} from 'next-auth/react'
 
 export interface INavigation {
   id: number
@@ -12,9 +13,10 @@ export interface INavigation {
 }
 
 const Navbar = () => {
+  const session = useSession()
   const {isOpen, onOpen, onClose} = useDisclosure()
 
-  const navigation: INavigation[] = [
+  const navPublic: INavigation[] = [
     {
       id: 1,
       href: '/',
@@ -24,6 +26,32 @@ const Navbar = () => {
       id: 2,
       href: '/reviews',
       name: 'Reviews'
+    }
+  ]
+
+  const navPrivateBeforeSignIn: INavigation[] = [
+    {
+      id: 1,
+      href: '/profile',
+      name: 'Profile'
+    }
+  ]
+
+  const navPrivateAfterSignIn: INavigation[] = [
+    {
+      id: 1,
+      href: '/registration',
+      name: 'Registration'
+    },
+    {
+      id: 2,
+      href: '/api/auth/signin',
+      name: 'Sign In'
+    },
+    {
+      id: 3,
+      href: 'signin',
+      name: 'Sign In Custom'
     }
   ]
 
@@ -41,10 +69,22 @@ const Navbar = () => {
           </DrawerHeader>
           <DrawerBody>
             <>
-              {navigation.map((nav) =>
+              {navPublic.map((nav) =>
                 <PublicItem key={nav.id} onClose={onClose} nav={nav}/>
               )}
-              <PrivateItem onClose={onClose}/>
+
+              {session.data ?
+                <>
+                  {navPrivateBeforeSignIn.map((nav) =>
+                    <PrivateItem key={nav.id} onClose={onClose} nav={nav}/>
+                  )}
+                </> :
+                <>
+                  {navPrivateAfterSignIn.map((nav) =>
+                    <PrivateItem key={nav.id} onClose={onClose} nav={nav}/>
+                  )}
+                </>
+              }
             </>
           </DrawerBody>
         </DrawerContent>

@@ -2,6 +2,7 @@ import {IReview} from '../interface/review'
 
 export const fetchReviews = async () => {
   const response = await fetch('http://localhost:3000/api/reviews', {
+    method: 'GET',
     cache: 'no-store'
   })
   return response.json()

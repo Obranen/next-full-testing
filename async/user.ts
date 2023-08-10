@@ -7,3 +7,10 @@ export const createUser = async (data: IUser) => {
   })
   return response.json()
 }
+
+export const checkEmailUser = async (email: string) => {
+  const response = await fetch(`http://localhost:3000/api/registration/${email}`, {
+    method: 'GET'
+  })
+  return response.json()
+}

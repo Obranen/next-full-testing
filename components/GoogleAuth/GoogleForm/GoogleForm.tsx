@@ -16,7 +16,7 @@ const GoogleForm = () => {
       password: formData.get('password'),
       redirect: false
     })
-    
+
     if (response && !response.error) {
       router.push('/profile')
     } else {

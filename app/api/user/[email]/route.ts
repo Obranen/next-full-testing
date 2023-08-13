@@ -1,9 +1,9 @@
-import {prisma} from '../../../../prisma/db'
 import {NextResponse} from 'next/server'
+import {prisma} from '../../../../prisma/db'
 
 export const GET = async (req: Request) => {
   try {
-    const emailValue = req.url.split('/registration/')[1]
+    const emailValue = req.url.split('/user/')[1]
     const response = await prisma.user.findFirst({where: {email: emailValue}})
     return NextResponse.json(response)
   } catch (e) {

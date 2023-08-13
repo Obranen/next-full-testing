@@ -1,10 +1,21 @@
 'use client'
 
-import {Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, useDisclosure} from '@chakra-ui/react'
+import {
+  Button,
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
+  Link,
+  useDisclosure
+} from '@chakra-ui/react'
 import {AiOutlineMenu, AiOutlineMenuFold} from 'react-icons/ai'
 import PublicItem from './PublicItem/PublicItem'
 import PrivateItem from './PrivateItem/PrivateItem'
-import {useSession} from 'next-auth/react'
+import {signOut, useSession} from 'next-auth/react'
+import {usePathname} from 'next/navigation'
+import NextLink from 'next/link'
 
 export interface INavigation {
   id: number
@@ -13,6 +24,7 @@ export interface INavigation {
 }
 
 const Navbar = () => {
+  const pathname = usePathname()
   const session = useSession()
   const {isOpen, onOpen, onClose} = useDisclosure()
 
@@ -24,8 +36,8 @@ const Navbar = () => {
     },
     {
       id: 2,
-      href: '/reviews',
-      name: 'Reviews'
+      href: '/review',
+      name: 'Review'
     }
   ]
 
@@ -70,18 +82,26 @@ const Navbar = () => {
           <DrawerBody>
             <>
               {navPublic.map((nav) =>
-                <PublicItem key={nav.id} onClose={onClose} nav={nav}/>
+                <PublicItem key={nav.id} onClose={onClose} nav={nav} pathname={pathname}/>
               )}
 
-              {session.data ?
+              {session.status === 'authenticated' ?
                 <>
                   {navPrivateBeforeSignIn.map((nav) =>
-                    <PrivateItem key={nav.id} onClose={onClose} nav={nav}/>
+                    <PrivateItem key={nav.id} onClose={onClose} nav={nav} pathname={pathname}/>
                   )}
+                  <Link
+                    as={NextLink}
+                    href={'#'}
+                    onClick={() => signOut({
+                      callbackUrl: '/'
+                    })}
+                    style={{display: 'block'}}
+                  >Sign Out</Link>
                 </> :
                 <>
                   {navPrivateAfterSignIn.map((nav) =>
-                    <PrivateItem key={nav.id} onClose={onClose} nav={nav}/>
+                    <PrivateItem key={nav.id} onClose={onClose} nav={nav} pathname={pathname}/>
                   )}
                 </>
               }

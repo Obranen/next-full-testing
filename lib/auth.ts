@@ -1,11 +1,7 @@
 import {AuthOptions, User} from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import Credentials from 'next-auth/providers/credentials'
-
-const fetchUser = async (data: {email: string}) => {
-  const response = await fetch(`http://localhost:3000/api/users/${data.email}`)
-  return response.json()
-}
+import {createUser, fetchUser} from '../async/user'
 
 export const authConfig: AuthOptions = {
   providers: [
@@ -18,10 +14,10 @@ export const authConfig: AuthOptions = {
         email: {label: 'email', type: 'email', required: true},
         password: {label: 'password', type: 'password', required: true}
       },
-      async authorize (credentials) {
+      async authorize(credentials) {
         if (!credentials?.email || !credentials.password) return null
 
-        const currentUser = await fetchUser({email: credentials.email})
+        const currentUser = await fetchUser(credentials.email)
 
         if (currentUser && currentUser.password === credentials.password) {
           const {password, ...userWithoutPass} = currentUser
@@ -32,5 +28,34 @@ export const authConfig: AuthOptions = {
         return null
       }
     })
-  ]
+  ],
+  callbacks: {
+    async session({session}) {
+      if (session.user?.email) {
+        const sessionUser = await fetchUser(session.user?.email)
+        // @ts-ignore
+        session.user.id = sessionUser.id
+      }
+      return session
+    },
+    async signIn({profile}) {
+      try {
+        if (profile?.email) {
+          const userExist = await fetchUser(profile.email)
+          if (!userExist) {
+            await createUser({
+              // @ts-ignore
+              name: profile.name,
+              email: profile.email,
+              password: '123'
+            })
+          }
+        }
+        return true
+      } catch (e) {
+        console.log(e)
+        return false
+      }
+    }
+  }
 }

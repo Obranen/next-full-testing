@@ -6,20 +6,31 @@ import {useState} from 'react'
 import {useRouter} from 'next/navigation'
 import {createReview} from '../../async/review'
 import {IReview} from '../../interface/review'
+import {useSession} from 'next-auth/react'
 
 const CreateReview = () => {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
+  const session = useSession()
 
-  const {handleSubmit, control, resetField} = useForm<IReview>({
-    defaultValues: {nameReview: '', descReview: ''}
-  })
+  const {
+    handleSubmit,
+    control,
+    resetField,
+    reset
+  } = useForm<IReview>(
+    // @ts-ignore
+    session.status === 'authenticated' ?
+      {values: {nameReview: session.data?.user?.name, descReview: ''}} :
+      {defaultValues: {nameReview: '', descReview: ''}}
+  )
   const {errors} = useFormState({control})
   const onSubmit: SubmitHandler<IReview> = async (data) => {
     setIsLoading(true)
 
     await createReview({
-      id: data.id,
+      // @ts-ignore
+      id: session.data?.user.id,
       nameReview: data.nameReview,
       descReview: data.descReview
     }).finally(() => {
@@ -27,8 +38,13 @@ const CreateReview = () => {
       router.refresh()
     })
 
-    resetField('nameReview')
-    resetField('descReview')
+    if (session.status === 'authenticated') {
+      resetField('nameReview')
+      resetField('descReview')
+    } else {
+      reset({nameReview: '', descReview: ''})
+    }
+
   }
 
   return (
@@ -48,6 +64,7 @@ const CreateReview = () => {
                 type="text"
                 value={field.value}
                 onChange={(e) => field.onChange(e)}
+                isDisabled={session.status === 'authenticated' && true}
               />
               <FormErrorMessage>{errors.nameReview?.message}</FormErrorMessage>
             </FormControl>
@@ -75,7 +92,7 @@ const CreateReview = () => {
             type="submit"
             colorScheme="teal"
             variant="solid"
-            loadingText='Loading...'
+            loadingText="Loading..."
             isLoading={isLoading}
           >
             Add Post

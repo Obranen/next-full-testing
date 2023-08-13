@@ -1,7 +1,7 @@
 'use client'
 
 import {FC} from 'react'
-import {IReview} from '../../app/reviews/page'
+import {IReview} from '../../app/review/page'
 import {Heading} from '@chakra-ui/react'
 import Item from './Item/Item'
 

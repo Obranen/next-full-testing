@@ -17,7 +17,8 @@ import {Controller, SubmitHandler, useForm, useFormState} from 'react-hook-form'
 import {BsEyeSlashFill, BsEyeFill, BsFillCheckSquareFill} from 'react-icons/bs'
 import {AiFillStop} from 'react-icons/ai'
 import {IUser} from '../../interface/user'
-import {checkEmailUser, createUser} from '../../async/user'
+import {createUser, fetchUser} from '../../async/user'
+import {signIn} from 'next-auth/react'
 
 const minLengthValue = 3
 const maxLengthValue = 12
@@ -34,7 +35,7 @@ const RegistrationForm = () => {
     setIsEmail(false)
     setShowCheckEmail(true)
     setLoadingCheckEmail(true)
-    const emailCheck = await checkEmailUser(value)
+    const emailCheck = await fetchUser(value)
     if (emailCheck !== null) {
       setIsEmail(true)
     } else {
@@ -67,6 +68,18 @@ const RegistrationForm = () => {
       resetField('name')
       resetField('email')
       resetField('password')
+
+      const response = await signIn('credentials', {
+        email: data.email,
+        password: data.password,
+        redirect: false
+      })
+
+      if (response && !response.error) {
+        router.push('/profile')
+      } else {
+        console.log(`error signIn ${response}`)
+      }
     } else {
       await checkEmail(data.email)
     }

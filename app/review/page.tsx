@@ -4,11 +4,11 @@ import {fetchReviews} from '../../async/review'
 import {IReview} from '../../interface/review'
 
 export const metadata = {
-  title: 'Reviews',
-  description: 'page Reviews'
+  title: 'Review',
+  description: 'page Review'
 }
 
-const Reviews = async () => {
+const Review = async () => {
   const reviews: IReview[] = await fetchReviews()
   return (
     <>
@@ -18,4 +18,4 @@ const Reviews = async () => {
   )
 }
 
-export default Reviews
+export default Review

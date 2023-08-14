@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth'
 import { authConfig } from '../../lib/auth'
 
-const Profile = async () => {
+const ProfilePage = async () => {
   const session = await getServerSession(authConfig)
 
   return (
@@ -14,4 +14,4 @@ const Profile = async () => {
   )
 }
 
-export default Profile
+export default ProfilePage

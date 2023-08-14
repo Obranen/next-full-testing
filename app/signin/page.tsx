@@ -1,6 +1,6 @@
 import GoogleAuth from '../../components/GoogleAuth/GoogleAuth'
 
-const SignIn = () => {
+const SignInPage = () => {
   return (
     <>
       <GoogleAuth/>
@@ -8,4 +8,4 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default SignInPage

@@ -8,7 +8,7 @@ export const metadata = {
   description: 'page Review'
 }
 
-const Review = async () => {
+const ReviewPage = async () => {
   const reviews: IReview[] = await fetchReviews()
   return (
     <>
@@ -18,4 +18,4 @@ const Review = async () => {
   )
 }
 
-export default Review
+export default ReviewPage

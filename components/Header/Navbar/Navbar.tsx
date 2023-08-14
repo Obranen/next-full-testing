@@ -32,7 +32,7 @@ const Navbar = () => {
     {
       id: 1,
       href: '/',
-      name: 'Home'
+      name: 'Product'
     },
     {
       id: 2,

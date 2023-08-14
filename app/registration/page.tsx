@@ -5,7 +5,7 @@ export const metadata = {
   description: 'page Reviews'
 }
 
-const Registration = () => {
+const RegistrationPage = () => {
   return (
     <>
       <RegistrationForm/>
@@ -13,4 +13,4 @@ const Registration = () => {
   )
 }
 
-export default Registration
+export default RegistrationPage

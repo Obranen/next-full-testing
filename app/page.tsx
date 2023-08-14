@@ -1,20 +1,18 @@
-import Image from 'next/image'
-import imgPizza from '../assets/pizza.jpg'
+import Product from '../components/Product/Product'
+import {fetchProducts} from '../async/product'
+import {IProduct} from '../interface/product'
 
 export const metadata = {
-  title: 'Home',
-  description: 'page Home'
+  title: 'Product',
+  description: 'Product'
 }
 
-export default function Home() {
+export default async function ProductPage() {
+  const products: IProduct[] = await fetchProducts()
+
   return (
     <>
-      <h1>Home</h1>
-      <Image
-        src={imgPizza}
-        alt={'pizza'}
-        priority
-      />
+      <Product products={products}/>
     </>
   )
 }

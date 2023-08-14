@@ -11,17 +11,50 @@ datasource db {
 }
 
 model User {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
   name     String?
-  email    String   @unique
+  email    String    @unique
   password String
   reviews  Review[]
+  product  Product[]
 }
 
 model Review {
   id         String  @id @default(auto()) @map("_id") @db.ObjectId
   nameReview String
   descReview String
-  author     User?   @relation(fields: [authorId], references: [id])
-  authorId   String? @db.ObjectId
+  user       User?   @relation(fields: [userId], references: [id])
+  userId     String? @db.ObjectId
+}
+
+model Product {
+  id        String         @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime?      @default(now())
+  updatedAt DateTime?      @updatedAt
+  imageAlt  String
+  imageSrc  String
+  images    ProductImage[]
+  // role    Role     @default(BASIC)
+  title     String
+  weight    Int
+  desc      String
+  price     Int
+  quantity  Int
+  stock     Int
+  user      User?          @relation(fields: [userId], references: [id])
+  userId    String?        @db.ObjectId
+}
+
+model ProductImage {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  src       String
+  alt       String
+  product   Product? @relation(fields: [productId], references: [id])
+  productId String?  @db.ObjectId
+}
+
+enum Role {
+  BASIC
+  MIDLE
+  ADMIN
 }

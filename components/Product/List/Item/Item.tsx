@@ -1,5 +1,6 @@
 import {FC} from 'react'
 import {IProduct} from '../../../../interface/product'
+import Image from 'next/image'
 import {
   Button,
   ButtonGroup,
@@ -10,7 +11,7 @@ import {
   Heading,
   Stack,
   Text,
-  Image,
+
   Box
 } from '@chakra-ui/react'
 
@@ -29,7 +30,9 @@ const Item: FC<IItem> = ({product}) => {
           <Image
             src={product.imageSrc}
             alt={product.imageAlt}
-            borderRadius="lg"
+            width={500}
+            height={500}
+            // borderRadius="lg"
           />
           <Stack mt="6" spacing="3">
             <Heading size="md">{product.title}</Heading>

@@ -44,7 +44,6 @@ const CreateReview = () => {
     } else {
       reset({nameReview: '', descReview: ''})
     }
-
   }
 
   return (

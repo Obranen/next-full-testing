@@ -1,4 +1,4 @@
-import {FC, FormEvent, useState} from 'react'
+import {FC, useState} from 'react'
 import {IProduct} from '../../../interface/product'
 import ImageUploading, {ImageListType} from 'react-images-uploading'
 import Image from 'next/image'
@@ -15,28 +15,6 @@ const List: FC<IList> = ({products}) => {
   //   </Heading>
   // }
 
-  //One example
-  const [file, setFile] = useState<File>()
-
-  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (!file) return
-
-    try {
-      const data = new FormData()
-      data.set('file', file)
-
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: data
-      })
-      if (!res.ok) throw new Error(await res.text())
-    } catch (e: any) {
-      console.error(e)
-    }
-  }
-
-  //Two example
   const [images, setImages] = useState([]);
   const maxNumber = 69;
 
@@ -50,14 +28,19 @@ const List: FC<IList> = ({products}) => {
   };
 
   const sendData = async () => {
-    // images.map(image => {
-    //   console.log(image.file.name)
-    // })
-    // console.log(images[0].file, 'images')
-    // await fetch('/api/upload', {
-    //   method: 'POST',
-    //   body: {name: images[0].file.name}
-    // })
+    try {
+      const data = new FormData()
+      // @ts-ignore
+      data.set('file', images[0].file)
+
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: data
+      })
+      if (!res.ok) throw new Error(await res.text())
+    } catch (e: any) {
+      console.error(e)
+    }
   }
 
   return (
@@ -67,18 +50,6 @@ const List: FC<IList> = ({products}) => {
       {/*    <Item key={product.id} product={product}/>*/}
       {/*  )}*/}
       {/*</SimpleGrid>*/}
-
-      {/*//One example*/}
-      <form onSubmit={onSubmit}>
-        <input
-          type="file"
-          name="file"
-          onChange={(e) => setFile(e.target.files?.[0])}
-        />
-        <input type="submit" value="Upload"/>
-      </form>
-
-      {/*//Two example*/}
 
       <ImageUploading
         // multiple

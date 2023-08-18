@@ -1,5 +1,5 @@
 import {extname, join} from 'path'
-import {stat, mkdir, writeFile} from 'fs/promises'
+import {mkdir, stat, writeFile} from 'fs/promises'
 import * as dateFn from 'date-fns'
 import {NextRequest, NextResponse} from 'next/server'
 
@@ -7,15 +7,15 @@ function sanitizeFilename(filename: string): string {
   return filename.replace(/[^a-zA-Z0-9_\u0600-\u06FF.]/g, '_')
 }
 
-export async function POST(request: NextRequest) {
-  const formData = await request.formData()
+export async function POST(req: NextRequest) {
+  const formData = await req.formData()
   const file = formData.get('file') as Blob | null
 
   if (!file) {
     return NextResponse.json(
       {error: 'File blob is required.'},
       {status: 400}
-    );
+    )
   }
 
   const buffer = Buffer.from(await file.arrayBuffer())
@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {error: 'Something went wrong.'},
         {status: 500}
-      );
+      )
 
     }
   }

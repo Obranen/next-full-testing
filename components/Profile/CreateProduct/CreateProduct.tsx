@@ -7,7 +7,7 @@ import {
   FormLabel,
   Heading,
   Input, NumberDecrementStepper, NumberIncrementStepper,
-  NumberInput, NumberInputField, NumberInputStepper
+  NumberInput, NumberInputField, NumberInputStepper, Textarea
 } from '@chakra-ui/react'
 import {useState} from 'react'
 import {useRouter} from 'next/navigation'
@@ -69,7 +69,7 @@ const CreateProduct = () => {
             <FormControl isInvalid={!!errors.title?.message} marginTop={'20px'}>
               <FormLabel>Title</FormLabel>
               <Input
-                type="text"
+                type="file"
                 value={field.value}
                 onChange={(e) => field.onChange(e)}
               />
@@ -116,8 +116,8 @@ const CreateProduct = () => {
           render={({field}) => (
             <FormControl isInvalid={!!errors.desc?.message} marginTop={'20px'}>
               <FormLabel>Desc</FormLabel>
-              <Input
-                type="text"
+              <Textarea
+                placeholder='Описание товара'
                 value={field.value}
                 onChange={(e) => field.onChange(e)}
               />

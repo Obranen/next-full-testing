@@ -3,7 +3,6 @@ import { ReactNode } from 'react'
 import Footer from '../components/Footer/Footer'
 import Header from '../components/Header/Header'
 import { Providers } from '../components/Providers/Providers'
-import './globals.scss'
 
 const inter = Inter({ subsets: ['latin'] })
 

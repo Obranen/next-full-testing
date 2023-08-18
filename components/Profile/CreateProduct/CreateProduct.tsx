@@ -1,4 +1,14 @@
-import {Button, Center, Container, FormControl, FormErrorMessage, FormLabel, Heading, Input} from '@chakra-ui/react'
+import {
+  Button,
+  Center,
+  Container,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Heading,
+  Input, NumberDecrementStepper, NumberIncrementStepper,
+  NumberInput, NumberInputField, NumberInputStepper
+} from '@chakra-ui/react'
 import {useState} from 'react'
 import {useRouter} from 'next/navigation'
 import {useSession} from 'next-auth/react'
@@ -118,21 +128,21 @@ const CreateProduct = () => {
         <Controller
           control={control}
           name="price"
-          rules={{
-            required: 'Заполните поле',
-            pattern: {
-              value: /^(\d)$/,
-              message: 'Только цифры'
-            }
-        }}
+          rules={{required: 'Заполните поле'}}
           render={({field}) => (
             <FormControl isInvalid={!!errors.price?.message} marginTop={'20px'}>
               <FormLabel>Price</FormLabel>
-              <Input
-                type="number"
+              <NumberInput
                 value={field.value}
-                onChange={(e) => field.onChange(e)}
-              />
+                onChange={(e) => field.onChange(Number(e))}
+                min={1}
+              >
+                <NumberInputField/>
+                <NumberInputStepper>
+                  <NumberIncrementStepper/>
+                  <NumberDecrementStepper/>
+                </NumberInputStepper>
+              </NumberInput>
               <FormErrorMessage>{errors.price?.message}</FormErrorMessage>
             </FormControl>
           )}
@@ -140,21 +150,21 @@ const CreateProduct = () => {
         <Controller
           control={control}
           name="weight"
-          rules={{
-            required: 'Заполните поле',
-            pattern: {
-              value: /^(\d){1,13}$/,
-              message: 'Только цифры'
-            }
-        }}
+          rules={{required: 'Заполните поле'}}
           render={({field}) => (
             <FormControl isInvalid={!!errors.weight?.message} marginTop={'20px'}>
               <FormLabel>Weight</FormLabel>
-              <Input
-                type="number"
+              <NumberInput
                 value={field.value}
-                onChange={(e) => field.onChange(e)}
-              />
+                onChange={(e) => field.onChange(Number(e))}
+                min={1}
+              >
+                <NumberInputField/>
+                <NumberInputStepper>
+                  <NumberIncrementStepper/>
+                  <NumberDecrementStepper/>
+                </NumberInputStepper>
+              </NumberInput>
               <FormErrorMessage>{errors.weight?.message}</FormErrorMessage>
             </FormControl>
           )}
@@ -162,21 +172,21 @@ const CreateProduct = () => {
         <Controller
           control={control}
           name="quantity"
-          rules={{
-            required: 'Заполните поле',
-            pattern: {
-              value: /^(\d){1,13}$/,
-              message: 'Только цифры'
-            }
-          }}
+          rules={{required: 'Заполните поле'}}
           render={({field}) => (
             <FormControl isInvalid={!!errors.quantity?.message} marginTop={'20px'}>
               <FormLabel>Quantity</FormLabel>
-              <Input
-                type="number"
+              <NumberInput
                 value={field.value}
-                onChange={(e) => field.onChange(e)}
-              />
+                onChange={(e) => field.onChange(Number(e))}
+                min={1}
+              >
+                <NumberInputField/>
+                <NumberInputStepper>
+                  <NumberIncrementStepper/>
+                  <NumberDecrementStepper/>
+                </NumberInputStepper>
+              </NumberInput>
               <FormErrorMessage>{errors.quantity?.message}</FormErrorMessage>
             </FormControl>
           )}
@@ -184,21 +194,21 @@ const CreateProduct = () => {
         <Controller
           control={control}
           name="stock"
-          rules={{
-            required: 'Заполните поле',
-            pattern: {
-              value: /^(\d){1,13}$/,
-              message: 'Только цифры'
-            }
-          }}
+          rules={{required: 'Заполните поле'}}
           render={({field}) => (
             <FormControl isInvalid={!!errors.stock?.message} marginTop={'20px'}>
               <FormLabel>Stock</FormLabel>
-              <Input
-                type="number"
+              <NumberInput
                 value={field.value}
-                onChange={(e) => field.onChange(e)}
-              />
+                onChange={(e) => field.onChange(Number(e))}
+                min={1}
+              >
+                <NumberInputField/>
+                <NumberInputStepper>
+                  <NumberIncrementStepper/>
+                  <NumberDecrementStepper/>
+                </NumberInputStepper>
+              </NumberInput>
               <FormErrorMessage>{errors.stock?.message}</FormErrorMessage>
             </FormControl>
           )}

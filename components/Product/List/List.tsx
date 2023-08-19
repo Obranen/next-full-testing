@@ -15,28 +15,30 @@ const List: FC<IList> = ({products}) => {
   //   </Heading>
   // }
 
-  const [images, setImages] = useState([]);
-  const maxNumber = 69;
+  const [images, setImages] = useState([])
+  const maxNumber = 5
 
   const onChange = (
     imageList: ImageListType,
-    addUpdateIndex: number[] | undefined
+    // addUpdateIndex: number[] | undefined
   ) => {
-    // data for submit
-    console.log(imageList, addUpdateIndex);
-    setImages(imageList as never[]);
+    setImages(imageList as never[])
   };
 
   const sendData = async () => {
     try {
-      const data = new FormData()
-      // @ts-ignore
-      data.set('file', images[0].file)
+      const formData = new FormData()
+
+      images.forEach(image => {
+        // @ts-ignore
+        formData.append('file', image.file)
+      })
 
       const res = await fetch('/api/upload', {
         method: 'POST',
-        body: data
+        body: formData
       })
+
       if (!res.ok) throw new Error(await res.text())
     } catch (e: any) {
       console.error(e)
@@ -52,7 +54,7 @@ const List: FC<IList> = ({products}) => {
       {/*</SimpleGrid>*/}
 
       <ImageUploading
-        // multiple
+        multiple
         value={images}
         onChange={onChange}
         maxNumber={maxNumber}

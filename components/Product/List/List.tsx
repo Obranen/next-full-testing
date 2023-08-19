@@ -1,7 +1,7 @@
-import {FC, useState} from 'react'
+import {FC} from 'react'
 import {IProduct} from '../../../interface/product'
-import ImageUploading, {ImageListType} from 'react-images-uploading'
-import Image from 'next/image'
+import {Heading, SimpleGrid} from '@chakra-ui/react'
+import Item from './Item/Item'
 
 interface IList {
   products: IProduct[]
@@ -9,92 +9,19 @@ interface IList {
 
 const List: FC<IList> = ({products}) => {
 
-  // if (!products.length) {
-  //   return <Heading as={'h2'} size={'lg'} textAlign={'center'} marginTop={'30px'} color={'red'}>
-  //     No Products
-  //   </Heading>
-  // }
-
-  const [images, setImages] = useState([])
-  const maxNumber = 5
-
-  const onChange = (
-    imageList: ImageListType,
-    // addUpdateIndex: number[] | undefined
-  ) => {
-    setImages(imageList as never[])
-  };
-
-  const sendData = async () => {
-    try {
-      const formData = new FormData()
-
-      images.forEach(image => {
-        // @ts-ignore
-        formData.append('file', image.file)
-      })
-
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData
-      })
-
-      if (!res.ok) throw new Error(await res.text())
-    } catch (e: any) {
-      console.error(e)
-    }
+  if (!products.length) {
+    return <Heading as={'h2'} size={'lg'} textAlign={'center'} marginTop={'30px'} color={'red'}>
+      No Products
+    </Heading>
   }
 
   return (
     <>
-      {/*<SimpleGrid columns={5} spacing={3}>*/}
-      {/*  {products.map((product: IProduct) =>*/}
-      {/*    <Item key={product.id} product={product}/>*/}
-      {/*  )}*/}
-      {/*</SimpleGrid>*/}
-
-      <ImageUploading
-        multiple
-        value={images}
-        onChange={onChange}
-        maxNumber={maxNumber}
-      >
-        {({
-            imageList,
-            onImageUpload,
-            onImageRemoveAll,
-            onImageUpdate,
-            onImageRemove,
-            isDragging,
-            dragProps
-          }) => (
-          <>
-            {/*// write your building UI*/}
-            <div className="upload__image-wrapper">
-              <div {...dragProps} style={{width: '500px', height: '300px', border: '1px dotted #000'}}>
-                <button
-                  style={isDragging ? {color: 'red'} : undefined}
-                  onClick={onImageUpload}
-                >
-                  {isDragging ? 'Click or Drop here' : 'Upload space'}
-                </button>
-              </div>
-              &nbsp;
-              <button onClick={onImageRemoveAll}>Remove all images</button>
-              {imageList.map((image, index) => (
-                <div key={index} className="image-item">
-                  {image.dataURL && <Image src={image.dataURL} alt="" width={200} height={200}/>}
-                  <div className="image-item__btn-wrapper">
-                    <button onClick={() => onImageUpdate(index)}>Update</button>
-                    <button onClick={() => onImageRemove(index)}>Remove</button>
-                    <button onClick={sendData}>add</button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </>
+      <SimpleGrid columns={5} spacing={3}>
+        {products.map((product: IProduct) =>
+          <Item key={product.id} product={product}/>
         )}
-      </ImageUploading>
+      </SimpleGrid>
     </>
   )
 }

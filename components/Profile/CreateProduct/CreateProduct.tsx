@@ -6,8 +6,13 @@ import {
   FormErrorMessage,
   FormLabel,
   Heading,
-  Input, NumberDecrementStepper, NumberIncrementStepper,
-  NumberInput, NumberInputField, NumberInputStepper, Textarea
+  Input,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  Textarea
 } from '@chakra-ui/react'
 import {useState} from 'react'
 import {useRouter} from 'next/navigation'
@@ -15,11 +20,15 @@ import {useSession} from 'next-auth/react'
 import {Controller, SubmitHandler, useForm, useFormState} from 'react-hook-form'
 import {IProduct} from '../../../interface/product'
 import {createProduct} from '../../../async/product'
+import {ImageListType} from 'react-images-uploading'
+import {createImages} from '../../../async/upload'
+import Uploader from '../../ui/Uploader/Uploader'
 
 const CreateProduct = () => {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const {data: session} = useSession()
+  const [images, setImages] = useState<any[]>([])
 
   const {
     handleSubmit,
@@ -32,11 +41,17 @@ const CreateProduct = () => {
   const onSubmit: SubmitHandler<IProduct> = async (data) => {
     setIsLoading(true)
 
+    const formData = new FormData()
+    images.forEach(image => {
+      formData.append('file', image.file)
+    })
+    await createImages(formData)
+
     await createProduct({
       // @ts-ignore
       id: session?.user.id,
       title: data.title,
-      imageSrc: data.imageSrc,
+      imageSrc: images[0].file.name,
       imageAlt: data.imageAlt,
       desc: data.desc,
       price: data.price,
@@ -55,6 +70,10 @@ const CreateProduct = () => {
     reset()
   }
 
+  const imagesChange = (imageList: ImageListType) => {
+    setImages(imageList as never[])
+  }
+
   return (
     <Container>
       <Heading as={'h3'} size={'lg'} textAlign={'center'} marginTop={'20px'}>
@@ -69,7 +88,7 @@ const CreateProduct = () => {
             <FormControl isInvalid={!!errors.title?.message} marginTop={'20px'}>
               <FormLabel>Title</FormLabel>
               <Input
-                type="file"
+                type="text"
                 value={field.value}
                 onChange={(e) => field.onChange(e)}
               />
@@ -77,22 +96,9 @@ const CreateProduct = () => {
             </FormControl>
           )}
         />
-        <Controller
-          control={control}
-          name="imageSrc"
-          rules={{required: 'Заполните поле'}}
-          render={({field}) => (
-            <FormControl isInvalid={!!errors.imageSrc?.message} marginTop={'20px'}>
-              <FormLabel>Image Src</FormLabel>
-              <Input
-                type="text"
-                value={field.value}
-                onChange={(e) => field.onChange(e)}
-              />
-              <FormErrorMessage>{errors.imageSrc?.message}</FormErrorMessage>
-            </FormControl>
-          )}
-        />
+
+        <Uploader multiple={true} onChange={imagesChange} images={images}/>
+
         <Controller
           control={control}
           name="imageAlt"
@@ -117,7 +123,7 @@ const CreateProduct = () => {
             <FormControl isInvalid={!!errors.desc?.message} marginTop={'20px'}>
               <FormLabel>Desc</FormLabel>
               <Textarea
-                placeholder='Описание товара'
+                placeholder="Описание товара"
                 value={field.value}
                 onChange={(e) => field.onChange(e)}
               />

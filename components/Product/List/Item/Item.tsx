@@ -11,7 +11,6 @@ import {
   Heading,
   Stack,
   Text,
-
   Box
 } from '@chakra-ui/react'
 
@@ -27,16 +26,12 @@ const Item: FC<IItem> = ({product}) => {
     <Box>
       <Card maxW="sm">
         <CardBody>
-          {/*<Image*/}
-          {/*  // src={product.imageSrc}*/}
-          {/*  // src={'http://localhost:3000/assets/product/pizza/chetyre-syra_1567059967719.jpeg'}*/}
-          {/*  src={'https://images.unsplash.com/photo-1682686580003-22d3d65399a8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1931&q=80'}*/}
-          {/*  // alt={product.imageAlt}*/}
-          {/*  alt={'resg'}*/}
-          {/*  width={500}*/}
-          {/*  height={500}*/}
-          {/*  // borderRadius="lg"*/}
-          {/*/>*/}
+          <Image
+            src={`/images/product/${product.imageSrc}`}
+            alt={product.imageAlt}
+            width={500}
+            height={500}
+          />
           <Stack mt="6" spacing="3">
             <Heading size="md">{product.title}</Heading>
             <Text>

@@ -29,6 +29,7 @@ const CreateProduct = () => {
   const router = useRouter()
   const {data: session} = useSession()
   const [images, setImages] = useState<any[]>([])
+  const [imageError, setImageError] = useState(false)
 
   const {
     handleSubmit,
@@ -39,35 +40,42 @@ const CreateProduct = () => {
   )
   const {errors} = useFormState({control})
   const onSubmit: SubmitHandler<IProduct> = async (data) => {
-    setIsLoading(true)
+    if (images.length !== 0) {
+      setIsLoading(true)
 
-    const formData = new FormData()
-    images.forEach(image => {
-      formData.append('file', image.file)
-    })
-    await createImages(formData)
+      if (imageError) {
+        setImageError(false)
+      }
 
-    await createProduct({
-      // @ts-ignore
-      id: session?.user.id,
-      title: data.title,
-      imageSrc: images[0].file.name,
-      imageAlt: data.imageAlt,
-      desc: data.desc,
-      price: data.price,
-      weight: data.weight,
-      quantity: data.quantity,
-      stock: data.stock,
-      images: [{
-        alt: '',
-        src: ''
-      }]
-    }).finally(() => {
-      setIsLoading(false)
-      router.refresh()
-    })
+      const formData = new FormData()
+      images.forEach(image => {
+        formData.append('file', image.file)
+      })
+      await createImages(formData)
 
-    reset()
+      await createProduct({
+        // @ts-ignore
+        id: session?.user.id,
+        title: data.title,
+        imageSrc: images[0].file.name,
+        imageAlt: data.imageAlt,
+        desc: data.desc,
+        price: data.price,
+        weight: data.weight,
+        quantity: data.quantity,
+        stock: data.stock,
+        images: [{
+          alt: '',
+          src: ''
+        }]
+      }).finally(() => {
+        setIsLoading(false)
+        reset()
+        router.refresh()
+      })
+    } else {
+      setImageError(true)
+    }
   }
 
   const imagesChange = (imageList: ImageListType) => {
@@ -97,7 +105,11 @@ const CreateProduct = () => {
           )}
         />
 
-        <Uploader multiple={true} onChange={imagesChange} images={images}/>
+        <FormControl isInvalid={imageError} marginTop={'20px'}>
+          <FormLabel>Main Image</FormLabel>
+          <Uploader onChange={imagesChange} images={images}/>
+          <FormErrorMessage>{'Выберите картинку'}</FormErrorMessage>
+        </FormControl>
 
         <Controller
           control={control}

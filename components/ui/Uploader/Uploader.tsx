@@ -1,4 +1,4 @@
-import {FC} from 'react'
+import {FC, useEffect} from 'react'
 import Image from 'next/image'
 import ImageUploading, {ImageListType} from 'react-images-uploading'
 import {Button, Center, Flex, SimpleGrid} from '@chakra-ui/react'
@@ -11,6 +11,7 @@ interface IUploader {
 }
 
 const Uploader: FC<IUploader> = ({multiple = false, maxQuantityImages = 5, onChange, images}) => {
+
   return (
     <ImageUploading
       multiple={multiple}
@@ -30,17 +31,15 @@ const Uploader: FC<IUploader> = ({multiple = false, maxQuantityImages = 5, onCha
         <>
           <Center
             {...dragProps}
-            style={isDragging ? {borderColor: 'orange'} : undefined}
             h="300px"
-            border={'2px dotted teal'}
+            border={isDragging ? '2px dotted orange' : '2px dotted teal'}
             borderRadius={'6px'}
             marginTop={'20px'}
             marginBottom={'20px'}
           >
             <Button
-              style={isDragging ? {color: 'orange'} : undefined}
               onClick={onImageUpload}
-              colorScheme="teal"
+              colorScheme={isDragging ? 'orange' : 'teal'}
               variant="outline"
             >
               {isDragging ? 'Click or Drop here' : 'Upload space'}
@@ -48,7 +47,7 @@ const Uploader: FC<IUploader> = ({multiple = false, maxQuantityImages = 5, onCha
           </Center>
 
           <Center marginBottom={'20px'}>
-            <Button colorScheme="teal" variant="solid" onClick={onImageRemoveAll}> Remove all images</Button>
+            <Button colorScheme="red" variant="solid" onClick={onImageRemoveAll}> Remove all images</Button>
           </Center>
 
           <SimpleGrid columns={3} spacing={5} marginBottom={'20px'}>
@@ -57,9 +56,9 @@ const Uploader: FC<IUploader> = ({multiple = false, maxQuantityImages = 5, onCha
                 {image.dataURL && image.file?.name &&
                   <Image src={image.dataURL} alt={image.file?.name} fill/>}
                 <Flex flex={0} justify={'space-between'} style={{marginTop: '124px'}}>
-                  <Button size={'xs'} onClick={() => onImageUpdate(index)} colorScheme="teal"
+                  <Button size={'xs'} onClick={() => onImageUpdate(index)} colorScheme="blue"
                           variant="outline">Update</Button>
-                  <Button size={'xs'} onClick={() => onImageRemove(index)} colorScheme="teal"
+                  <Button size={'xs'} onClick={() => onImageRemove(index)} colorScheme="red"
                           variant="outline">Remove</Button>
                 </Flex>
               </div>

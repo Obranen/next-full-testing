@@ -1,15 +1,28 @@
 import {Controller, SubmitHandler, useForm, useFormState} from 'react-hook-form'
-import {Button, Center, Container, FormControl, FormErrorMessage, FormLabel, Heading, Input} from '@chakra-ui/react'
+import {
+  Button,
+  Center,
+  Container,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Heading,
+  Input, Link,
+  useToast
+} from '@chakra-ui/react'
 import {useState} from 'react'
 import {useRouter} from 'next/navigation'
 import {createReview} from '../../../async/review'
 import {IReview} from '../../../interface/review'
 import {useSession} from 'next-auth/react'
+import NextLink from 'next/link'
+import classes from '../../Header/Navbar/Navbar.module.scss'
 
 const CreateForm = () => {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const session = useSession()
+  const toast = useToast()
 
   const {
     handleSubmit,
@@ -24,6 +37,27 @@ const CreateForm = () => {
   )
   const {errors} = useFormState({control})
   const onSubmit: SubmitHandler<IReview> = async (data) => {
+    // @ts-ignore
+    if (!session.data?.user.id) {
+      return toast({
+        status: 'warning',
+        title:
+          <>
+            <Link
+              as={NextLink}
+              href={`registration`}
+              style={{display: 'block'}}
+            >Registration</Link>
+            <Link
+              as={NextLink}
+              href={`signin`}
+              style={{display: 'block'}}
+            >Sign In Custom</Link>
+          </>,
+        position: 'top'
+      })
+    }
+
     setIsLoading(true)
 
     await createReview({

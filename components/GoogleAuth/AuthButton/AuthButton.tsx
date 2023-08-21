@@ -2,7 +2,7 @@ import {Button, Center} from '@chakra-ui/react'
 import {useSearchParams} from 'next/navigation'
 import {signIn} from 'next-auth/react'
 
-const Button = () => {
+const AuthButton = () => {
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get('callbackUrl') || '/profile'
 
@@ -19,4 +19,4 @@ const Button = () => {
   )
 }
 
-export default Button
+export default AuthButton

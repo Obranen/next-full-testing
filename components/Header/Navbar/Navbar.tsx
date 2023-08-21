@@ -38,6 +38,11 @@ const Navbar = () => {
       id: 2,
       href: '/review',
       name: 'Review'
+    },
+    {
+      id: 3,
+      href: '/contact',
+      name: 'Contact'
     }
   ]
 

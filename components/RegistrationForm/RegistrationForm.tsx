@@ -62,7 +62,6 @@ const RegistrationForm = () => {
         password: data.password
       }).finally(() => {
         setIsLoading(false)
-        router.refresh()
       })
 
       resetField('name')

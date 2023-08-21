@@ -1,15 +1,14 @@
-'use client'
-
 import {FC} from 'react'
 import {Heading} from '@chakra-ui/react'
 import Item from './Item/Item'
-import {IReview} from '../../interface/review'
+import {IReview} from '../../../interface/review'
 
-interface IReviewsList {
+
+interface IList {
   reviews: IReview[]
 }
 
-const ReviewsList: FC<IReviewsList> = ({reviews}) => {
+const List: FC<IReviewsList> = ({reviews}) => {
 
   if (!reviews.length) {
     return <Heading as={'h2'} size={'lg'} textAlign={'center'} marginTop={'30px'} color={'red'}>
@@ -29,4 +28,4 @@ const ReviewsList: FC<IReviewsList> = ({reviews}) => {
   )
 }
 
-export default ReviewsList
+export default List

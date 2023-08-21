@@ -2,7 +2,7 @@
 
 import {Tab, TabList, TabPanel, TabPanels, Tabs} from '@chakra-ui/tabs'
 import {useSession} from 'next-auth/react'
-import CreateProduct from './CreateProduct/CreateProduct'
+import CreateProductForm from './CreateProductForm/CreateProductForm'
 
 const Profile = () => {
   const {data: session} = useSession()
@@ -17,7 +17,7 @@ const Profile = () => {
 
       <TabPanels>
         <TabPanel>
-          <CreateProduct/>
+          <CreateProductForm/>
         </TabPanel>
         <TabPanel>
           two

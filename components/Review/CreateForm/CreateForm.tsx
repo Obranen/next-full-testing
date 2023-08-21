@@ -1,14 +1,12 @@
-'use client'
-
 import {Controller, SubmitHandler, useForm, useFormState} from 'react-hook-form'
 import {Button, Center, Container, FormControl, FormErrorMessage, FormLabel, Heading, Input} from '@chakra-ui/react'
 import {useState} from 'react'
 import {useRouter} from 'next/navigation'
-import {createReview} from '../../async/review'
-import {IReview} from '../../interface/review'
+import {createReview} from '../../../async/review'
+import {IReview} from '../../../interface/review'
 import {useSession} from 'next-auth/react'
 
-const CreateReview = () => {
+const CreateForm = () => {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const session = useSession()
@@ -102,4 +100,4 @@ const CreateReview = () => {
   )
 }
 
-export default CreateReview
+export default CreateForm

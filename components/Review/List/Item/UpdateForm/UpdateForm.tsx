@@ -2,15 +2,15 @@ import {FC, useState} from 'react'
 import {Controller, SubmitHandler, useForm, useFormState} from 'react-hook-form'
 import {Button, Card, CardFooter, CardHeader, FormControl, FormErrorMessage, FormLabel, Input} from '@chakra-ui/react'
 import {useRouter} from 'next/navigation'
-import {IReview} from '../../../../interface/review'
-import {updateReview} from '../../../../async/review'
+import {IReview} from '../../../../../interface/review'
+import {updateReview} from '../../../../../async/review'
 
-interface IUpdateReview {
+interface IUpdateForm {
   review: IReview
   cancelEdit: (isCancel: boolean) => void
 }
 
-const UpdateReview: FC<IUpdateReview> = ({review, cancelEdit}) => {
+const UpdateForm: FC<IUpdateForm> = ({review, cancelEdit}) => {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
@@ -92,4 +92,4 @@ const UpdateReview: FC<IUpdateReview> = ({review, cancelEdit}) => {
 }
 
 
-export default UpdateReview
+export default UpdateForm

@@ -3,7 +3,7 @@ import {useRouter} from 'next/navigation'
 import {signIn} from 'next-auth/react'
 import {Button, Center, Input} from '@chakra-ui/react'
 
-const GoogleForm = () => {
+const Form = () => {
   const router = useRouter()
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
@@ -53,4 +53,4 @@ const GoogleForm = () => {
   )
 }
 
-export default GoogleForm
+export default Form

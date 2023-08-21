@@ -10,10 +10,10 @@ import {
   Divider,
   Flex, Heading
 } from '@chakra-ui/react'
-import UpdateReview from './UpdateReview/UpdateReview'
+import UpdateForm from './UpdateForm/UpdateForm'
 import {useRouter} from 'next/navigation'
-import {IReview} from '../../../interface/review'
-import {deleteReview} from '../../../async/review'
+import {IReview} from '../../../../interface/review'
+import {deleteReview} from '../../../../async/review'
 
 interface IItem {
   review: IReview
@@ -30,7 +30,7 @@ const Item: FC<IItem> = ({review}) => {
   return (
     <Container marginTop={'20px'} marginBottom={'20px'}>
       {isEdit ?
-        <UpdateReview cancelEdit={cancelEdit} review={review}/>
+        <UpdateForm cancelEdit={cancelEdit} review={review}/>
         :
         <Card>
           <CardHeader>

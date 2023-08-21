@@ -1,8 +1,8 @@
 'use client'
 
-import GoogleButton from './GoogleButton/GoogleButton'
+import Button from './Button/Button'
 import {Container, Heading} from '@chakra-ui/react'
-import GoogleForm from './GoogleForm/GoogleForm'
+import Form from './Form/Form'
 import { Text } from '@chakra-ui/react'
 
 const GoogleAuth = () => {
@@ -11,11 +11,11 @@ const GoogleAuth = () => {
       <Heading as={'h3'} size={'lg'} textAlign={'center'} marginTop={'20px'}>
         SignIn Custom
       </Heading>
-      <GoogleButton/>
+      <Button/>
       <Text fontSize='lg' textAlign={'center'} marginTop={'20px'}>
         or
       </Text>
-      <GoogleForm/>
+      <Form/>
     </Container>
   )
 }

@@ -24,7 +24,7 @@ import {ImageListType} from 'react-images-uploading'
 import {createImages} from '../../../async/upload'
 import Uploader from '../../ui/Uploader/Uploader'
 
-const CreateProduct = () => {
+const CreateProductForm = () => {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const {data: session} = useSession()
@@ -248,4 +248,4 @@ const CreateProduct = () => {
   )
 }
 
-export default CreateProduct
+export default CreateProductForm

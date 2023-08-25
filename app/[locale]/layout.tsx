@@ -4,6 +4,7 @@ import Header from '../../components/Header/Header'
 import {Providers} from '../../components/Providers/Providers'
 import {useLocale} from 'next-intl'
 import {notFound} from 'next/navigation'
+import classes from './global.module.scss'
 
 // const inter = Inter({ subsets: ['latin'] })
 
@@ -16,17 +17,17 @@ export default function RootLayout({children, params}: { children: ReactNode, pa
   const locale = useLocale();
 
   if (params.locale !== locale) {
-    notFound();
+    notFound()
   }
 
   return (
     <html lang={locale}>
     {/*<body className={inter.className}>*/}
-    <body>
+    <body className={classes.body}>
     <Providers>
-      <Header/>
-      <main>{children}</main>
-      <Footer/>
+      <header className={classes.header}><Header/></header>
+      <main className={classes.main}>{children}</main>
+      <footer className={classes.footer}><Footer/></footer>
     </Providers>
     </body>
     </html>

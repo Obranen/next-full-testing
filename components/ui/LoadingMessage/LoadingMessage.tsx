@@ -2,7 +2,7 @@
 
 import {Center, Spinner} from '@chakra-ui/react'
 
-const LoadingPage = () => {
+const LoadingMessage = () => {
   return (
     <>
       <Center marginTop={30}>
@@ -18,4 +18,4 @@ const LoadingPage = () => {
   )
 }
 
-export default LoadingPage
+export default LoadingMessage

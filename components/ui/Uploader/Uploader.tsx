@@ -1,4 +1,4 @@
-import {FC, useEffect} from 'react'
+import {FC} from 'react'
 import Image from 'next/image'
 import ImageUploading, {ImageListType} from 'react-images-uploading'
 import {Button, Center, Flex, SimpleGrid} from '@chakra-ui/react'

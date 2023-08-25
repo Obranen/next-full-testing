@@ -2,11 +2,11 @@ import {Heading} from '@chakra-ui/react'
 
 import {FC} from 'react'
 
-interface IErrorPage {
+interface IErrorMessage {
   errorMassage: any
 }
 
-const ErrorPage: FC<IErrorPage> = ({errorMassage}) => {
+const ErrorMessage: FC<IErrorMessage> = ({errorMassage}) => {
   return (
     <>
       <Heading as={'h2'} size={'lg'} textAlign={'center'} color={'red'} marginTop={'30px'}>
@@ -16,4 +16,4 @@ const ErrorPage: FC<IErrorPage> = ({errorMassage}) => {
   )
 }
 
-export default ErrorPage
+export default ErrorMessage

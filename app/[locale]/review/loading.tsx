@@ -1,8 +1,8 @@
-import LoadingPage from '../../../components/ui/LoadingPage/LoadingPage'
+import LoadingMessage from '../../../components/ui/LoadingMessage/LoadingMessage'
 
 const Loading = () => {
   return (
-    <LoadingPage/>
+    <LoadingMessage/>
   )
 }
 

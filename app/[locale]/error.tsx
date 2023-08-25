@@ -1,10 +1,10 @@
 'use client'
 
-import ErrorPage from '../../components/ui/ErrorPage/ErrorPage'
+import ErrorMessage from '../../components/ui/ErrorMessage/ErrorMessage'
 
 const Error = ({error}: {error: Error}) => {
   return (
-    <ErrorPage errorMassage={error.message}/>
+    <ErrorMessage errorMassage={error.message}/>
   )
 }
 

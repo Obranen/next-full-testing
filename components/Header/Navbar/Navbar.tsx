@@ -11,7 +11,7 @@ import {AiOutlineMenu, AiOutlineMenuFold} from 'react-icons/ai'
 import PublicItem from './PublicItem/PublicItem'
 import PrivateItem from './PrivateItem/PrivateItem'
 import {signOut, useSession} from 'next-auth/react'
-import {usePathname} from 'next/navigation'
+import {usePathname} from 'next-intl/client'
 import Link from 'next-intl/link'
 
 export interface INavigation {
@@ -54,7 +54,7 @@ const Navbar = () => {
   const navPrivateAfterSignIn: INavigation[] = [
     {
       id: 1,
-      href: 'registration',
+      href: '/registration',
       name: 'Registration'
     },
     {
@@ -64,7 +64,7 @@ const Navbar = () => {
     },
     {
       id: 3,
-      href: 'signin',
+      href: '/signin',
       name: 'Sign In Custom'
     }
   ]

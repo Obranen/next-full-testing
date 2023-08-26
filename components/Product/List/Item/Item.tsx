@@ -19,9 +19,6 @@ interface IItem {
 }
 
 const Item: FC<IItem> = ({product}) => {
-  // @ts-ignore
-  const createdDate = new Date(product.createdAt).toLocaleString()
-
   return (
     <Box>
       <Card maxW="sm">

@@ -1,5 +1,3 @@
-'use client'
-
 import {
   Button,
   Drawer,
@@ -7,7 +5,6 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
-  Link,
   useDisclosure
 } from '@chakra-ui/react'
 import {AiOutlineMenu, AiOutlineMenuFold} from 'react-icons/ai'
@@ -15,7 +12,7 @@ import PublicItem from './PublicItem/PublicItem'
 import PrivateItem from './PrivateItem/PrivateItem'
 import {signOut, useSession} from 'next-auth/react'
 import {usePathname} from 'next/navigation'
-import NextLink from 'next/link'
+import Link from 'next-intl/link'
 
 export interface INavigation {
   id: number
@@ -57,7 +54,7 @@ const Navbar = () => {
   const navPrivateAfterSignIn: INavigation[] = [
     {
       id: 1,
-      href: '/registration',
+      href: 'registration',
       name: 'Registration'
     },
     {
@@ -96,7 +93,6 @@ const Navbar = () => {
                     <PrivateItem key={nav.id} onClose={onClose} nav={nav} pathname={pathname}/>
                   )}
                   <Link
-                    as={NextLink}
                     href={'#'}
                     onClick={() => signOut({
                       callbackUrl: '/'

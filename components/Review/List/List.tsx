@@ -8,7 +8,7 @@ interface IList {
   reviews: IReview[]
 }
 
-const List: FC<IReviewsList> = ({reviews}) => {
+const List: FC<IList> = ({reviews}) => {
 
   if (!reviews.length) {
     return <Heading as={'h2'} size={'lg'} textAlign={'center'} marginTop={'30px'} color={'red'}>

@@ -1,6 +1,5 @@
 import {FC} from 'react'
-import {Link} from '@chakra-ui/react'
-import NextLink from 'next/link'
+import Link from 'next/link'
 import {INavigation} from '../Navbar'
 import classes from '../Navbar.module.scss'
 
@@ -13,7 +12,6 @@ interface IPrivateItem {
 const PrivateItem: FC<IPrivateItem> = ({onClose, nav, pathname}) => {
   return (
     <Link
-      as={NextLink}
       href={nav.href}
       onClick={onClose}
       style={{display: 'block'}}

@@ -7,7 +7,7 @@ import {
   FormErrorMessage,
   FormLabel,
   Heading,
-  Input, Link,
+  Input,
   useToast
 } from '@chakra-ui/react'
 import {useState} from 'react'
@@ -15,8 +15,7 @@ import {useRouter} from 'next/navigation'
 import {createReview} from '../../../async/review'
 import {IReview} from '../../../interface/review'
 import {useSession} from 'next-auth/react'
-import NextLink from 'next/link'
-import classes from '../../Header/Navbar/Navbar.module.scss'
+import Link from 'next-intl/link'
 
 const CreateForm = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -44,12 +43,10 @@ const CreateForm = () => {
         title:
           <>
             <Link
-              as={NextLink}
               href={`registration`}
               style={{display: 'block'}}
             >Registration</Link>
             <Link
-              as={NextLink}
               href={`signin`}
               style={{display: 'block'}}
             >Sign In Custom</Link>

@@ -1,6 +1,5 @@
 import {FC} from 'react'
-import NextLink from 'next/link'
-import {Link} from '@chakra-ui/react'
+import Link from 'next-intl/link'
 import {INavigation} from '../Navbar'
 import classes from '../Navbar.module.scss'
 
@@ -14,7 +13,6 @@ const PublicItem: FC<IPublicItem> = ({nav, onClose, pathname}) => {
   return (
     <>
       <Link
-        as={NextLink}
         href={nav.href}
         onClick={onClose}
         style={{display: 'block'}}

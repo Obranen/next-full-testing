@@ -1,16 +1,8 @@
-import Item from './Item/Item'
-import {HStack} from '@chakra-ui/layout'
-
-export interface IFlag {
-  id: string
-  src: string
-  alt: string
-  tooltip: string
-  language: string
-}
+import FlagCountry from '../../ui/FlagCountry/FlagCountry'
+import {IFlagCountryState} from '../../../interface/ui/flagCountry'
 
 const Language = () => {
-  const flags: IFlag[] = [
+  const flags: IFlagCountryState[] = [
     {
       id: '1',
       src: '/language/flag-us.svg',
@@ -33,12 +25,11 @@ const Language = () => {
       language: 'ru'
     },
   ]
+
   return (
-    <HStack justify={'end'} marginRight={'30px'} marginTop={'10px'}>
-      {flags.map((flag) =>
-        <Item key={flag.id} flag={flag} />
-      )}
-    </HStack>
+    <>
+      <FlagCountry array={flags}/>
+    </>
   )
 }
 

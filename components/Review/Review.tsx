@@ -3,13 +3,13 @@
 import {FC} from 'react'
 import CreateForm from './CreateForm/CreateForm'
 import List from './List/List'
-import {IReview} from '../../interface/review'
+import {IReviewState} from '../../interface/schema/review'
 
-interface IReviewState {
-  reviews: IReview[]
+interface IReviewStateState {
+  reviews: IReviewState[]
 }
 
-const Review: FC<IReviewState> = ({reviews}) => {
+const Review: FC<IReviewStateState> = ({reviews}) => {
   return (
     <>
       <CreateForm/>

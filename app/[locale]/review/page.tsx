@@ -1,7 +1,7 @@
 import ReviewsList from '../../components/List/List'
 import CreateForm from '../../../components/Review/CreateForm/CreateForm'
 import {fetchReviews} from '../../../async/review'
-import {IReview} from '../../../interface/review'
+import {IReviewState} from '../../../interface/schema/review'
 import Review from '../../../components/Review/Review'
 
 export const metadata = {
@@ -10,7 +10,7 @@ export const metadata = {
 }
 
 const ReviewPage = async () => {
-  const reviews: IReview[] = await fetchReviews()
+  const reviews: IReviewState[] = await fetchReviews()
   return (
     <>
       <Review reviews={reviews}/>

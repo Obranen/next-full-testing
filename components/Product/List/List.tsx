@@ -1,10 +1,10 @@
 import {FC} from 'react'
-import {IProduct} from '../../../interface/product'
+import {IProductState} from '../../../interface/schema/product'
 import {Heading, SimpleGrid} from '@chakra-ui/react'
 import Item from './Item/Item'
 
 interface IList {
-  products: IProduct[]
+  products: IProductState[]
 }
 
 const List: FC<IList> = ({products}) => {
@@ -18,7 +18,7 @@ const List: FC<IList> = ({products}) => {
   return (
     <>
       <SimpleGrid columns={5} spacing={3}>
-        {products.map((product: IProduct) =>
+        {products.map((product: IProductState) =>
           <Item key={product.id} product={product}/>
         )}
       </SimpleGrid>

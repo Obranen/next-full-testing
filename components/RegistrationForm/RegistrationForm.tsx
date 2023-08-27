@@ -16,7 +16,7 @@ import {useRouter} from 'next/navigation'
 import {Controller, SubmitHandler, useForm, useFormState} from 'react-hook-form'
 import {BsEyeSlashFill, BsEyeFill, BsFillCheckSquareFill} from 'react-icons/bs'
 import {AiFillStop} from 'react-icons/ai'
-import {IUser} from '../../interface/user'
+import {IUserState} from '../../interface/schema/user'
 import {createUser, fetchUser} from '../../async/user'
 import {signIn} from 'next-auth/react'
 
@@ -48,11 +48,11 @@ const RegistrationForm = () => {
     setShowPassword(!showPassword)
   }
 
-  const {handleSubmit, control, resetField} = useForm<IUser>({
+  const {handleSubmit, control, resetField} = useForm<IUserState>({
     defaultValues: {name: '', email: '', password: ''}
   })
   const {errors} = useFormState({control})
-  const onSubmit: SubmitHandler<IUser> = async (data) => {
+  const onSubmit: SubmitHandler<IUserState> = async (data) => {
 
     if (!isEmail) {
       await createUser({

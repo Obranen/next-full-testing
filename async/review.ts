@@ -1,4 +1,4 @@
-import {IReview} from '../interface/review'
+import {IReviewState} from '../interface/schema/review'
 
 export const fetchReviews = async () => {
   const response = await fetch(`${process.env.FETCH_URL}/api/review`, {
@@ -8,7 +8,7 @@ export const fetchReviews = async () => {
   return response.json()
 }
 
-export const updateReview = async (data: IReview) => {
+export const updateReview = async (data: IReviewState) => {
   const response = await fetch(`/api/review/${data.id}`, {
     method: 'PUT',
     body: JSON.stringify({nameReview: data.nameReview, descReview: data.descReview})

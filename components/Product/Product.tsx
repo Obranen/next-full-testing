@@ -1,15 +1,15 @@
 'use client'
 
 import {FC} from 'react'
-import {IProduct} from '../../interface/product'
+import {IProductState} from '../../interface/schema/product'
 import List from './List/List'
 
 
-interface IProductState {
-  products: IProduct[]
+interface IProductStateState {
+  products: IProductState[]
 }
 
-const Product: FC<IProductState> = ({products}) => {
+const Product: FC<IProductStateState> = ({products}) => {
   return (
     <>
       <List products={products}/>

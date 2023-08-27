@@ -1,5 +1,5 @@
 import {FC} from 'react'
-import {IProduct} from '../../../../interface/product'
+import {IProductState} from '../../../../interface/schema/product'
 import Image from 'next/image'
 import {
   Button,
@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react'
 
 interface IItem {
-  product: IProduct
+  product: IProductState
 }
 
 const Item: FC<IItem> = ({product}) => {

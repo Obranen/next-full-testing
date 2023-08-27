@@ -1,3 +1,4 @@
+import {MouseEvent, useState} from 'react'
 import {
   Button,
   Center,
@@ -14,15 +15,17 @@ import {
   NumberInputStepper,
   Textarea
 } from '@chakra-ui/react'
-import {useState} from 'react'
 import {useRouter} from 'next/navigation'
 import {useSession} from 'next-auth/react'
 import {Controller, SubmitHandler, useForm, useFormState} from 'react-hook-form'
-import {IProduct} from '../../../interface/product'
+import {IProductState} from '../../../interface/schema/product'
 import {createProduct} from '../../../async/product'
 import {ImageListType} from 'react-images-uploading'
 import {createImages} from '../../../async/upload'
 import Uploader from '../../ui/Uploader/Uploader'
+import FlagCountry from '../../ui/FlagCountry/FlagCountry'
+import {IFlagCountryState} from '../../../interface/ui/flagCountry'
+import classes from './CreateProductForm.module.scss'
 
 const CreateProductForm = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -30,16 +33,56 @@ const CreateProductForm = () => {
   const {data: session} = useSession()
   const [images, setImages] = useState<any[]>([])
   const [imageError, setImageError] = useState(false)
+  const [isVisibleRu, setIsVisibleRu] = useState(false)
+  const [isVisibleUa, setIsVisibleUa] = useState(false)
+
+  const flags: IFlagCountryState[] = [
+    {
+      id: '1',
+      src: '/language/flag-ua.svg',
+      alt: 'flag-ua',
+      tooltip: 'ua',
+      language: 'ua'
+    },
+    {
+      id: '2',
+      src: '/language/flag-ru.svg',
+      alt: 'flag-ru',
+      tooltip: 'ru',
+      language: 'ru'
+    },
+  ]
+
+  const flagCountryVisibleClick = (e: MouseEvent<HTMLElement>) => {
+    const $target = e.currentTarget
+    const localeCurrent = e.currentTarget.dataset.locale
+    if (localeCurrent === 'ru') {
+      setIsVisibleRu(prev => !prev)
+      if ($target.classList.contains(classes.active)) {
+        $target.classList.remove(classes.active)
+      } else {
+        $target.classList.add(classes.active)
+      }
+    }
+    if (localeCurrent === 'ua') {
+      setIsVisibleUa(prev => !prev)
+      if ($target.classList.contains(classes.active)) {
+        $target.classList.remove(classes.active)
+      } else {
+        $target.classList.add(classes.active)
+      }
+    }
+  }
 
   const {
     handleSubmit,
     control,
     reset
-  } = useForm<IProduct>(
-    {defaultValues: {title: '', imageSrc: '', imageAlt: '', desc: '', price: 1, weight: 1, quantity: 1, stock: 1}}
+  } = useForm<IProductState>(
+    {defaultValues: {titleEn: '', titleRu: '', titleUa: '', descEn: '', descRu: '', descUa: '', currencyEn: '', currencyRu: '', currencyUa: '', imageSrc: '', imageAlt: '', price: 1, weight: 1, quantity: 1, stock: 1}}
   )
   const {errors} = useFormState({control})
-  const onSubmit: SubmitHandler<IProduct> = async (data) => {
+  const onSubmit: SubmitHandler<IProductState> = async (data) => {
     if (images.length !== 0) {
       setIsLoading(true)
 
@@ -56,10 +99,17 @@ const CreateProductForm = () => {
       await createProduct({
         // @ts-ignore
         id: session?.user.id,
-        title: data.title,
+        titleEn: data.titleEn,
+        titleRu: data.titleRu,
+        titleUa: data.titleUa,
+        currencyEn: data.currencyEn,
+        currencyRu: data.currencyRu,
+        currencyUa: data.currencyUa,
+        descEn: data.descEn,
+        descRu: data.descRu,
+        descUa: data.descUa,
         imageSrc: images[0].file.name,
         imageAlt: data.imageAlt,
-        desc: data.desc,
         price: data.price,
         weight: data.weight,
         quantity: data.quantity,
@@ -88,22 +138,64 @@ const CreateProductForm = () => {
         Create Product
       </Heading>
       <form onSubmit={handleSubmit(onSubmit)} style={{marginBottom: '20px'}}>
+        <FlagCountry
+          array={flags}
+          appearance={'button'}
+          onClickImage={flagCountryVisibleClick}
+          text={'Показать инпуты для перевода:'}
+          marginTop={'20px'}
+        />
         <Controller
           control={control}
-          name="title"
+          name="titleEn"
           rules={{required: 'Заполните поле'}}
           render={({field}) => (
-            <FormControl isInvalid={!!errors.title?.message} marginTop={'20px'}>
-              <FormLabel>Title</FormLabel>
+            <FormControl isInvalid={!!errors.titleEn?.message} marginTop={'20px'}>
+              <FormLabel>titleEn</FormLabel>
               <Input
                 type="text"
                 value={field.value}
                 onChange={(e) => field.onChange(e)}
               />
-              <FormErrorMessage>{errors.title?.message}</FormErrorMessage>
+              <FormErrorMessage>{errors.titleEn?.message}</FormErrorMessage>
             </FormControl>
           )}
         />
+        {isVisibleRu &&
+        <Controller
+          control={control}
+          name="titleRu"
+          rules={{required: 'Заполните поле'}}
+          render={({field}) => (
+            <FormControl isInvalid={!!errors.titleRu?.message} marginTop={'20px'}>
+              <FormLabel>titleRu</FormLabel>
+              <Input
+                type="text"
+                value={field.value}
+                onChange={(e) => field.onChange(e)}
+              />
+              <FormErrorMessage>{errors.titleRu?.message}</FormErrorMessage>
+            </FormControl>
+          )}
+        />}
+
+        {isVisibleUa &&
+        <Controller
+          control={control}
+          name="titleUa"
+          rules={{required: 'Заполните поле'}}
+          render={({field}) => (
+            <FormControl isInvalid={!!errors.titleUa?.message} marginTop={'20px'}>
+              <FormLabel>titleUa</FormLabel>
+              <Input
+                type="text"
+                value={field.value}
+                onChange={(e) => field.onChange(e)}
+              />
+              <FormErrorMessage>{errors.titleUa?.message}</FormErrorMessage>
+            </FormControl>
+          )}
+        />}
 
         <FormControl isInvalid={imageError} marginTop={'20px'}>
           <FormLabel>Main Image</FormLabel>
@@ -127,22 +219,113 @@ const CreateProductForm = () => {
             </FormControl>
           )}
         />
+
         <Controller
           control={control}
-          name="desc"
+          name="descEn"
           rules={{required: 'Заполните поле'}}
           render={({field}) => (
-            <FormControl isInvalid={!!errors.desc?.message} marginTop={'20px'}>
-              <FormLabel>Desc</FormLabel>
+            <FormControl isInvalid={!!errors.descEn?.message} marginTop={'20px'}>
+              <FormLabel>descEn</FormLabel>
               <Textarea
                 placeholder="Описание товара"
                 value={field.value}
                 onChange={(e) => field.onChange(e)}
               />
-              <FormErrorMessage>{errors.desc?.message}</FormErrorMessage>
+              <FormErrorMessage>{errors.descEn?.message}</FormErrorMessage>
             </FormControl>
           )}
         />
+
+        {isVisibleRu &&
+        <Controller
+          control={control}
+          name="descRu"
+          rules={{required: 'Заполните поле'}}
+          render={({field}) => (
+            <FormControl isInvalid={!!errors.descRu?.message} marginTop={'20px'}>
+              <FormLabel>descRu</FormLabel>
+              <Textarea
+                placeholder="Описание товара"
+                value={field.value}
+                onChange={(e) => field.onChange(e)}
+              />
+              <FormErrorMessage>{errors.descRu?.message}</FormErrorMessage>
+            </FormControl>
+          )}
+        />}
+
+        {isVisibleUa &&
+        <Controller
+          control={control}
+          name="descUa"
+          rules={{required: 'Заполните поле'}}
+          render={({field}) => (
+            <FormControl isInvalid={!!errors.descUa?.message} marginTop={'20px'}>
+              <FormLabel>descUa</FormLabel>
+              <Textarea
+                placeholder="Описание товара"
+                value={field.value}
+                onChange={(e) => field.onChange(e)}
+              />
+              <FormErrorMessage>{errors.descUa?.message}</FormErrorMessage>
+            </FormControl>
+          )}
+        />}
+
+        <Controller
+          control={control}
+          name="currencyEn"
+          rules={{required: 'Заполните поле'}}
+          render={({field}) => (
+            <FormControl isInvalid={!!errors.currencyEn?.message} marginTop={'20px'}>
+              <FormLabel>currencyEn</FormLabel>
+              <Input
+                type="text"
+                value={field.value}
+                onChange={(e) => field.onChange(e)}
+              />
+              <FormErrorMessage>{errors.currencyEn?.message}</FormErrorMessage>
+            </FormControl>
+          )}
+        />
+
+        {isVisibleRu &&
+        <Controller
+          control={control}
+          name="currencyRu"
+          rules={{required: 'Заполните поле'}}
+          render={({field}) => (
+            <FormControl isInvalid={!!errors.currencyRu?.message} marginTop={'20px'}>
+              <FormLabel>currencyRu</FormLabel>
+              <Input
+                type="text"
+                value={field.value}
+                onChange={(e) => field.onChange(e)}
+              />
+              <FormErrorMessage>{errors.currencyRu?.message}</FormErrorMessage>
+            </FormControl>
+          )}
+        />}
+
+        {isVisibleUa &&
+        <Controller
+          control={control}
+          name="currencyUa"
+          rules={{required: 'Заполните поле'}}
+          render={({field}) => (
+            <FormControl isInvalid={!!errors.currencyUa?.message} marginTop={'20px'}>
+              <FormLabel>currencyUa</FormLabel>
+              <Input
+                type="text"
+                value={field.value}
+                onChange={(e) => field.onChange(e)}
+              />
+              <FormErrorMessage>{errors.currencyUa?.message}</FormErrorMessage>
+            </FormControl>
+          )}
+        />}
+
         <Controller
           control={control}
           name="price"
@@ -165,6 +348,7 @@ const CreateProductForm = () => {
             </FormControl>
           )}
         />
+
         <Controller
           control={control}
           name="weight"
@@ -187,6 +371,7 @@ const CreateProductForm = () => {
             </FormControl>
           )}
         />
+
         <Controller
           control={control}
           name="quantity"
@@ -209,6 +394,7 @@ const CreateProductForm = () => {
             </FormControl>
           )}
         />
+
         <Controller
           control={control}
           name="stock"
@@ -231,6 +417,7 @@ const CreateProductForm = () => {
             </FormControl>
           )}
         />
+
         <Center marginTop={'20px'}>
           <Button
             disabled={isLoading}

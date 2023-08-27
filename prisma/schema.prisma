@@ -28,21 +28,28 @@ model Review {
 }
 
 model Product {
-  id        String         @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime?      @default(now())
-  updatedAt DateTime?      @updatedAt
-  imageAlt  String
-  imageSrc  String
-  images    ProductImage[]
+  id         String         @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt  DateTime?      @default(now())
+  updatedAt  DateTime?      @updatedAt
+  imageAlt   String
+  imageSrc   String
+  images     ProductImage[]
   // role    Role     @default(BASIC)
-  title     String
-  weight    Int
-  desc      String
-  price     Int
-  quantity  Int
-  stock     Int
-  user      User?          @relation(fields: [userId], references: [id])
-  userId    String?        @db.ObjectId
+  titleEn    String
+  titleRu    String?
+  titleUa    String?
+  currencyEn String
+  currencyRu String?
+  currencyUa String?
+  descEn     String
+  descRu     String?
+  descUa     String?
+  weight     Int
+  price      Int
+  quantity   Int
+  stock      Int
+  user       User?          @relation(fields: [userId], references: [id])
+  userId     String?        @db.ObjectId
 }
 
 model ProductImage {

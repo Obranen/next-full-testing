@@ -1,4 +1,4 @@
-export interface IContact {
+export interface IContactState {
   name: string
   email: string
   subject: string

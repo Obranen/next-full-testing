@@ -3,14 +3,21 @@ export interface IImageProduct {
   alt: string
 }
 
-export interface IProduct {
+export interface IProductState {
   id: string
+  titleEn: string
+  titleRu?: string
+  titleUa?: string
+  currencyEn: string
+  currencyRu?: string
+  currencyUa?: string
+  descEn: string
+  descRu?: string
+  descUa?: string
   imageAlt: string
   imageSrc: string
   images: IImageProduct[]
-  title: string
   weight: number
-  desc: string
   price: number
   quantity: number
   stock: number

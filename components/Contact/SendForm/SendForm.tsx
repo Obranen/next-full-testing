@@ -12,7 +12,7 @@ import {
   Input,
   Textarea
 } from '@chakra-ui/react'
-import {IContact} from '../../../interface/contact'
+import {IContactState} from '../../../interface/schema/contact'
 import {SendContactForm} from '../../../async/contact'
 import {useTranslations} from 'next-intl'
 
@@ -26,11 +26,11 @@ const SendForm = () => {
     handleSubmit,
     control,
     reset
-  } = useForm<IContact>(
+  } = useForm<IContactState>(
     {defaultValues: {name: '', email: '', subject: '', message: ''}}
   )
   const {errors} = useFormState({control})
-  const onSubmit: SubmitHandler<IContact> = async (data) => {
+  const onSubmit: SubmitHandler<IContactState> = async (data) => {
     setIsLoading(true)
 
     await SendContactForm({

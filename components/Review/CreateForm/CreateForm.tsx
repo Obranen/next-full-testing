@@ -13,7 +13,7 @@ import {
 import {useState} from 'react'
 import {useRouter} from 'next/navigation'
 import {createReview} from '../../../async/review'
-import {IReview} from '../../../interface/review'
+import {IReviewState} from '../../../interface/schema/review'
 import {useSession} from 'next-auth/react'
 import Link from 'next-intl/link'
 
@@ -28,14 +28,14 @@ const CreateForm = () => {
     control,
     resetField,
     reset
-  } = useForm<IReview>(
+  } = useForm<IReviewState>(
     // @ts-ignore
     session.status === 'authenticated' ?
       {values: {nameReview: session.data?.user?.name, descReview: ''}} :
       {defaultValues: {nameReview: '', descReview: ''}}
   )
   const {errors} = useFormState({control})
-  const onSubmit: SubmitHandler<IReview> = async (data) => {
+  const onSubmit: SubmitHandler<IReviewState> = async (data) => {
     // @ts-ignore
     if (!session.data?.user.id) {
       return toast({

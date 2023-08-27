@@ -1,8 +1,8 @@
 'use client'
 
 import Navbar from './Navbar/Navbar'
-import Language from './Language/Language'
 import {Box, SimpleGrid} from '@chakra-ui/react'
+import Language from './Language/Language'
 
 const Header = () => {
   return (

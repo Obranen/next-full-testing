@@ -1,11 +1,11 @@
 import {FC} from 'react'
 import {Heading} from '@chakra-ui/react'
 import Item from './Item/Item'
-import {IReview} from '../../../interface/review'
+import {IReviewState} from '../../../interface/schema/review'
 
 
 interface IList {
-  reviews: IReview[]
+  reviews: IReviewState[]
 }
 
 const List: FC<IList> = ({reviews}) => {
@@ -21,7 +21,7 @@ const List: FC<IList> = ({reviews}) => {
       <Heading as={'h2'} size={'lg'} textAlign={'center'} marginTop={'30px'}>
         List
       </Heading>
-      {reviews.map((review: IReview) =>
+      {reviews.map((review: IReviewState) =>
         <Item key={review.id} review={review}/>
       )}
     </>

@@ -7,7 +7,7 @@ import {ChakraProvider} from '@chakra-ui/react'
 
 import {SessionProvider} from 'next-auth/react'
 
-export function Providers({children}: { children: ReactNode }) {
+export async function Provider({children}: { children: ReactNode }) {
   return (
     <SessionProvider>
       <CacheProvider>

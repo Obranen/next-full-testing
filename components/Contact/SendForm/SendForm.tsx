@@ -19,7 +19,8 @@ import {useTranslations} from 'next-intl'
 const SendForm = () => {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
-  const t = useTranslations('Contact');
+  const tContact = useTranslations('Contact')
+  const tForm = useTranslations('Contact.form')
 
   const {
     handleSubmit,
@@ -45,9 +46,8 @@ const SendForm = () => {
 
   return (
     <Container>
-      <h1>{t('title')}</h1>
       <Heading as={'h3'} size={'lg'} textAlign={'center'} marginTop={'20px'}>
-        Send Contact
+        {tContact('title')}
       </Heading>
       <form onSubmit={handleSubmit(onSubmit)} style={{marginBottom: '20px'}}>
         <Controller
@@ -56,7 +56,7 @@ const SendForm = () => {
           rules={{required: 'Заполните поле'}}
           render={({field}) => (
             <FormControl isInvalid={!!errors.name?.message} marginTop={'20px'}>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>{tForm('name')}</FormLabel>
               <Input
                 type="text"
                 value={field.value}
@@ -79,7 +79,7 @@ const SendForm = () => {
           }}
           render={({field}) => (
             <FormControl isInvalid={!!errors.email?.message} marginTop={'20px'}>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>{tForm('email')}</FormLabel>
               <Input
                 type="text"
                 value={field.value}
@@ -95,7 +95,7 @@ const SendForm = () => {
           rules={{required: 'Заполните поле'}}
           render={({field}) => (
             <FormControl isInvalid={!!errors.subject?.message} marginTop={'20px'}>
-              <FormLabel>Subject</FormLabel>
+              <FormLabel>{tForm('subject')}</FormLabel>
               <Input
                 type="text"
                 value={field.value}
@@ -112,9 +112,9 @@ const SendForm = () => {
           rules={{required: 'Заполните поле'}}
           render={({field}) => (
             <FormControl isInvalid={!!errors.message?.message} marginTop={'20px'}>
-              <FormLabel>Message</FormLabel>
+              <FormLabel>{tForm('message')}</FormLabel>
               <Textarea
-                placeholder="Опишите запрос"
+                placeholder={tForm('messagePlaceholder')}
                 value={field.value}
                 onChange={(e) => field.onChange(e)}
               />
@@ -131,7 +131,7 @@ const SendForm = () => {
             loadingText="Loading..."
             isLoading={isLoading}
           >
-            Send
+            {tForm('button')}
           </Button>
         </Center>
       </form>

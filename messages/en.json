@@ -3,6 +3,14 @@
     "title": "Hello world!"
   },
   "Contact": {
-    "title": "Hello world!"
+    "title": "Send Contact",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message",
+      "button": "Send",
+      "messagePlaceholder": "Describe the request"
+    }
   }
 }

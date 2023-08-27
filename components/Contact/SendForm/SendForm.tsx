@@ -14,10 +14,12 @@ import {
 } from '@chakra-ui/react'
 import {IContact} from '../../../interface/contact'
 import {SendContactForm} from '../../../async/contact'
+import {useTranslations} from 'next-intl'
 
 const SendForm = () => {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
+  const t = useTranslations('Contact');
 
   const {
     handleSubmit,
@@ -43,6 +45,7 @@ const SendForm = () => {
 
   return (
     <Container>
+      <h1>{t('title')}</h1>
       <Heading as={'h3'} size={'lg'} textAlign={'center'} marginTop={'20px'}>
         Send Contact
       </Heading>

@@ -1,32 +1,32 @@
 'use client'
 
 import {Tab, TabList, TabPanel, TabPanels, Tabs} from '@chakra-ui/tabs'
-import {useSession} from 'next-auth/react'
 import CreateProductForm from './CreateProductForm/CreateProductForm'
+import CreateCategoryForm from './CreateCategoryForm/CreateCategoryForm'
+import {Heading} from '@chakra-ui/react'
 
 const Profile = () => {
-  const {data: session} = useSession()
-
   return (
-    <Tabs orientation="vertical">
-      <TabList width={'400px'} border={'1px solid #000'}>
-        <Tab borderBottom={'1px solid #000'}>Create Product</Tab>
-        <Tab borderBottom={'1px solid #000'}>Two</Tab>
-        <Tab>Three</Tab>
-      </TabList>
+    <>
+      <Heading as={'h3'} size={'md'} textAlign={'left'} marginTop={'20px'} marginBottom={'10px'}>
+        My profile:
+      </Heading>
+      <Tabs orientation="vertical">
+        <TabList width={'400px'} border={'1px solid #000'}>
+          <Tab borderBottom={'1px solid #000'}>Category</Tab>
+          <Tab borderBottom={'1px solid #000'}>Product</Tab>
+        </TabList>
 
-      <TabPanels>
-        <TabPanel>
-          <CreateProductForm/>
-        </TabPanel>
-        <TabPanel>
-          two
-        </TabPanel>
-        <TabPanel>
-          <p>three!</p>
-        </TabPanel>
-      </TabPanels>
-    </Tabs>
+        <TabPanels>
+          <TabPanel>
+            <CreateCategoryForm/>
+          </TabPanel>
+          <TabPanel>
+            <CreateProductForm/>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+    </>
   )
 }
 

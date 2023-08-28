@@ -21,6 +21,7 @@ export interface IProductState {
   price: number
   quantity: number
   stock: number
+  category: string
   createdAt?: Date
   updatedAt?: Date
 }

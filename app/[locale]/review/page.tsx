@@ -1,5 +1,3 @@
-import ReviewsList from '../../components/List/List'
-import CreateForm from '../../../components/Review/CreateForm/CreateForm'
 import {fetchReviews} from '../../../async/review'
 import {IReviewState} from '../../../interface/schema/review'
 import Review from '../../../components/Review/Review'

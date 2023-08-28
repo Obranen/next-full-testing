@@ -1,7 +1,7 @@
 import {IUserState} from '../interface/schema/user'
 
 export const fetchUser = async (email: string) => {
-  const response = await fetch(`${process.env.FETCH_URL}/api/user/${email}`)
+  const response = await fetch(`http://localhost:3000/api/user/${email}`)
   return response.json()
 }
 

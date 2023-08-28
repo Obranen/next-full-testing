@@ -1,6 +1,7 @@
 {
-  "Index": {
-    "title": "Привет мир!"
+  "Product": {
+    "buttonCart": "Добавить в корзину",
+    "buttonBuy": "Купить сейчас"
   },
   "Contact": {
     "title": "Отправить контакт",

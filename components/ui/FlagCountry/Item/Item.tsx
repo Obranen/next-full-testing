@@ -18,28 +18,28 @@ const Item: FC<IItem> = ({flag, appearance, onClickImage}) => {
 
   return (
     <>
-      <Tooltip label={flag.tooltip} placement="auto">
-        <>
-          {appearance === 'link' &&
-            <Link
-              href={pathName}
-              style={{marginRight: '10px'}}
-              locale={flag.language}
-            >
-              <Image src={flag.src} alt={flag.alt} width={'20'} height={'20'}/>
-            </Link>}
-          {appearance === 'button' &&
-            <Image
-              onClick={onClickImage}
-              data-locale={flag.language}
-              style={{cursor: 'pointer'}}
-              src={flag.src}
-              alt={flag.alt}
-              width={'20'}
-              height={'20'}
-            />}
-        </>
-      </Tooltip>
+      {appearance === 'link' &&
+        <Tooltip label={flag.tooltip} placement="bottom">
+          <Link
+            href={pathName}
+            style={{marginRight: '10px'}}
+            locale={flag.language}
+          >
+            <Image src={flag.src} alt={flag.alt} width={'20'} height={'20'}/>
+          </Link>
+        </Tooltip>}
+      {appearance === 'button' &&
+        <Tooltip label={flag.tooltip} placement="bottom">
+          <Image
+            onClick={onClickImage}
+            data-locale={flag.language}
+            style={{cursor: 'pointer'}}
+            src={flag.src}
+            alt={flag.alt}
+            width={'20'}
+            height={'20'}
+          />
+        </Tooltip>}
     </>
   )
 }

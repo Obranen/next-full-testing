@@ -1,6 +1,7 @@
 {
-  "Index": {
-    "title": "Hello world!"
+  "Product": {
+    "buttonCart": "Add to cart",
+    "buttonBuy": "Buy now"
   },
   "Contact": {
     "title": "Send Contact",

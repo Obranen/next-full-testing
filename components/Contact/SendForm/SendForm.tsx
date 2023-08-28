@@ -1,5 +1,4 @@
 import {useState} from 'react'
-import {useRouter} from 'next/navigation'
 import {Controller, SubmitHandler, useForm, useFormState} from 'react-hook-form'
 import {
   Button,
@@ -18,7 +17,6 @@ import {useTranslations} from 'next-intl'
 
 const SendForm = () => {
   const [isLoading, setIsLoading] = useState(false)
-  const router = useRouter()
   const tContact = useTranslations('Contact')
   const tForm = useTranslations('Contact.form')
 

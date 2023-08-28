@@ -1,7 +1,8 @@
-import {FC} from 'react'
+import {FC, MouseEvent, useState} from 'react'
 import Image from 'next/image'
 import ImageUploading, {ImageListType} from 'react-images-uploading'
-import {Button, Center, Flex, SimpleGrid} from '@chakra-ui/react'
+import {Button, Center, Flex, SimpleGrid, Text} from '@chakra-ui/react'
+import classes from './Uploader.module.scss'
 
 interface IUploader {
   multiple?: boolean
@@ -11,7 +12,7 @@ interface IUploader {
 }
 
 const Uploader: FC<IUploader> = ({multiple = false, maxQuantityImages = 5, onChange, images}) => {
-
+  const [visibleTextImage, setVisibleTextImage] = useState(false)
   return (
     <ImageUploading
       multiple={multiple}
@@ -52,9 +53,13 @@ const Uploader: FC<IUploader> = ({multiple = false, maxQuantityImages = 5, onCha
 
           <SimpleGrid columns={3} spacing={5} marginBottom={'20px'}>
             {imageList.map((image, index) => (
-              <div key={index} style={{position: 'relative', width: '100%', height: '120px', marginBottom: '20px'}}>
+              <div
+                onMouseMove={() => setVisibleTextImage(true)}
+                onMouseLeave={() => setVisibleTextImage(false)}
+                key={index} style={{position: 'relative', width: '100%', height: '120px', marginBottom: '20px'}}>
                 {image.dataURL && image.file?.name &&
                   <Image src={image.dataURL} alt={image.file?.name} fill/>}
+                {visibleTextImage && <Text className={classes.visibleName}>{image.file?.name}</Text>}
                 <Flex flex={0} justify={'space-between'} style={{marginTop: '124px'}}>
                   <Button size={'xs'} onClick={() => onImageUpdate(index)} colorScheme="blue"
                           variant="outline">Update</Button>

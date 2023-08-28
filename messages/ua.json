@@ -1,6 +1,7 @@
 {
-  "Index": {
-    "title": "Привіт Світ!"
+  "Product": {
+    "buttonCart": "Додати до кошика",
+    "buttonBuy": "Купити зараз"
   },
   "Contact": {
     "title": "Надіслати контакт",

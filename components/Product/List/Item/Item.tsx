@@ -13,12 +13,16 @@ import {
   Text,
   Box
 } from '@chakra-ui/react'
+import {useLocale, useTranslations} from 'next-intl'
 
 interface IItem {
   product: IProductState
 }
 
 const Item: FC<IItem> = ({product}) => {
+  const locale = useLocale()
+  const tProduct = useTranslations('Product')
+
   return (
     <Box>
       <Card maxW="sm">
@@ -30,12 +34,21 @@ const Item: FC<IItem> = ({product}) => {
             height={500}
           />
           <Stack mt="6" spacing="3">
-            <Heading size="md">{product.title}</Heading>
+            <Heading size="md">
+              {locale === 'en' && product.titleEn}
+              {locale === 'ru' && product.titleRu}
+              {locale === 'ua' && product.titleUa}
+            </Heading>
             <Text>
-              {product.desc}
+              {locale === 'en' && product.descEn}
+              {locale === 'ru' && product.descRu}
+              {locale === 'ua' && product.descUa}
             </Text>
             <Text color="blue.600" fontSize="2xl">
-              ${product.price}
+              {locale === 'en' && product.currencyEn}
+              {locale === 'ru' && product.currencyRu}
+              {locale === 'ua' && product.currencyUa}
+              {product.price}
             </Text>
           </Stack>
         </CardBody>
@@ -43,10 +56,10 @@ const Item: FC<IItem> = ({product}) => {
         <CardFooter>
           <ButtonGroup spacing="2">
             <Button variant="solid" colorScheme="blue">
-              Buy now
+              {tProduct('buttonBuy')}
             </Button>
             <Button variant="ghost" colorScheme="blue">
-              Add to cart
+              {tProduct('buttonCart')}
             </Button>
           </ButtonGroup>
         </CardFooter>

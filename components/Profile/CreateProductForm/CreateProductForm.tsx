@@ -27,6 +27,7 @@ import FlagCountry from '../../ui/FlagCountry/FlagCountry'
 import {IFlagCountryState} from '../../../interface/ui/flagCountry'
 import classes from './CreateProductForm.module.scss'
 import CategorySelect from './CategorySelect/CategorySelect'
+import {useCategoryStore} from '../../../store/category'
 
 const CreateProductForm = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -36,6 +37,7 @@ const CreateProductForm = () => {
   const [imageError, setImageError] = useState(false)
   const [isVisibleRu, setIsVisibleRu] = useState(false)
   const [isVisibleUa, setIsVisibleUa] = useState(false)
+  const currentOption = useCategoryStore(state => state.currentOption)
 
   const flags: IFlagCountryState[] = [
     {
@@ -91,8 +93,6 @@ const CreateProductForm = () => {
         currencyEn: '',
         currencyRu: '',
         currencyUa: '',
-        imageSrc: '',
-        imageAlt: '',
         price: 1,
         weight: 1,
         quantity: 1,
@@ -102,50 +102,51 @@ const CreateProductForm = () => {
   )
   const {errors} = useFormState({control})
   const onSubmit: SubmitHandler<IProductState> = async (data) => {
-  //   if (images.length !== 0) {
-  //     setIsLoading(true)
-  //
-  //     if (imageError) {
-  //       setImageError(false)
-  //     }
-  //
-  //     const formData = new FormData()
-  //     images.forEach(image => {
-  //       formData.append('file', image.file)
-  //     })
-  //     await createImages(formData)
-  //
-  //     await createProduct({
-  //       // @ts-ignore
-  //       id: session?.user.id,
-  //       titleEn: data.titleEn,
-  //       titleRu: data.titleRu,
-  //       titleUa: data.titleUa,
-  //       currencyEn: data.currencyEn,
-  //       currencyRu: data.currencyRu,
-  //       currencyUa: data.currencyUa,
-  //       descEn: data.descEn,
-  //       descRu: data.descRu,
-  //       descUa: data.descUa,
-  //       imageSrc: images[0].file.name,
-  //       imageAlt: data.imageAlt,
-  //       price: data.price,
-  //       weight: data.weight,
-  //       quantity: data.quantity,
-  //       stock: data.stock,
-  //       category: '',
-  //       images: [{
-  //         alt: '',
-  //         src: ''
-  //       }]
-  //     }).finally(() => {
-  //       setIsLoading(false)
-  //       reset()
-  //       router.refresh()
-  //     })
-  //   } else {
-  //     setImageError(true)
-  //   }
+    if (images.length !== 0) {
+      if (!currentOption) return
+      setIsLoading(true)
+
+      if (imageError) {
+        setImageError(false)
+      }
+
+      const formData = new FormData()
+      images.forEach(image => {
+        formData.append('file', image.file)
+      })
+      await createImages(formData)
+
+      await createProduct({
+        // @ts-ignore
+        id: session?.user.id,
+        titleEn: data.titleEn,
+        titleRu: data.titleRu,
+        titleUa: data.titleUa,
+        currencyEn: data.currencyEn,
+        currencyRu: data.currencyRu,
+        currencyUa: data.currencyUa,
+        descEn: data.descEn,
+        descRu: data.descRu,
+        descUa: data.descUa,
+        imageSrc: images[0].file.name,
+        imageAlt: data.imageAlt,
+        price: data.price,
+        weight: data.weight,
+        quantity: data.quantity,
+        stock: data.stock,
+        category: currentOption,
+        images: [{
+          alt: '',
+          src: ''
+        }]
+      }).finally(() => {
+        setIsLoading(false)
+        reset()
+        router.refresh()
+      })
+    } else {
+      setImageError(true)
+    }
   }
 
   const imagesChange = (imageList: ImageListType) => {
@@ -346,7 +347,7 @@ const CreateProductForm = () => {
             )}
           />}
 
-        <FormControl isInvalid={imageError} marginTop={'20px'}>
+        <FormControl isInvalid={!currentOption} marginTop={'20px'}>
           <FormLabel>category</FormLabel>
           <CategorySelect/>
           <FormErrorMessage>{'Выберите категорию'}</FormErrorMessage>

@@ -3,9 +3,11 @@ import {Controller, SubmitHandler, useForm, useFormState} from 'react-hook-form'
 import {useState} from 'react'
 import {ICategoryState} from '../../../interface/schema/category'
 import {createCategory} from '../../../async/category'
+import {useCategoryStore} from '../../../store/category'
 
 const CreateCategoryForm = () => {
   const [isLoading, setIsLoading] = useState(false)
+  const setCreatedCategory = useCategoryStore(state => state.setCreatedCategory)
 
   const {
     handleSubmit,
@@ -17,6 +19,7 @@ const CreateCategoryForm = () => {
   const {errors} = useFormState({control})
   const onSubmit: SubmitHandler<ICategoryState> = async (data) => {
     setIsLoading(true)
+    setCreatedCategory(true)
 
     await createCategory({
       id: data.id,
@@ -24,6 +27,7 @@ const CreateCategoryForm = () => {
       label: data.label,
     }).finally(() => {
       setIsLoading(false)
+      setCreatedCategory(false)
       reset()
     })
   }

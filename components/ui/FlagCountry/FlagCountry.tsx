@@ -2,7 +2,7 @@ import {FC} from 'react'
 import Item, {AppearanceType} from './Item/Item'
 import {HStack} from '@chakra-ui/layout'
 import {IFlagCountryState} from '../../../interface/ui/flagCountry'
-import {border, Text} from '@chakra-ui/react'
+import {Text} from '@chakra-ui/react'
 
 interface IFlagCountry {
   array: IFlagCountryState[]

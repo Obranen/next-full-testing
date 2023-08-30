@@ -1,71 +1,67 @@
-import {
-  Button,
-  Drawer,
-  DrawerBody,
-  DrawerContent,
-  DrawerHeader,
-  DrawerOverlay,
-  useDisclosure
-} from '@chakra-ui/react'
+import {Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, useDisclosure} from '@chakra-ui/react'
 import {AiOutlineMenu, AiOutlineMenuFold} from 'react-icons/ai'
-import PublicItem from './PublicItem/PublicItem'
-import PrivateItem from './PrivateItem/PrivateItem'
-import {signOut, useSession} from 'next-auth/react'
 import {usePathname} from 'next-intl/client'
-import Link from 'next-intl/link'
+import Item from './Item/Item'
 
 export interface INavigation {
   id: number
   href: string
   name: string
+  role: string
 }
 
 const Navbar = () => {
   const pathname = usePathname()
-  const session = useSession()
   const {isOpen, onOpen, onClose} = useDisclosure()
 
-  const navPublic: INavigation[] = [
+  const navigation: INavigation[] = [
     {
       id: 1,
       href: '/',
-      name: 'Product'
+      name: 'Product',
+      role: 'public'
     },
     {
       id: 2,
       href: '/review',
-      name: 'Review'
+      name: 'Review',
+      role: 'public'
     },
     {
       id: 3,
       href: '/contact',
-      name: 'Contact'
-    }
-  ]
-
-  const navPrivateBeforeSignIn: INavigation[] = [
+      name: 'Contact',
+      role: 'public'
+    },
     {
-      id: 1,
+      id: 4,
       href: '/profile',
-      name: 'Profile'
-    }
-  ]
-
-  const navPrivateAfterSignIn: INavigation[] = [
+      name: 'Profile',
+      role: 'authenticated'
+    },
     {
-      id: 1,
+      id: 5,
+      href: '#',
+      name: 'Sign Out',
+      role: 'authenticated'
+    },
+    {
+      id: 6,
       href: '/registration',
-      name: 'Registration'
+      name: 'Registration',
+      role: 'notAuthenticated'
     },
     {
-      id: 2,
+      id: 7,
       href: '/api/auth/signin',
-      name: 'Sign In'
+      name: 'Sign In',
+      role: 'notAuthenticated'
     },
     {
-      id: 3,
+      id: 8,
       href: '/signin',
-      name: 'Sign In Custom'
+      name: 'Sign In Custom',
+      role: 'notAuthenticated'
     }
   ]
 
@@ -81,32 +77,10 @@ const Navbar = () => {
             </Button>
             Menu
           </DrawerHeader>
-          <DrawerBody>
-            <>
-              {navPublic.map((nav) =>
-                <PublicItem key={nav.id} onClose={onClose} nav={nav} pathname={pathname}/>
-              )}
-
-              {session.status === 'authenticated' ?
-                <>
-                  {navPrivateBeforeSignIn.map((nav) =>
-                    <PrivateItem key={nav.id} onClose={onClose} nav={nav} pathname={pathname}/>
-                  )}
-                  <Link
-                    href={'#'}
-                    onClick={() => signOut({
-                      callbackUrl: '/'
-                    })}
-                    style={{display: 'block'}}
-                  >Sign Out</Link>
-                </> :
-                <>
-                  {navPrivateAfterSignIn.map((nav) =>
-                    <PrivateItem key={nav.id} onClose={onClose} nav={nav} pathname={pathname}/>
-                  )}
-                </>
-              }
-            </>
+          <DrawerBody padding={0}>
+            {navigation.map((nav) =>
+              <Item key={nav.id} onClose={onClose} nav={nav} pathname={pathname}/>
+            )}
           </DrawerBody>
         </DrawerContent>
       </Drawer>

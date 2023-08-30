@@ -1,0 +1,12 @@
+.activeLink {
+  color: chocolate;
+}
+
+.link {
+  display: block;
+  padding: 8px 24px;
+  &:hover {
+    background: #000;
+    color: #fff;
+  }
+}

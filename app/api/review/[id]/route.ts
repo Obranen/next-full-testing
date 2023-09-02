@@ -1,5 +1,6 @@
 import {NextResponse} from 'next/server'
 import {prisma} from '../../../../lib/prismaDB'
+import {IReviewState} from '../../../../interface/schema/review'
 
 // export const GET = async (req: Request) => {
 //   try {
@@ -37,7 +38,7 @@ export const DELETE = async (req: Request) => {
 export const POST = async (req: Request) => {
   try {
     const id = req.url.split('/review/')[1]
-    const {nameReview, descReview} = await req.json()
+    const {nameReview, descReview}: IReviewState = await req.json()
     const updateAuthorAndCreateReview = await prisma.user.update({
       where: {
         id

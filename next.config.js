@@ -9,6 +9,9 @@ const nextConfig = {
         hostname: 'pixabay.com'
       }
     ]
+  },
+  env: {
+    FETCH_URL: 'http://localhost:3000',
   }
 }
 

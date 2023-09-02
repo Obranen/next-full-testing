@@ -14,12 +14,16 @@ const Profile = () => {
       <Tabs orientation="vertical">
         <TabList width={'400px'} border={'1px solid #000'}>
           <Tab borderBottom={'1px solid #000'}>Category</Tab>
+          <Tab borderBottom={'1px solid #000'}>SubCategory</Tab>
           <Tab borderBottom={'1px solid #000'}>Product</Tab>
         </TabList>
 
         <TabPanels>
           <TabPanel>
             <CreateCategoryForm/>
+          </TabPanel>
+          <TabPanel>
+
           </TabPanel>
           <TabPanel>
             <CreateProductForm/>

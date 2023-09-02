@@ -1,7 +1,7 @@
 import {ICategoryState} from '../interface/schema/category'
 
 export const fetchCategories = async () => {
-  const response = await fetch(`http://localhost:3000/api/category`, {
+  const response = await fetch(`${process.env.FETCH_URL}/api/category`, {
     method: 'GET',
     cache: 'no-store'
   })

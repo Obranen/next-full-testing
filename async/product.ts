@@ -1,7 +1,7 @@
 import {IProductState} from '../interface/schema/product'
 
 export const fetchProducts = async () => {
-  const response = await fetch(`http://localhost:3000/api/product`, {
+  const response = await fetch(`${process.env.FETCH_URL}/api/product`, {
     method: 'GET',
     cache: 'no-store'
   })

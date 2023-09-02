@@ -20,9 +20,18 @@ model User {
 }
 
 model Category {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  value String
-  label String
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  value       String
+  label       String
+  subCategory SubCategory[]
+}
+
+model SubCategory {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  value      String
+  label      String
+  category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId String?   @db.ObjectId
 }
 
 model Review {

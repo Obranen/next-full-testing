@@ -1,7 +1,7 @@
 import {IReviewState} from '../interface/schema/review'
 
 export const fetchReviews = async () => {
-  const response = await fetch(`http://localhost:3000/api/review`, {
+  const response = await fetch(`${process.env.FETCH_URL}/api/review`, {
     method: 'GET',
     cache: 'no-store'
   })

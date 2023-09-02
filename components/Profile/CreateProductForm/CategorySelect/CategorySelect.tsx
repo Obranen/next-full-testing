@@ -24,7 +24,7 @@ const CategorySelect: FC<ICategorySelect> = ({}) => {
         router.refresh()
       }
     })
-  }, [createdCategory])
+  }, [createdCategory, router])
 
   const getValue = () => {
     return currentOption ? options.find(current => current.value === currentOption) : ''
@@ -39,8 +39,6 @@ const CategorySelect: FC<ICategorySelect> = ({}) => {
       onChange={selectChange}
       value={getValue()}
       options={options}
-      className={'react-select-container'}
-      classNamePrefix={'custom-select'}
     />
   )
 }

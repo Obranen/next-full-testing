@@ -1,20 +1,16 @@
 import {create} from 'zustand'
 import {ICategoryState} from '../interface/schema/category'
 
-interface IUseCategoryStore {
+interface IUseSubCategoryStore {
   currentOption: ICategoryState,
   setCurrentOption: (currentOption: ICategoryState) => void
-  createdCategory: boolean,
-  setCreatedCategory: (isState: boolean) => void,
 }
 
-export const useCategoryStore = create<IUseCategoryStore>((set) => ({
-  createdCategory: false,
+export const useSubCategoryStore = create<IUseSubCategoryStore>((set) => ({
   currentOption: {
     id: '',
     value: '',
     label: ''
   },
-  setCreatedCategory: (isState: boolean) => set({createdCategory: isState}),
   setCurrentOption: (currentOption: ICategoryState) => set({currentOption})
 }))

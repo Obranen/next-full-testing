@@ -23,6 +23,10 @@ const Item: FC<IItem> = ({product}) => {
   const locale = useLocale()
   const tProduct = useTranslations('Product')
 
+  if (product.category !== 'drinks') {
+    return <></>
+  }
+
   return (
     <Box>
       <Card maxW="sm">

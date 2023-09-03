@@ -1,24 +1,34 @@
-import {FC, useEffect, useState} from 'react'
-import Select from 'react-select'
+import {useEffect, useState} from 'react'
 import {fetchCategories} from '../../../../async/category'
+import {fetchSubCategories} from '../../../../async/subCategory'
 import {ICategoryState} from '../../../../interface/schema/category'
 import {useCategoryStore} from '../../../../store/category'
 import {useRouter} from 'next/navigation'
+import SelectBasic from '../../../ui/SelectBasic/SelectBasic'
 
-interface ICategorySelect {
-
-}
-
-const CategorySelect: FC<ICategorySelect> = ({}) => {
+const CategorySelect = () => {
+  const [catOption, setCatOption] = useState([])
+  const [subCatOption, setSubCatOption] = useState([])
   const [options, setOptions] = useState<ICategoryState[]>([])
-  const createdCategory = useCategoryStore(state => state.createdCategory)
   const currentOption = useCategoryStore(state => state.currentOption)
   const setCurrentOption = useCategoryStore(state => state.setCurrentOption)
+  const createdCategory = useCategoryStore(state => state.createdCategory)
   const router = useRouter()
 
+  const selectChange = (option: any) => {
+    setCurrentOption(option)
+  }
+
   useEffect(() => {
-    fetchCategories().then(data => {
-      setOptions(data)
+    fetchCategories().then(dataCat => {
+      fetchSubCategories().then(dataSubCat => {
+        const option = dataCat.concat(dataSubCat)
+        setOptions(option)
+      }).finally(() => {
+        if (createdCategory) {
+          router.refresh()
+        }
+      })
     }).finally(() => {
       if (createdCategory) {
         router.refresh()
@@ -26,20 +36,8 @@ const CategorySelect: FC<ICategorySelect> = ({}) => {
     })
   }, [createdCategory, router])
 
-  const getValue = () => {
-    return currentOption ? options.find(current => current.value === currentOption) : ''
-  }
-
-  const selectChange = (option: any) => {
-    setCurrentOption(option.value)
-  }
-
   return (
-    <Select
-      onChange={selectChange}
-      value={getValue()}
-      options={options}
-    />
+    <SelectBasic options={options} selectChange={selectChange} currentOption={currentOption}/>
   )
 }
 

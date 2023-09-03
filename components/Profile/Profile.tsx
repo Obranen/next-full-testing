@@ -4,6 +4,7 @@ import {Tab, TabList, TabPanel, TabPanels, Tabs} from '@chakra-ui/tabs'
 import CreateProductForm from './CreateProductForm/CreateProductForm'
 import CreateCategoryForm from './CreateCategoryForm/CreateCategoryForm'
 import {Heading} from '@chakra-ui/react'
+import CreateSubCategoryForm from './CreateSubCategoryForm/CreateSubCategoryForm'
 
 const Profile = () => {
   return (
@@ -23,7 +24,7 @@ const Profile = () => {
             <CreateCategoryForm/>
           </TabPanel>
           <TabPanel>
-
+            <CreateSubCategoryForm/>
           </TabPanel>
           <TabPanel>
             <CreateProductForm/>

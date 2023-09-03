@@ -103,7 +103,7 @@ const CreateProductForm = () => {
   const {errors} = useFormState({control})
   const onSubmit: SubmitHandler<IProductState> = async (data) => {
     if (images.length !== 0) {
-      if (!currentOption) return
+      if (!currentOption.value) return
       setIsLoading(true)
 
       if (imageError) {
@@ -134,7 +134,7 @@ const CreateProductForm = () => {
         weight: data.weight,
         quantity: data.quantity,
         stock: data.stock,
-        category: currentOption,
+        category: currentOption.value,
         images: [{
           alt: '',
           src: ''
@@ -347,8 +347,8 @@ const CreateProductForm = () => {
             )}
           />}
 
-        <FormControl isInvalid={!currentOption} marginTop={'20px'}>
-          <FormLabel>category</FormLabel>
+        <FormControl isInvalid={!currentOption.value} marginTop={'20px'}>
+          <FormLabel>category or subCategory</FormLabel>
           <CategorySelect/>
           <FormErrorMessage>{'Выберите категорию'}</FormErrorMessage>
         </FormControl>

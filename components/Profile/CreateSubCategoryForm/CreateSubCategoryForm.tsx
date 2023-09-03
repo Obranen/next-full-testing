@@ -1,12 +1,14 @@
 import {useState} from 'react'
-import {useCategoryStore} from '../../../store/category'
 import {Controller, SubmitHandler, useForm, useFormState} from 'react-hook-form'
 import {ICategoryState} from '../../../interface/schema/category'
 import {Button, Center, Container, FormControl, FormErrorMessage, FormLabel, Heading, Input} from '@chakra-ui/react'
 import {createSubCategory} from '../../../async/subCategory'
+import CategorySelect from './CategorySelect/CategorySelect'
+import {useSubCategoryStore} from '../../../store/subCategory'
 
 const CreateSubCategoryForm = () => {
   const [isLoading, setIsLoading] = useState(false)
+  const currentOption = useSubCategoryStore(state => state.currentOption)
 
   const {
     handleSubmit,
@@ -17,12 +19,13 @@ const CreateSubCategoryForm = () => {
   })
   const {errors} = useFormState({control})
   const onSubmit: SubmitHandler<ICategoryState> = async (data) => {
+    if (!currentOption?.value) return
     setIsLoading(true)
 
     await createSubCategory({
-      id: data.id,
+      id: currentOption.id,
       value: data.value,
-      label: data.label,
+      label: data.label
     }).finally(() => {
       setIsLoading(false)
       reset()
@@ -31,7 +34,7 @@ const CreateSubCategoryForm = () => {
   return (
     <Container>
       <Heading as={'h3'} size={'lg'} textAlign={'center'} marginTop={'20px'}>
-        Create category
+        Create subCategory
       </Heading>
       <form onSubmit={handleSubmit(onSubmit)} style={{marginBottom: '20px'}}>
         <Controller
@@ -50,6 +53,7 @@ const CreateSubCategoryForm = () => {
             </FormControl>
           )}
         />
+
         <Controller
           control={control}
           name="label"
@@ -66,6 +70,13 @@ const CreateSubCategoryForm = () => {
             </FormControl>
           )}
         />
+
+        <FormControl isInvalid={!currentOption.value} marginTop={'20px'}>
+          <FormLabel>category</FormLabel>
+          <CategorySelect/>
+          <FormErrorMessage>{'Выберите категорию'}</FormErrorMessage>
+        </FormControl>
+
         <Center marginTop={'20px'}>
           <Button
             disabled={isLoading}

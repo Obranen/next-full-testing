@@ -1,12 +1,20 @@
 'use client'
 
+import {FC} from 'react'
 import {Tab, TabList, TabPanel, TabPanels, Tabs} from '@chakra-ui/tabs'
 import CreateProductForm from './CreateProductForm/CreateProductForm'
 import CreateCategoryForm from './CreateCategoryForm/CreateCategoryForm'
 import {Heading} from '@chakra-ui/react'
 import CreateSubCategoryForm from './CreateSubCategoryForm/CreateSubCategoryForm'
+import {ICategoryState} from '../../interface/schema/category'
+import {ISubCategoryState} from '../../interface/schema/subCategory'
 
-const Profile = () => {
+interface IProfile {
+  categories: ICategoryState
+  subCategories: ISubCategoryState
+}
+
+const Profile: FC<IProfile> = ({categories, subCategories}) => {
   return (
     <>
       <Heading as={'h3'} size={'md'} textAlign={'left'} marginTop={'20px'} marginBottom={'10px'}>
@@ -24,10 +32,10 @@ const Profile = () => {
             <CreateCategoryForm/>
           </TabPanel>
           <TabPanel>
-            <CreateSubCategoryForm/>
+            <CreateSubCategoryForm categories={categories}/>
           </TabPanel>
           <TabPanel>
-            <CreateProductForm/>
+            <CreateProductForm categories={categories} subCategories={subCategories}/>
           </TabPanel>
         </TabPanels>
       </Tabs>

@@ -23,7 +23,7 @@ const Item: FC<IItem> = ({product}) => {
   const locale = useLocale()
   const tProduct = useTranslations('Product')
 
-  if (product.category !== 'drinks') {
+  if (product.category !== 'cold') {
     return <></>
   }
 

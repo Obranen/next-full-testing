@@ -1,4 +1,4 @@
-import {MouseEvent, useState} from 'react'
+import {FC, MouseEvent, useEffect, useState} from 'react'
 import {
   Button,
   Center,
@@ -26,10 +26,18 @@ import Uploader from '../../ui/Uploader/Uploader'
 import FlagCountry from '../../ui/FlagCountry/FlagCountry'
 import {IFlagCountryState} from '../../../interface/ui/flagCountry'
 import classes from './CreateProductForm.module.scss'
-import CategorySelect from './CategorySelect/CategorySelect'
+import SelectBasic from '../../ui/SelectBasic/SelectBasic'
+import {ICategoryState} from '../../../interface/schema/category'
+import {ISubCategoryState} from '../../../interface/schema/subCategory'
+import {fetchCategories} from '../../../async/category'
 import {useCategoryStore} from '../../../store/category'
 
-const CreateProductForm = () => {
+interface ICreateProductForm {
+  categories: ICategoryState
+  subCategories: ISubCategoryState
+}
+
+const CreateProductForm: FC<ICreateProductForm> = ({categories, subCategories}) => {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const {data: session} = useSession()
@@ -37,7 +45,10 @@ const CreateProductForm = () => {
   const [imageError, setImageError] = useState(false)
   const [isVisibleRu, setIsVisibleRu] = useState(false)
   const [isVisibleUa, setIsVisibleUa] = useState(false)
-  const currentOption = useCategoryStore(state => state.currentOption)
+  const [optionCategory, setOptionCategory] = useState<ICategoryState>({id: '', value: '', label: ''})
+  const [optionSubCategory, setOptionSubCategory] = useState<ICategoryState>({id: '', value: '', label: ''})
+  const categoryUpdate = useCategoryStore(state => state.categoryUpdate)
+  const [category, setCategory] = useState(categories)
 
   const flags: IFlagCountryState[] = [
     {
@@ -103,7 +114,7 @@ const CreateProductForm = () => {
   const {errors} = useFormState({control})
   const onSubmit: SubmitHandler<IProductState> = async (data) => {
     if (images.length !== 0) {
-      if (!currentOption.value) return
+      if (!optionCategory.value) return
       setIsLoading(true)
 
       if (imageError) {
@@ -134,7 +145,7 @@ const CreateProductForm = () => {
         weight: data.weight,
         quantity: data.quantity,
         stock: data.stock,
-        category: currentOption.value,
+        category: optionCategory.id,
         images: [{
           alt: '',
           src: ''
@@ -153,6 +164,20 @@ const CreateProductForm = () => {
     setImages(imageList as never[])
   }
 
+  const getCurrentOptionCategory = (option: any) => {
+    setOptionCategory(option)
+  }
+
+  const getCurrentOptionSubCategory = (option: any) => {
+    setOptionSubCategory(option)
+  }
+
+  useEffect(() => {
+    fetchCategories().then(data => {
+      setCategory(data)
+    })
+  }, [categoryUpdate])
+
   return (
     <Container>
       <Heading as={'h3'} size={'lg'} textAlign={'center'} marginTop={'20px'}>
@@ -166,6 +191,7 @@ const CreateProductForm = () => {
           text={'Показать инпуты для перевода:'}
           marginTop={'20px'}
         />
+
         <Controller
           control={control}
           name="titleEn"
@@ -182,6 +208,7 @@ const CreateProductForm = () => {
             </FormControl>
           )}
         />
+
         {isVisibleRu &&
           <Controller
             control={control}
@@ -347,9 +374,15 @@ const CreateProductForm = () => {
             )}
           />}
 
-        <FormControl isInvalid={!currentOption.value} marginTop={'20px'}>
-          <FormLabel>category or subCategory</FormLabel>
-          <CategorySelect/>
+        <FormControl isInvalid={!optionCategory.value} marginTop={'20px'}>
+          <FormLabel>Category</FormLabel>
+          <SelectBasic getCurrentOption={getCurrentOptionCategory} options={category}/>
+          <FormErrorMessage>{'Выберите категорию'}</FormErrorMessage>
+        </FormControl>
+
+        <FormControl isInvalid={!optionSubCategory.value} marginTop={'20px'}>
+          <FormLabel>SubCategory</FormLabel>
+          <SelectBasic getCurrentOption={getCurrentOptionSubCategory} options={subCategories}/>
           <FormErrorMessage>{'Выберите категорию'}</FormErrorMessage>
         </FormControl>
 

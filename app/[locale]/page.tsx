@@ -7,7 +7,7 @@ export const metadata = {
   description: 'Product'
 }
 
-export default async function ProductPage({params: {locale}}: {params: { locale: string }}) {
+export default async function ProductPage() {
   const products: IProductState[] = await fetchProducts()
   return (
     <>

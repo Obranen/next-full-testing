@@ -1,14 +1,33 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {Controller, SubmitHandler, useForm, useFormState} from 'react-hook-form'
 import {ICategoryState} from '../../../interface/schema/category'
 import {Button, Center, Container, FormControl, FormErrorMessage, FormLabel, Heading, Input} from '@chakra-ui/react'
 import {createSubCategory} from '../../../async/subCategory'
-import CategorySelect from './CategorySelect/CategorySelect'
-import {useSubCategoryStore} from '../../../store/subCategory'
+import SelectBasic from '../../ui/SelectBasic/SelectBasic'
 
-const CreateSubCategoryForm = () => {
+import {FC} from 'react'
+import {fetchCategories} from '../../../async/category'
+import {useCategoryStore} from '../../../store/category'
+
+interface ICreateSubCategoryForm {
+  categories: ICategoryState
+}
+
+const CreateSubCategoryForm: FC<ICreateSubCategoryForm> = ({categories}) => {
   const [isLoading, setIsLoading] = useState(false)
-  const currentOption = useSubCategoryStore(state => state.currentOption)
+  const [optionCategory, setOptionCategory] = useState<ICategoryState>({id: '', value: '', label: ''})
+  const categoryUpdate = useCategoryStore(state => state.categoryUpdate)
+  const [category, setCategory] = useState(categories)
+
+  const getCurrentOptionCategory = (option: any) => {
+    setOptionCategory(option)
+  }
+
+  useEffect(() => {
+    fetchCategories().then(data => {
+      setCategory(data)
+    })
+  }, [categoryUpdate])
 
   const {
     handleSubmit,
@@ -19,11 +38,11 @@ const CreateSubCategoryForm = () => {
   })
   const {errors} = useFormState({control})
   const onSubmit: SubmitHandler<ICategoryState> = async (data) => {
-    if (!currentOption?.value) return
+    if (!optionCategory?.value) return
     setIsLoading(true)
 
     await createSubCategory({
-      id: currentOption.id,
+      id: optionCategory.id,
       value: data.value,
       label: data.label
     }).finally(() => {
@@ -31,6 +50,7 @@ const CreateSubCategoryForm = () => {
       reset()
     })
   }
+
   return (
     <Container>
       <Heading as={'h3'} size={'lg'} textAlign={'center'} marginTop={'20px'}>
@@ -71,9 +91,9 @@ const CreateSubCategoryForm = () => {
           )}
         />
 
-        <FormControl isInvalid={!currentOption.value} marginTop={'20px'}>
-          <FormLabel>category</FormLabel>
-          <CategorySelect/>
+        <FormControl isInvalid={!optionCategory.value} marginTop={'20px'}>
+          <FormLabel>Category</FormLabel>
+          <SelectBasic getCurrentOption={getCurrentOptionCategory} options={category}/>
           <FormErrorMessage>{'Выберите категорию'}</FormErrorMessage>
         </FormControl>
 

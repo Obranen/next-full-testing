@@ -1,6 +1,6 @@
 import {NextResponse} from 'next/server'
 import {prisma} from '../../../../lib/prismaDB'
-import {IReviewState} from '../../../../interface/schema/review'
+import {IReviewState} from '../../../../interface/review'
 
 // export const GET = async (req: Request) => {
 //   try {

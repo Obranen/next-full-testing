@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import {Controller, SubmitHandler, useForm, useFormState} from 'react-hook-form'
-import {ICategoryState} from '../../../interface/schema/category'
+import {ICategoryState} from '../../../interface/category'
 import {Button, Center, Container, FormControl, FormErrorMessage, FormLabel, Heading, Input} from '@chakra-ui/react'
 import {createSubCategory} from '../../../async/subCategory'
 import SelectBasic from '../../ui/SelectBasic/SelectBasic'

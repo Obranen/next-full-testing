@@ -1,7 +1,7 @@
 import {Button, Center, Container, FormControl, FormErrorMessage, FormLabel, Heading, Input} from '@chakra-ui/react'
 import {Controller, SubmitHandler, useForm, useFormState} from 'react-hook-form'
 import {useState} from 'react'
-import {ICategoryState} from '../../../interface/schema/category'
+import {ICategoryState} from '../../../interface/category'
 import {createCategory} from '../../../async/category'
 import {useCategoryStore} from '../../../store/category'
 

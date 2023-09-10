@@ -1,6 +1,6 @@
 import {prisma} from '../../../lib/prismaDB'
 import {NextResponse} from 'next/server'
-import {ICategoryState} from '../../../interface/schema/category'
+import {ICategoryState} from '../../../interface/category'
 
 export const GET = async () => {
   try {

@@ -1,5 +1,5 @@
 import {FC} from 'react'
-import {IProductState} from '../../../../interface/schema/product'
+import {IProductState} from '../../../../interface/product'
 import Image from 'next/image'
 import {
   Button,
@@ -23,9 +23,9 @@ const Item: FC<IItem> = ({product}) => {
   const locale = useLocale()
   const tProduct = useTranslations('Product')
 
-  if (product.category !== 'cold') {
-    return <></>
-  }
+  // if (product.category !== '64fb5d7686487529418fbb81') {
+  //   return <></>
+  // }
 
   return (
     <Box>

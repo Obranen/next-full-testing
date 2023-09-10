@@ -11,7 +11,7 @@ import {
   Input,
   Textarea
 } from '@chakra-ui/react'
-import {IContactState} from '../../../interface/schema/contact'
+import {IContactState} from '../../../interface/contact'
 import {SendContactForm} from '../../../async/contact'
 import {useTranslations} from 'next-intl'
 

@@ -16,7 +16,7 @@ import {useRouter} from 'next/navigation'
 import {Controller, SubmitHandler, useForm, useFormState} from 'react-hook-form'
 import {BsEyeSlashFill, BsEyeFill, BsFillCheckSquareFill} from 'react-icons/bs'
 import {AiFillStop} from 'react-icons/ai'
-import {IUserState} from '../../interface/schema/user'
+import {IUserState} from '../../interface/user'
 import {createUser, fetchUser} from '../../async/user'
 import {signIn} from 'next-auth/react'
 

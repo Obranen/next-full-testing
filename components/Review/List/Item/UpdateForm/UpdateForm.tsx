@@ -2,7 +2,7 @@ import {FC, useState} from 'react'
 import {Controller, SubmitHandler, useForm, useFormState} from 'react-hook-form'
 import {Button, Card, CardFooter, CardHeader, FormControl, FormErrorMessage, FormLabel, Input} from '@chakra-ui/react'
 import {useRouter} from 'next/navigation'
-import {IReviewState} from '../../../../../interface/schema/review'
+import {IReviewState} from '../../../../../interface/review'
 import {updateReview} from '../../../../../async/review'
 
 interface IUpdateForm {

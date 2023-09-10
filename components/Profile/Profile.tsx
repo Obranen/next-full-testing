@@ -6,8 +6,8 @@ import CreateProductForm from './CreateProductForm/CreateProductForm'
 import CreateCategoryForm from './CreateCategoryForm/CreateCategoryForm'
 import {Heading} from '@chakra-ui/react'
 import CreateSubCategoryForm from './CreateSubCategoryForm/CreateSubCategoryForm'
-import {ICategoryState} from '../../interface/schema/category'
-import {ISubCategoryState} from '../../interface/schema/subCategory'
+import {ICategoryState} from '../../interface/category'
+import {ISubCategoryState} from '../../interface/subCategory'
 
 interface IProfile {
   categories: ICategoryState

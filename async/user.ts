@@ -1,4 +1,4 @@
-import {IUserState} from '../interface/schema/user'
+import {IUserState} from '../interface/user'
 
 export const fetchUser = async (email: string) => {
   const response = await fetch(`${process.env.FETCH_URL}/api/user/${email}`)

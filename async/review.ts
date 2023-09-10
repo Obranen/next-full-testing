@@ -1,4 +1,4 @@
-import {IReviewState} from '../interface/schema/review'
+import {IReviewState} from '../interface/review'
 
 export const fetchReviews = async () => {
   const response = await fetch(`${process.env.FETCH_URL}/api/review`, {

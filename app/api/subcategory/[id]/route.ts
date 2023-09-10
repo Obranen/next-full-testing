@@ -1,6 +1,6 @@
 import {prisma} from '../../../../lib/prismaDB'
 import {NextResponse} from 'next/server'
-import {ISubCategoryState} from '../../../../interface/schema/subCategory'
+import {ISubCategoryState} from '../../../../interface/subCategory'
 
 export const POST = async (req: Request) => {
   try {

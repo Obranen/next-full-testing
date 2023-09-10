@@ -18,17 +18,16 @@ import {
 import {useRouter} from 'next/navigation'
 import {useSession} from 'next-auth/react'
 import {Controller, SubmitHandler, useForm, useFormState} from 'react-hook-form'
-import {IProductState} from '../../../interface/schema/product'
+import {IProductState} from '../../../interface/product'
 import {createProduct} from '../../../async/product'
 import {ImageListType} from 'react-images-uploading'
 import {createImages} from '../../../async/upload'
 import Uploader from '../../ui/Uploader/Uploader'
-import FlagCountry from '../../ui/FlagCountry/FlagCountry'
-import {IFlagCountryState} from '../../../interface/ui/flagCountry'
+import FlagCountry, {IFlagCountryState} from '../../ui/FlagCountry/FlagCountry'
 import classes from './CreateProductForm.module.scss'
 import SelectBasic from '../../ui/SelectBasic/SelectBasic'
-import {ICategoryState} from '../../../interface/schema/category'
-import {ISubCategoryState} from '../../../interface/schema/subCategory'
+import {ICategoryState} from '../../../interface/category'
+import {ISubCategoryState} from '../../../interface/subCategory'
 import {fetchCategories} from '../../../async/category'
 import {useCategoryStore} from '../../../store/category'
 
@@ -146,6 +145,7 @@ const CreateProductForm: FC<ICreateProductForm> = ({categories, subCategories}) 
         quantity: data.quantity,
         stock: data.stock,
         category: optionCategory.id,
+        subCategory: optionSubCategory.id,
         images: [{
           alt: '',
           src: ''

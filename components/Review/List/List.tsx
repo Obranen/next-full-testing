@@ -1,7 +1,7 @@
 import {FC} from 'react'
 import {Heading} from '@chakra-ui/react'
 import Item from './Item/Item'
-import {IReviewState} from '../../../interface/schema/review'
+import {IReviewState} from '../../../interface/review'
 
 
 interface IList {

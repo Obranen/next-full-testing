@@ -1,5 +1,4 @@
-import FlagCountry from '../../ui/FlagCountry/FlagCountry'
-import {IFlagCountryState} from '../../../interface/ui/flagCountry'
+import FlagCountry, {IFlagCountryState} from '../../ui/FlagCountry/FlagCountry'
 
 const Language = () => {
   const flags: IFlagCountryState[] = [

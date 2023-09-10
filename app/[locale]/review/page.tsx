@@ -1,5 +1,5 @@
 import {fetchReviews} from '../../../async/review'
-import {IReviewState} from '../../../interface/schema/review'
+import {IReviewState} from '../../../interface/review'
 import Review from '../../../components/Review/Review'
 
 export const metadata = {

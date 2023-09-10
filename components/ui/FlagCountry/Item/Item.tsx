@@ -3,7 +3,7 @@ import Image from 'next/image'
 import {Tooltip} from '@chakra-ui/tooltip'
 import Link from 'next-intl/link'
 import {usePathname} from 'next-intl/client'
-import {IFlagCountryState} from '../../../../interface/ui/flagCountry'
+import {IFlagCountryState} from '../FlagCountry'
 
 export type AppearanceType = 'link' | 'button'
 

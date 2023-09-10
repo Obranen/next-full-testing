@@ -13,7 +13,7 @@ import {
 import {useState} from 'react'
 import {useRouter} from 'next/navigation'
 import {createReview} from '../../../async/review'
-import {IReviewState} from '../../../interface/schema/review'
+import {IReviewState} from '../../../interface/review'
 import {useSession} from 'next-auth/react'
 import Link from 'next-intl/link'
 

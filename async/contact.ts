@@ -1,4 +1,4 @@
-import {IContactState} from '../interface/schema/contact'
+import {IContactState} from '../interface/contact'
 
 export const SendContactForm = async (data: IContactState) => {
   const response = await fetch(`/api/contact`, {

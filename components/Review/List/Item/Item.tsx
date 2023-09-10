@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react'
 import UpdateForm from './UpdateForm/UpdateForm'
 import {useRouter} from 'next/navigation'
-import {IReviewState} from '../../../../interface/schema/review'
+import {IReviewState} from '../../../../interface/review'
 import {deleteReview} from '../../../../async/review'
 
 interface IItem {

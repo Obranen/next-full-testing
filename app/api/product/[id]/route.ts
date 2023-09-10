@@ -1,11 +1,11 @@
 import {prisma} from '../../../../lib/prismaDB'
 import {NextResponse} from 'next/server'
-import {IProductState} from '../../../../interface/schema/product'
+import {IProductState} from '../../../../interface/product'
 
 export const POST = async (req: Request) => {
   try {
     const id = req.url.split('/product/')[1]
-    const {imageAlt, imageSrc, titleEn, titleRu, titleUa, images, weight, descEn, descRu, descUa, currencyEn, currencyRu, currencyUa, price, quantity, stock, category}: IProductState = await req.json()
+    const {imageAlt, imageSrc, titleEn, titleRu, titleUa, images, weight, descEn, descRu, descUa, currencyEn, currencyRu, currencyUa, price, quantity, stock, category, subCategory}: IProductState = await req.json()
     const updateAuthorAndCreateReview = await prisma.user.update({
       where: {
         id
@@ -14,7 +14,7 @@ export const POST = async (req: Request) => {
         product: {
           create: [
             {
-              imageAlt, imageSrc, titleEn, titleRu, titleUa, weight, descEn, descRu, descUa, currencyEn, currencyRu, currencyUa, price, quantity, stock, category,
+              imageAlt, imageSrc, titleEn, titleRu, titleUa, weight, descEn, descRu, descUa, currencyEn, currencyRu, currencyUa, price, quantity, stock, category, subCategory,
               images: {
                 create: images
               }

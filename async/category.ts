@@ -1,4 +1,4 @@
-import {ICategoryState} from '../interface/schema/category'
+import {ICategoryState} from '../interface/category'
 
 export const fetchCategories = async () => {
   const response = await fetch(`${process.env.FETCH_URL}/api/category`, {

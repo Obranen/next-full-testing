@@ -14,6 +14,7 @@ import {
   Box
 } from '@chakra-ui/react'
 import {useLocale, useTranslations} from 'next-intl'
+import {useFilterProductStore} from '../../../../store/filterProduct'
 
 interface IItem {
   product: IProductState
@@ -22,10 +23,13 @@ interface IItem {
 const Item: FC<IItem> = ({product}) => {
   const locale = useLocale()
   const tProduct = useTranslations('Product')
+  const categoryId = useFilterProductStore(state => state.categoryId)
 
-  // if (product.category !== '64fb5d7686487529418fbb81') {
-  //   return <></>
-  // }
+  console.log(categoryId)
+
+  if (categoryId !== '' && product.subCategory !== categoryId) {
+    return <></>
+  }
 
   return (
     <Box>

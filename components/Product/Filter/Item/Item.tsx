@@ -1,17 +1,21 @@
 import {ChangeEvent, FC} from 'react'
 import {Checkbox} from '@chakra-ui/checkbox'
 import {ISubCategoryState} from '../../../../interface/subCategory'
+import {useFilterProductStore} from '../../../../store/filterProduct'
 
 interface IItem {
   subCategory: ISubCategoryState
 }
 
 const Item: FC<IItem> = ({subCategory}) => {
+  const setCategoryId = useFilterProductStore(state => state.setCategoryId)
 
   const checkboxChange = (e: ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.currentTarget.checked
     if (isChecked) {
-      console.log(subCategory.id, 'isChecked')
+      setCategoryId(subCategory.id)
+    } else {
+      setCategoryId('')
     }
   }
 

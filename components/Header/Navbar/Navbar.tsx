@@ -18,7 +18,7 @@ const Navbar = () => {
     {
       id: 1,
       href: '/',
-      name: 'Product',
+      name: 'Catalog Product',
       role: 'public'
     },
     {

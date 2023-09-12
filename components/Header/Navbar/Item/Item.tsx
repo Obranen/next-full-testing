@@ -24,18 +24,21 @@ const Item: FC<IItem> = ({onClose, nav, pathname}) => {
     <>
       {nav.role === 'public' &&
         <Link
+          as={nav.href}
           href={nav.href}
           onClick={linkClick}
           className={pathname === nav.href ? clsx(classes.activeLink, classes.link) : classes.link}
         >{nav.name}</Link>}
       {session.status === 'authenticated' && nav.role === 'authenticated' &&
         <Link
+          as={nav.href}
           href={nav.href}
           onClick={linkClick}
           className={pathname === nav.href ? clsx(classes.activeLink, classes.link) : classes.link}
         >{nav.name}</Link>}
       {session.status !== 'authenticated' && nav.role === 'notAuthenticated' &&
         <Link
+          as={nav.href}
           href={nav.href}
           onClick={linkClick}
           className={pathname === nav.href ? clsx(classes.activeLink, classes.link) : classes.link}

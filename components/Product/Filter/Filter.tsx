@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react'
+import {FC} from 'react'
 import {FormControl, FormLabel} from '@chakra-ui/react'
 import {ISubCategoryState} from '../../../interface/subCategory'
 import Item from './Item/Item'
@@ -10,17 +10,10 @@ interface IFilter {
 }
 
 const Filter: FC<IFilter> = ({subCategories, categories}) => {
-  const [category, setCategory] = useState('')
-
-  useEffect(() => {
-    const currentCategory = categories.filter((category) => category.id === '64fb5d7686487529418fbb81')
-    console.log(currentCategory)
-    setCategory(currentCategory[0].label)
-  }, [categories])
 
   return (
     <FormControl>
-      <FormLabel>{category} ({subCategories.length})</FormLabel>
+      <FormLabel>{} ({subCategories.length})</FormLabel>
       {subCategories.map((subCategory =>
           <Item key={subCategory.id} subCategory={subCategory}/>
       ))}

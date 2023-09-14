@@ -10,10 +10,9 @@ interface IFilter {
 }
 
 const Filter: FC<IFilter> = ({subCategories, categories}) => {
-
   return (
     <FormControl>
-      <FormLabel>{} ({subCategories.length})</FormLabel>
+      <FormLabel>{categories[0].label} ({subCategories.length})</FormLabel>
       {subCategories.map((subCategory =>
           <Item key={subCategory.id} subCategory={subCategory}/>
       ))}

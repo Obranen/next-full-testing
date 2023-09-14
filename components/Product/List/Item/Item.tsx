@@ -25,8 +25,6 @@ const Item: FC<IItem> = ({product}) => {
   const tProduct = useTranslations('Product')
   const categoryId = useFilterProductStore(state => state.categoryId)
 
-  console.log(categoryId)
-
   if (categoryId !== '' && product.subCategory !== categoryId) {
     return <></>
   }

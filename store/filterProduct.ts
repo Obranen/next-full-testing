@@ -11,5 +11,14 @@ export const useFilterProductStore = create<IUseFilterProductStore>((set) => ({
   categoryId: '',
   categoryTitle: '',
   setCategoryId: (id: string) => set({categoryId: id}),
+  // // @ts-ignore
+  // setCategoryId: (idProducts: string) => set(state => (
+  //   {
+  //     categoryId: [
+  //       ...state.categoryId,
+  //       idProducts
+  //     ]
+  //   }
+  // )),
   setCategoryTitle: (title: string) => set({categoryTitle: title}),
 }))

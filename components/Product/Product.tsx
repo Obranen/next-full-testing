@@ -15,7 +15,7 @@ interface IProductProps {
   categories: ICategoryState[]
 }
 
-const Product: FC<IProductProps> = ({products, categories, subCategories}) => {
+const Product: FC<IProductProps> = ({products, subCategories, categories}) => {
   return (
     <>
       <SimpleGrid columns={5} spacing={3}>

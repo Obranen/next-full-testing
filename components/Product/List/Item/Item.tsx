@@ -1,20 +1,8 @@
 import {FC} from 'react'
 import {IProductState} from '../../../../interface/product'
 import Image from 'next/image'
-import {
-  Button,
-  ButtonGroup,
-  Card,
-  CardBody,
-  CardFooter,
-  Divider,
-  Heading,
-  Stack,
-  Text,
-  Box
-} from '@chakra-ui/react'
+import {Box, Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Heading, Stack, Text} from '@chakra-ui/react'
 import {useLocale, useTranslations} from 'next-intl'
-import {useFilterProductStore} from '../../../../store/filterProduct'
 
 interface IItem {
   product: IProductState
@@ -23,11 +11,6 @@ interface IItem {
 const Item: FC<IItem> = ({product}) => {
   const locale = useLocale()
   const tProduct = useTranslations('Product')
-  const categoryId = useFilterProductStore(state => state.categoryId)
-
-  if (categoryId !== '' && product.subCategory !== categoryId) {
-    return <></>
-  }
 
   return (
     <Box>

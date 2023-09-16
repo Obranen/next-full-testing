@@ -1,24 +1,25 @@
 import {create} from 'zustand'
+import {IProductState} from '../interface/product'
 
 interface IUseFilterProductStore {
-  categoryId: string,
+  productsFilter: IProductState[],
   categoryTitle: string,
-  setCategoryId: (id: string) => void,
   setCategoryTitle: (title: string) => void,
+  addProductInFilter: (array: IProductState) => void,
+  deleteProductFromFilter: (id: string) => void,
 }
 
 export const useFilterProductStore = create<IUseFilterProductStore>((set) => ({
-  categoryId: '',
+  productsFilter: [],
   categoryTitle: '',
-  setCategoryId: (id: string) => set({categoryId: id}),
-  // // @ts-ignore
-  // setCategoryId: (idProducts: string) => set(state => (
-  //   {
-  //     categoryId: [
-  //       ...state.categoryId,
-  //       idProducts
-  //     ]
-  //   }
-  // )),
-  setCategoryTitle: (title: string) => set({categoryTitle: title}),
+  addProductInFilter: (array) => set(state => ({
+    productsFilter: [
+      ...state.productsFilter,
+      array
+    ]
+  })),
+  deleteProductFromFilter: (id) => set(state => ({
+    productsFilter: state.productsFilter.filter((productId) => productId.subCategory !== id)
+  })),
+  setCategoryTitle: (title: string) => set({categoryTitle: title})
 }))

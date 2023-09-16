@@ -19,9 +19,7 @@ const Product: FC<IProductProps> = ({products, subCategories, categories}) => {
   return (
     <>
       <SimpleGrid columns={5} spacing={3}>
-        <VStack align="stretch">
-          <Filter subCategories={subCategories} categories={categories}/>
-        </VStack>
+        <Filter subCategories={subCategories} categories={categories} products={products}/>
         <List products={products}/>
       </SimpleGrid>
     </>

@@ -16,9 +16,11 @@ const Item: FC<IItem> = ({subCategory, products}) => {
   const checkboxChange = (e: ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.currentTarget.checked
     if (isChecked) {
-        const newProducts = products.filter(product => subCategory.id === product.subCategory)
-      // @ts-ignore
-      addProductInFilter(...newProducts)
+      products.forEach(product => {
+        if (subCategory.id === product.subCategory) {
+          addProductInFilter({...product})
+        }
+      })
     } else {
       deleteProductFromFilter(subCategory.id)
     }

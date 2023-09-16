@@ -15,6 +15,7 @@ const Filter: FC<IFilter> = ({subCategories, categories, products}) => {
 
   if (subCategories.length === 1 || subCategories.length === 0) {
     return <></>
+
   }
 
   return (

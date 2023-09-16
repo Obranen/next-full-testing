@@ -1,4 +1,4 @@
-import {FC} from 'react'
+import {FC, useEffect} from 'react'
 import {IProductState} from '../../../interface/product'
 import {Heading} from '@chakra-ui/react'
 import Item from './Item/Item'
@@ -10,6 +10,13 @@ interface IList {
 
 const List: FC<IList> = ({products}) => {
   const productsFilter = useFilterProductStore(state => state.productsFilter)
+  const cleanProductFilter = useFilterProductStore(state => state.cleanProductFilter)
+
+  useEffect(() => {
+    if (productsFilter.length) {
+      cleanProductFilter()
+    }
+  }, [])
 
   if (!products.length) {
     return <Heading as={'h2'} size={'lg'} textAlign={'center'} marginTop={'30px'} color={'red'}>

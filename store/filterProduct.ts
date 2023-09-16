@@ -5,21 +5,25 @@ interface IUseFilterProductStore {
   productsFilter: IProductState[],
   categoryTitle: string,
   setCategoryTitle: (title: string) => void,
-  addProductInFilter: (array: IProductState) => void,
+  addProductInFilter: (object: IProductState) => void,
   deleteProductFromFilter: (id: string) => void,
+  cleanProductFilter: () => void,
 }
 
 export const useFilterProductStore = create<IUseFilterProductStore>((set) => ({
   productsFilter: [],
   categoryTitle: '',
-  addProductInFilter: (array) => set(state => ({
+  addProductInFilter: (object) => set(state => ({
     productsFilter: [
       ...state.productsFilter,
-      array
+      object
     ]
   })),
   deleteProductFromFilter: (id) => set(state => ({
     productsFilter: state.productsFilter.filter((productId) => productId.subCategory !== id)
+  })),
+  cleanProductFilter: () => set(state => ({
+    productsFilter: []
   })),
   setCategoryTitle: (title: string) => set({categoryTitle: title})
 }))

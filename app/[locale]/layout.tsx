@@ -1,7 +1,7 @@
 import {ReactNode} from 'react'
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
-import {Provider} from '../../components/Provider/Provider'
+import {Provider} from '../../lib/provider'
 import {notFound} from 'next/navigation'
 import classes from './global.module.scss'
 

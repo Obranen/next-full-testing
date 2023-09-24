@@ -145,7 +145,7 @@ const CreateProductForm: FC<ICreateProductForm> = ({categories, subCategories}) 
         quantity: data.quantity,
         stock: data.stock,
         category: optionCategory.id,
-        subCategory: optionSubCategory.id,
+        subCategory: optionSubCategory.value,
         images: [{
           alt: '',
           src: ''

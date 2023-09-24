@@ -15,7 +15,6 @@ const Filter: FC<IFilter> = ({subCategories, categories, products}) => {
 
   if (subCategories.length === 1 || subCategories.length === 0) {
     return <></>
-
   }
 
   return (
@@ -23,7 +22,7 @@ const Filter: FC<IFilter> = ({subCategories, categories, products}) => {
       <FormControl>
         <FormLabel>{categories[0].label} ({subCategories.length})</FormLabel>
         {subCategories.map((subCategory =>
-            <FilterItem key={subCategory.id} subCategory={subCategory} products={products}/>
+            <FilterItem key={subCategory.id} subCategory={subCategory} products={products} categories={categories}/>
         ))}
       </FormControl>
     </VStack>

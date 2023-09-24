@@ -1,28 +1,28 @@
 import {ChangeEvent, FC} from 'react'
 import {Checkbox} from '@chakra-ui/checkbox'
 import {ISubCategoryState} from '../../../../interface/subCategory'
-import {useFilterProductStore} from '../../../../store/filterProduct'
 import {IProductState} from '../../../../interface/product'
+import {useRouter, useSearchParams} from 'next/navigation'
+import {ICategoryState} from '../../../../interface/category'
 
 interface IFilterItem {
   subCategory: ISubCategoryState
   products: IProductState[]
+  categories: ICategoryState[]
 }
 
-const FilterItem: FC<IFilterItem> = ({subCategory, products}) => {
-  const deleteProductFromFilter = useFilterProductStore(state => state.deleteProductFromFilter)
-  const addProductInFilter = useFilterProductStore(state => state.addProductInFilter)
+const FilterItem: FC<IFilterItem> = ({subCategory, categories, products}) => {
+  const router = useRouter()
+  const searchParams = useSearchParams()
 
   const checkboxChange = (e: ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.currentTarget.checked
     if (isChecked) {
-      products.forEach(product => {
-        if (subCategory.id === product.subCategory) {
-          addProductInFilter({...product})
-        }
-      })
+      router.push(`?${categories[0].value}=${subCategory.value}`)
     } else {
-      deleteProductFromFilter(subCategory.id)
+      const params = new URLSearchParams(searchParams.toString())
+      params.delete(categories[0].value)
+      router.push(`?${params}`)
     }
   }
 

@@ -9,7 +9,7 @@ interface ICategoryItem {
 const CategoryItem: FC<ICategoryItem> = ({category}) => {
   return (
     <Link
-      href={`${category.value}`}
+      href={`/${category.value}`}
       style={{color: '#000', display: 'block', textDecoration: 'underline'}}
     >{category.label}</Link>
   )

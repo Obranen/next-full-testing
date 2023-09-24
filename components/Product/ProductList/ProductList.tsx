@@ -9,13 +9,11 @@ interface IProductList {
 }
 
 const ProductList: FC<IProductList> = ({products}) => {
+  const getProductsFilter = useFilterProductStore(state => state.getProductsFilter)
   const productsFilter = useFilterProductStore(state => state.productsFilter)
-  const cleanProductFilter = useFilterProductStore(state => state.cleanProductFilter)
 
   useEffect(() => {
-    if (productsFilter.length) {
-      cleanProductFilter()
-    }
+    getProductsFilter(products)
   }, [])
 
   if (!products.length) {
@@ -26,12 +24,9 @@ const ProductList: FC<IProductList> = ({products}) => {
 
   return (
     <>
-      {!productsFilter.length ? products.map((product: IProductState) =>
+      {productsFilter.map((product: IProductState) =>
         <ProductItem key={product.id} product={product}/>
-      ) :
-        productsFilter.map((product: IProductState) =>
-          <ProductItem key={product.id} product={product}/>
-        )}
+      )}
     </>
   )
 }

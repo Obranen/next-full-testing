@@ -3,8 +3,7 @@ import {IProductState} from '../interface/product'
 
 interface IUseFilterProductStore {
   productsFilter: IProductState[],
-  categoryTitle: string,
-  setCategoryTitle: (title: string) => void,
+  getProductsFilter: (array: IProductState[]) => void,
   addProductInFilter: (object: IProductState) => void,
   deleteProductFromFilter: (id: string) => void,
   cleanProductFilter: () => void,
@@ -12,7 +11,9 @@ interface IUseFilterProductStore {
 
 export const useFilterProductStore = create<IUseFilterProductStore>((set) => ({
   productsFilter: [],
-  categoryTitle: '',
+  getProductsFilter: (array) => set(state => ({
+    productsFilter: array
+  })),
   addProductInFilter: (object) => set(state => ({
     productsFilter: [
       ...state.productsFilter,
@@ -25,5 +26,4 @@ export const useFilterProductStore = create<IUseFilterProductStore>((set) => ({
   cleanProductFilter: () => set(state => ({
     productsFilter: []
   })),
-  setCategoryTitle: (title: string) => set({categoryTitle: title})
 }))

@@ -1,14 +1,14 @@
 import {FC} from 'react'
 import {Heading} from '@chakra-ui/react'
-import Item from './Item/Item'
+import Item from './ReviewItem/ReviewItem'
 import {IReviewState} from '../../../interface/review'
 
 
-interface IList {
+interface IReviewList {
   reviews: IReviewState[]
 }
 
-const List: FC<IList> = ({reviews}) => {
+const ReviewList: FC<IReviewList> = ({reviews}) => {
 
   if (!reviews.length) {
     return <Heading as={'h2'} size={'lg'} textAlign={'center'} marginTop={'30px'} color={'red'}>
@@ -28,4 +28,4 @@ const List: FC<IList> = ({reviews}) => {
   )
 }
 
-export default List
+export default ReviewList

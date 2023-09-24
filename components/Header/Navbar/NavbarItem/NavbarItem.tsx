@@ -2,16 +2,16 @@ import {FC} from 'react'
 import Link from 'next/link'
 import {INavigation} from '../Navbar'
 import {signOut, useSession} from 'next-auth/react'
-import classes from './Item.module.scss'
+import classes from './NavbarItem.module.scss'
 import clsx from 'clsx'
 
-interface IItem {
+interface INavbarItem {
   nav: INavigation
   onClose: () => void
   pathname: string
 }
 
-const Item: FC<IItem> = ({onClose, nav, pathname}) => {
+const NavbarItem: FC<INavbarItem> = ({onClose, nav, pathname}) => {
   const session = useSession()
   const linkClick = async () => {
     if (nav.role === 'authenticated' && nav.href === '#') {
@@ -47,4 +47,4 @@ const Item: FC<IItem> = ({onClose, nav, pathname}) => {
   )
 }
 
-export default Item
+export default NavbarItem

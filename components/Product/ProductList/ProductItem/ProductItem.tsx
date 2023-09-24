@@ -4,11 +4,11 @@ import Image from 'next/image'
 import {Box, Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Heading, Stack, Text} from '@chakra-ui/react'
 import {useLocale, useTranslations} from 'next-intl'
 
-interface IItem {
+interface IProductItem {
   product: IProductState
 }
 
-const Item: FC<IItem> = ({product}) => {
+const ProductItem: FC<IProductItem> = ({product}) => {
   const locale = useLocale()
   const tProduct = useTranslations('Product')
 
@@ -57,4 +57,4 @@ const Item: FC<IItem> = ({product}) => {
   )
 }
 
-export default Item
+export default ProductItem

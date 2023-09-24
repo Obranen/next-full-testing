@@ -7,13 +7,13 @@ import {IFlagCountryState} from '../FlagCountry'
 
 export type AppearanceType = 'link' | 'button'
 
-interface IItem {
+interface IFlagCountryItem {
   flag: IFlagCountryState
   appearance: AppearanceType
   onClickImage?: (e: any) => void
 }
 
-const Item: FC<IItem> = ({flag, appearance, onClickImage}) => {
+const FlagCountryItem: FC<IFlagCountryItem> = ({flag, appearance, onClickImage}) => {
   const pathName = usePathname()
 
   return (
@@ -44,4 +44,4 @@ const Item: FC<IItem> = ({flag, appearance, onClickImage}) => {
   )
 }
 
-export default Item
+export default FlagCountryItem

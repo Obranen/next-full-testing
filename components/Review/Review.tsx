@@ -2,7 +2,7 @@
 
 import {FC} from 'react'
 import CreateForm from './CreateForm/CreateForm'
-import List from './List/List'
+import List from './ReviewList/ReviewList'
 import {IReviewState} from '../../interface/review'
 
 interface IReviewStateState {

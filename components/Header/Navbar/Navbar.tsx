@@ -1,7 +1,7 @@
 import {Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, useDisclosure} from '@chakra-ui/react'
 import {AiOutlineMenu, AiOutlineMenuFold} from 'react-icons/ai'
 import {usePathname} from 'next-intl/client'
-import Item from './Item/Item'
+import NavbarItem from './NavbarItem/NavbarItem'
 
 export interface INavigation {
   id: number
@@ -79,7 +79,7 @@ const Navbar = () => {
           </DrawerHeader>
           <DrawerBody padding={0}>
             {navigation.map((nav) =>
-              <Item key={nav.id} onClose={onClose} nav={nav} pathname={pathname}/>
+              <NavbarItem key={nav.id} onClose={onClose} nav={nav} pathname={pathname}/>
             )}
           </DrawerBody>
         </DrawerContent>

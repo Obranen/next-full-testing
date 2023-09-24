@@ -4,12 +4,12 @@ import {ISubCategoryState} from '../../../../interface/subCategory'
 import {useFilterProductStore} from '../../../../store/filterProduct'
 import {IProductState} from '../../../../interface/product'
 
-interface IItem {
+interface IFilterItem {
   subCategory: ISubCategoryState
   products: IProductState[]
 }
 
-const Item: FC<IItem> = ({subCategory, products}) => {
+const FilterItem: FC<IFilterItem> = ({subCategory, products}) => {
   const deleteProductFromFilter = useFilterProductStore(state => state.deleteProductFromFilter)
   const addProductInFilter = useFilterProductStore(state => state.addProductInFilter)
 
@@ -38,4 +38,4 @@ const Item: FC<IItem> = ({subCategory, products}) => {
   )
 }
 
-export default Item
+export default FilterItem

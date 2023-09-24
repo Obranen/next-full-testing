@@ -1,14 +1,14 @@
 import {FC, useEffect} from 'react'
 import {IProductState} from '../../../interface/product'
 import {Heading} from '@chakra-ui/react'
-import Item from './Item/Item'
+import ProductItem from './ProductItem/ProductItem'
 import {useFilterProductStore} from '../../../store/filterProduct'
 
-interface IList {
+interface IProductList {
   products: IProductState[]
 }
 
-const List: FC<IList> = ({products}) => {
+const ProductList: FC<IProductList> = ({products}) => {
   const productsFilter = useFilterProductStore(state => state.productsFilter)
   const cleanProductFilter = useFilterProductStore(state => state.cleanProductFilter)
 
@@ -27,13 +27,13 @@ const List: FC<IList> = ({products}) => {
   return (
     <>
       {!productsFilter.length ? products.map((product: IProductState) =>
-        <Item key={product.id} product={product}/>
+        <ProductItem key={product.id} product={product}/>
       ) :
         productsFilter.map((product: IProductState) =>
-          <Item key={product.id} product={product}/>
+          <ProductItem key={product.id} product={product}/>
         )}
     </>
   )
 }
 
-export default List
+export default ProductList

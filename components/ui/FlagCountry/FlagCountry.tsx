@@ -1,5 +1,5 @@
 import {FC} from 'react'
-import Item, {AppearanceType} from './Item/Item'
+import FlagCountryItem, {AppearanceType} from './FlagCountryItem/FlagCountryItem'
 import {HStack} from '@chakra-ui/layout'
 import {Text} from '@chakra-ui/react'
 
@@ -29,7 +29,7 @@ const FlagCountry: FC<IFlagCountry> = ({array, appearance = 'link', onClickImage
         </Text>
         <HStack marginRight={'30px'} marginTop={'10px'} zIndex={1} position={'relative'}>
           {array.map((flag) =>
-            <Item key={flag.id} flag={flag} appearance={appearance} onClickImage={onClickImage}/>
+            <FlagCountryItem key={flag.id} flag={flag} appearance={appearance} onClickImage={onClickImage}/>
           )}
         </HStack>
       </HStack>

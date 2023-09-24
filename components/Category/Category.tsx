@@ -2,7 +2,7 @@
 
 import {FC} from 'react'
 import {ICategoryState} from '../../interface/category'
-import Item from './Item/Item'
+import CategoryItem from './CategoryItem/CategoryItem'
 
 interface ICategory {
   categories: ICategoryState[]
@@ -13,7 +13,7 @@ const Category: FC<ICategory> = ({categories}) => {
     <>
       <h1 style={{fontWeight: 'bold', fontSize: '20px'}}>Product-Category: </h1>
       {categories.map((category) =>
-        <Item key={category.id} category={category}/>
+        <CategoryItem key={category.id} category={category}/>
       )}
     </>
   )

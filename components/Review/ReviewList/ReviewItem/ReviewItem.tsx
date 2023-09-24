@@ -15,11 +15,11 @@ import {useRouter} from 'next/navigation'
 import {IReviewState} from '../../../../interface/review'
 import {deleteReview} from '../../../../async/review'
 
-interface IItem {
+interface IReviewItem {
   review: IReviewState
 }
 
-const Item: FC<IItem> = ({review}) => {
+const ReviewItem: FC<IReviewItem> = ({review}) => {
   const [isEdit, setIsEdit] = useState(false)
   const router = useRouter()
 
@@ -60,4 +60,4 @@ const Item: FC<IItem> = ({review}) => {
   )
 }
 
-export default Item
+export default ReviewItem

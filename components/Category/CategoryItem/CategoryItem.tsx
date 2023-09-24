@@ -2,11 +2,11 @@ import {FC} from 'react'
 import {ICategoryState} from '../../../interface/category'
 import Link from 'next/link'
 
-interface IItem {
+interface ICategoryItem {
   category: ICategoryState
 }
 
-const Item: FC<IItem> = ({category}) => {
+const CategoryItem: FC<ICategoryItem> = ({category}) => {
   return (
     <Link
       href={`${category.value}`}
@@ -15,4 +15,4 @@ const Item: FC<IItem> = ({category}) => {
   )
 }
 
-export default Item
+export default CategoryItem

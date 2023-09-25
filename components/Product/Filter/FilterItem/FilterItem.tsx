@@ -13,27 +13,37 @@ const FilterItem: FC<IFilterItem> = ({subCategory, categories}) => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [checkedInput, setCheckedInput] = useState(false)
+  const paramsURL = new URLSearchParams(searchParams.toString())
 
-  useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString())
+  const addURLParams = () => {
+    paramsURL.append(categories[0].value, subCategory.value)
+    router.push(`?${paramsURL}`)
+  }
+  
+  const removeURLParams = () => {
     // @ts-ignore
-    if (params.has(categories[0].value, subCategory.value)) {
+    paramsURL.delete(categories[0].value, subCategory.value)
+    router.push(`?${paramsURL}`)
+  }
+  
+  const isCheckedInput = () => {
+    // @ts-ignore
+    if (paramsURL.has(categories[0].value, subCategory.value)) {
       setCheckedInput(true)
     }
+  }
+
+  useEffect(() => {
+    isCheckedInput()
   }, [])
 
   const checkboxChange = (e: ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.currentTarget.checked
     if (isChecked) {
-      const params = new URLSearchParams(searchParams.toString())
-      params.append(categories[0].value, subCategory.value)
-      router.push(`?${params}`)
+      addURLParams()
       setCheckedInput(true)
     } else {
-      const params = new URLSearchParams(searchParams.toString())
-      // @ts-ignore
-      params.delete(categories[0].value, subCategory.value)
-      router.push(`?${params}`)
+      removeURLParams()
       setCheckedInput(false)
     }
   }

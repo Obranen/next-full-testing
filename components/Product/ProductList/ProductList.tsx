@@ -15,10 +15,7 @@ const ProductList: FC<IProductList> = ({products}) => {
   const cleanProductFilter = useFilterProductStore(state => state.cleanProductFilter)
   const searchParams = useSearchParams()
 
-  useEffect(() => {
-    if (productsFilter.length !== 0) {
-      cleanProductFilter()
-    }
+  const createArrayProductFilter = () => {
     searchParams.forEach((value, key, parent) => {
       products.forEach((product) => {
         if (value === product.subCategory) {
@@ -26,6 +23,13 @@ const ProductList: FC<IProductList> = ({products}) => {
         }
       })
     })
+  }
+
+  useEffect(() => {
+    if (productsFilter.length !== 0) {
+      cleanProductFilter()
+    }
+    createArrayProductFilter()
   }, [searchParams])
 
   if (!products.length) {

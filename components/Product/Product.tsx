@@ -5,21 +5,21 @@ import {IProductState} from '../../interface/product'
 import ProductList from './ProductList/ProductList'
 import {SimpleGrid} from '@chakra-ui/react'
 import Filter from './Filter/Filter'
-import {ISubCategoryState} from '../../interface/subCategory'
+import {IFilterState} from '../../interface/filter'
 import {ICategoryState} from '../../interface/category'
 
 
 interface IProductProps {
   products: IProductState[]
-  subCategories: ISubCategoryState[]
+  filtersCategory: IFilterState[]
   categories: ICategoryState[]
 }
 
-const Product: FC<IProductProps> = ({products, subCategories, categories}) => {
+const Product: FC<IProductProps> = ({products, filtersCategory, categories}) => {
   return (
     <>
       <SimpleGrid columns={5} spacing={3}>
-        <Filter subCategories={subCategories} categories={categories}/>
+        <Filter filtersCategory={filtersCategory} categories={categories}/>
         <ProductList products={products}/>
       </SimpleGrid>
     </>

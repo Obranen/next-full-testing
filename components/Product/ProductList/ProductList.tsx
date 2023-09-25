@@ -18,7 +18,7 @@ const ProductList: FC<IProductList> = ({products}) => {
   const createArrayProductFilter = () => {
     searchParams.forEach((value, key, parent) => {
       products.forEach((product) => {
-        if (value === product.subCategory) {
+        if (value === product.filter) {
           addProductInFilter({...product})
         }
       })

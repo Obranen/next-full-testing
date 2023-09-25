@@ -27,16 +27,16 @@ import FlagCountry, {IFlagCountryState} from '../../ui/FlagCountry/FlagCountry'
 import classes from './CreateProductForm.module.scss'
 import SelectBasic from '../../ui/SelectBasic/SelectBasic'
 import {ICategoryState} from '../../../interface/category'
-import {ISubCategoryState} from '../../../interface/subCategory'
+import {IFilterState} from '../../../interface/filter'
 import {fetchCategories} from '../../../async/category'
 import {useCategoryStore} from '../../../store/category'
 
 interface ICreateProductForm {
   categories: ICategoryState
-  subCategories: ISubCategoryState
+  filtersCategory: IFilterState
 }
 
-const CreateProductForm: FC<ICreateProductForm> = ({categories, subCategories}) => {
+const CreateProductForm: FC<ICreateProductForm> = ({categories, filtersCategory}) => {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const {data: session} = useSession()
@@ -145,7 +145,7 @@ const CreateProductForm: FC<ICreateProductForm> = ({categories, subCategories}) 
         quantity: data.quantity,
         stock: data.stock,
         category: optionCategory.id,
-        subCategory: optionSubCategory.value,
+        filter: optionSubCategory.value,
         images: [{
           alt: '',
           src: ''
@@ -381,8 +381,8 @@ const CreateProductForm: FC<ICreateProductForm> = ({categories, subCategories}) 
         </FormControl>
 
         <FormControl isInvalid={!optionSubCategory.value} marginTop={'20px'}>
-          <FormLabel>SubCategory</FormLabel>
-          <SelectBasic getCurrentOption={getCurrentOptionSubCategory} options={subCategories}/>
+          <FormLabel>filter</FormLabel>
+          <SelectBasic getCurrentOption={getCurrentOptionSubCategory} options={filtersCategory}/>
           <FormErrorMessage>{'Выберите категорию'}</FormErrorMessage>
         </FormControl>
 

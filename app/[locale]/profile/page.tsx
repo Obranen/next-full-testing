@@ -1,12 +1,12 @@
 import Profile from '../../../components/Profile/Profile'
 import {fetchCategories} from '../../../async/category'
-import {fetchSubCategories} from '../../../async/subCategory'
+import {fetchFilters} from '../../../async/filter'
 
 const ProfilePage = async () => {
   const categories = await fetchCategories()
-  const subCategories = await fetchSubCategories()
+  const filtersCategory = await fetchFilters()
   return (
-    <Profile categories={categories} subCategories={subCategories}/>
+    <Profile categories={categories} filtersCategory={filtersCategory}/>
   )
 }
 

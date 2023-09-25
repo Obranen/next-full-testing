@@ -1,27 +1,26 @@
 import {FC} from 'react'
 import {FormControl, FormLabel, VStack} from '@chakra-ui/react'
-import {ISubCategoryState} from '../../../interface/subCategory'
+import {IFilterState} from '../../../interface/filter'
 import FilterItem from './FilterItem/FilterItem'
 import {ICategoryState} from '../../../interface/category'
-import {IProductState} from '../../../interface/product'
 
 interface IFilter {
-  subCategories: ISubCategoryState[]
+  filtersCategory: IFilterState[]
   categories: ICategoryState[]
 }
 
-const Filter: FC<IFilter> = ({subCategories, categories}) => {
+const Filter: FC<IFilter> = ({filtersCategory, categories}) => {
 
-  if (subCategories.length === 1 || subCategories.length === 0) {
+  if (filtersCategory.length === 1 || filtersCategory.length === 0) {
     return <></>
   }
 
   return (
     <VStack align="stretch">
       <FormControl>
-        <FormLabel>{categories[0].label} ({subCategories.length})</FormLabel>
-        {subCategories.map((subCategory =>
-            <FilterItem key={subCategory.id} subCategory={subCategory} categories={categories}/>
+        <FormLabel>{categories[0].label} ({filtersCategory.length})</FormLabel>
+        {filtersCategory.map((filterCategory =>
+            <FilterItem key={filterCategory.id} filterCategory={filterCategory} categories={categories}/>
         ))}
       </FormControl>
     </VStack>

@@ -1,8 +1,7 @@
 import {IProductState} from '../../../interface/product'
 import {fetchProducts} from '../../../async/product'
 import Product from '../../../components/Product/Product'
-import {ISubCategoryState} from '../../../interface/subCategory'
-import {fetchSubCategories} from '../../../async/subCategory'
+import {fetchFilters} from '../../../async/filter'
 import {fetchCategories} from '../../../async/category'
 import {ICategoryState} from '../../../interface/category'
 
@@ -12,17 +11,17 @@ export const metadata = {
 }
 
 const PizzaPage = async () => {
-  const products: IProductState[] = await fetchProducts().then((data: IProductState[]) => {
-    return data.filter((product) => product.category === '64fb658a77d875fb65aebd2f')
+  const products = await fetchProducts().then((data: IProductState[]) => {
+    return data.filter((product) => product.category === '651193713611c6c9ad5199cd')
   })
-  const subCategories: ISubCategoryState[] = await fetchSubCategories().then((data) => {
-    return data.filter((subCategory: any) => subCategory.categoryId === '64fb658a77d875fb65aebd2f')
+  const filtersCategory = await fetchFilters().then((data: any[]) => {
+    return data.filter((filter) => filter.categoryId === '651193713611c6c9ad5199cd')
   })
-  const categories: ISubCategoryState[] = await fetchCategories().then((data: ICategoryState[]) => {
-    return data.filter((category) => category.id === '64fb658a77d875fb65aebd2f')
+  const categories = await fetchCategories().then((data: ICategoryState[]) => {
+    return data.filter((category) => category.id === '651193713611c6c9ad5199cd')
   })
   return (
-    <Product products={products} subCategories={subCategories} categories={categories}/>
+    <Product products={products} filtersCategory={filtersCategory} categories={categories}/>
   )
 }
 

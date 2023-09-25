@@ -5,16 +5,16 @@ import {Tab, TabList, TabPanel, TabPanels, Tabs} from '@chakra-ui/tabs'
 import CreateProductForm from './CreateProductForm/CreateProductForm'
 import CreateCategoryForm from './CreateCategoryForm/CreateCategoryForm'
 import {Heading} from '@chakra-ui/react'
-import CreateSubCategoryForm from './CreateSubCategoryForm/CreateSubCategoryForm'
+import CreateFilterForm from './CreateFilterForm/CreateFilterForm'
 import {ICategoryState} from '../../interface/category'
-import {ISubCategoryState} from '../../interface/subCategory'
+import {IFilterState} from '../../interface/filter'
 
 interface IProfile {
   categories: ICategoryState
-  subCategories: ISubCategoryState
+  filtersCategory: IFilterState
 }
 
-const Profile: FC<IProfile> = ({categories, subCategories}) => {
+const Profile: FC<IProfile> = ({categories, filtersCategory}) => {
   return (
     <>
       <Heading as={'h3'} size={'md'} textAlign={'left'} marginTop={'20px'} marginBottom={'10px'}>
@@ -23,7 +23,7 @@ const Profile: FC<IProfile> = ({categories, subCategories}) => {
       <Tabs orientation="vertical">
         <TabList width={'400px'} border={'1px solid #000'}>
           <Tab borderBottom={'1px solid #000'}>Category</Tab>
-          <Tab borderBottom={'1px solid #000'}>SubCategory</Tab>
+          <Tab borderBottom={'1px solid #000'}>filter</Tab>
           <Tab borderBottom={'1px solid #000'}>Product</Tab>
         </TabList>
 
@@ -32,10 +32,10 @@ const Profile: FC<IProfile> = ({categories, subCategories}) => {
             <CreateCategoryForm/>
           </TabPanel>
           <TabPanel>
-            <CreateSubCategoryForm categories={categories}/>
+            <CreateFilterForm categories={categories}/>
           </TabPanel>
           <TabPanel>
-            <CreateProductForm categories={categories} subCategories={subCategories}/>
+            <CreateProductForm categories={categories} filtersCategory={filtersCategory}/>
           </TabPanel>
         </TabPanels>
       </Tabs>

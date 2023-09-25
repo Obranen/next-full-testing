@@ -9,10 +9,10 @@ export const fetchProducts = async () => {
 }
 
 export const createProduct = async (data: IProductState) => {
-  const {id, imageAlt, imageSrc, titleEn, titleRu, titleUa, images, weight, descEn, descRu, descUa, currencyEn, currencyRu, currencyUa, price, quantity, stock, category, subCategory} = data
+  const {id, imageAlt, imageSrc, titleEn, titleRu, titleUa, images, weight, descEn, descRu, descUa, currencyEn, currencyRu, currencyUa, price, quantity, stock, category, filter} = data
   const response = await fetch(`/api/product/${id}`, {
     method: 'POST',
-    body: JSON.stringify({imageAlt, imageSrc, titleEn, titleRu, titleUa, images, weight, descEn, descRu, descUa, currencyEn, currencyRu, currencyUa, price, quantity, stock, category, subCategory})
+    body: JSON.stringify({imageAlt, imageSrc, titleEn, titleRu, titleUa, images, weight, descEn, descRu, descUa, currencyEn, currencyRu, currencyUa, price, quantity, stock, category, filter})
   })
   return response.json()
 }

@@ -1,34 +1,34 @@
 import {ChangeEvent, FC, useEffect, useState} from 'react'
 import {Checkbox} from '@chakra-ui/checkbox'
-import {ISubCategoryState} from '../../../../interface/subCategory'
+import {IFilterState} from '../../../../interface/filter'
 import {useRouter, useSearchParams} from 'next/navigation'
 import {ICategoryState} from '../../../../interface/category'
 
 interface IFilterItem {
-  subCategory: ISubCategoryState
+  filterCategory: IFilterState
   categories: ICategoryState[]
 }
 
-const FilterItem: FC<IFilterItem> = ({subCategory, categories}) => {
+const FilterItem: FC<IFilterItem> = ({filterCategory, categories}) => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [checkedInput, setCheckedInput] = useState(false)
   const paramsURL = new URLSearchParams(searchParams.toString())
 
   const addURLParams = () => {
-    paramsURL.append(categories[0].value, subCategory.value)
+    paramsURL.append(categories[0].value, filterCategory.value)
     router.push(`?${paramsURL}`)
   }
   
   const removeURLParams = () => {
     // @ts-ignore
-    paramsURL.delete(categories[0].value, subCategory.value)
+    paramsURL.delete(categories[0].value, filterCategory.value)
     router.push(`?${paramsURL}`)
   }
   
   const isCheckedInput = () => {
     // @ts-ignore
-    if (paramsURL.has(categories[0].value, subCategory.value)) {
+    if (paramsURL.has(categories[0].value, filterCategory.value)) {
       setCheckedInput(true)
     }
   }
@@ -52,11 +52,11 @@ const FilterItem: FC<IFilterItem> = ({subCategory, categories}) => {
     <Checkbox
       colorScheme="green"
       onChange={checkboxChange}
-      key={subCategory.id}
+      key={filterCategory.id}
       display={'block'}
       isChecked={checkedInput}
     >
-      {subCategory.label}
+      {filterCategory.label}
     </Checkbox>
   )
 }

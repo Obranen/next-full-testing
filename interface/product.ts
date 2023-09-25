@@ -22,7 +22,7 @@ export interface IProductState {
   quantity: number
   stock: number
   category: string
-  subCategory: string
+  filter: string
   createdAt?: Date
   updatedAt?: Date
 }

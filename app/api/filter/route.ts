@@ -3,8 +3,8 @@ import {NextResponse} from 'next/server'
 
 export const GET = async () => {
   try {
-    const category = await prisma.subCategory.findMany()
-    return NextResponse.json(category)
+    const filters = await prisma.filter.findMany()
+    return NextResponse.json(filters)
   } catch (e) {
     return NextResponse.json({message: 'Error...', e}, {status: 500})
   }

@@ -2,18 +2,18 @@ import {useEffect, useState} from 'react'
 import {Controller, SubmitHandler, useForm, useFormState} from 'react-hook-form'
 import {ICategoryState} from '../../../interface/category'
 import {Button, Center, Container, FormControl, FormErrorMessage, FormLabel, Heading, Input} from '@chakra-ui/react'
-import {createSubCategory} from '../../../async/subCategory'
+import {createFilter} from '../../../async/filter'
 import SelectBasic from '../../ui/SelectBasic/SelectBasic'
 
 import {FC} from 'react'
 import {fetchCategories} from '../../../async/category'
 import {useCategoryStore} from '../../../store/category'
 
-interface ICreateSubCategoryForm {
+interface ICreateFilterForm {
   categories: ICategoryState
 }
 
-const CreateSubCategoryForm: FC<ICreateSubCategoryForm> = ({categories}) => {
+const CreateFilterForm: FC<ICreateFilterForm> = ({categories}) => {
   const [isLoading, setIsLoading] = useState(false)
   const [optionCategory, setOptionCategory] = useState<ICategoryState>({id: '', value: '', label: ''})
   const updateCategoryAfterCreate = useCategoryStore(state => state.updateCategoryAfterCreate)
@@ -41,7 +41,7 @@ const CreateSubCategoryForm: FC<ICreateSubCategoryForm> = ({categories}) => {
     if (!optionCategory?.value) return
     setIsLoading(true)
 
-    await createSubCategory({
+    await createFilter({
       id: optionCategory.id,
       value: data.value,
       label: data.label
@@ -54,7 +54,7 @@ const CreateSubCategoryForm: FC<ICreateSubCategoryForm> = ({categories}) => {
   return (
     <Container>
       <Heading as={'h3'} size={'lg'} textAlign={'center'} marginTop={'20px'}>
-        Create subCategory
+        Create filter
       </Heading>
       <form onSubmit={handleSubmit(onSubmit)} style={{marginBottom: '20px'}}>
         <Controller
@@ -114,4 +114,4 @@ const CreateSubCategoryForm: FC<ICreateSubCategoryForm> = ({categories}) => {
   )
 }
 
-export default CreateSubCategoryForm
+export default CreateFilterForm

@@ -1,10 +1,9 @@
-import {FC, useEffect, useState} from 'react'
+import {FC, useEffect} from 'react'
 import {IProductState} from '../../../interface/product'
 import {Heading} from '@chakra-ui/react'
 import ProductItem from './ProductItem/ProductItem'
 import {useFilterProductStore} from '../../../store/filterProduct'
 import {useSearchParams} from 'next/navigation'
-import LoadingMessage from '../../ui/LoadingMessage/LoadingMessage'
 
 interface IProductList {
   products: IProductState[]

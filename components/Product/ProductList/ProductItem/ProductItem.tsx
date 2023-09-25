@@ -1,9 +1,8 @@
-import {FC, useEffect} from 'react'
+import {FC} from 'react'
 import {IProductState} from '../../../../interface/product'
 import Image from 'next/image'
 import {Box, Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Heading, Stack, Text} from '@chakra-ui/react'
 import {useLocale, useTranslations} from 'next-intl'
-import {useSearchParams} from 'next/navigation'
 
 interface IProductItem {
   product: IProductState
@@ -12,14 +11,6 @@ interface IProductItem {
 const ProductItem: FC<IProductItem> = ({product}) => {
   const locale = useLocale()
   const tProduct = useTranslations('Product')
-  const searchParams = useSearchParams()
-
-  // @ts-ignore
-  for (const value of searchParams.values()) {
-    if (value !== product.subCategory) {
-      return <></>
-    }
-  }
 
   return (
     <Box>

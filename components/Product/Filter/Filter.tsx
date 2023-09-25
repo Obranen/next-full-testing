@@ -8,10 +8,9 @@ import {IProductState} from '../../../interface/product'
 interface IFilter {
   subCategories: ISubCategoryState[]
   categories: ICategoryState[]
-  products: IProductState[]
 }
 
-const Filter: FC<IFilter> = ({subCategories, categories, products}) => {
+const Filter: FC<IFilter> = ({subCategories, categories}) => {
 
   if (subCategories.length === 1 || subCategories.length === 0) {
     return <></>
@@ -22,7 +21,7 @@ const Filter: FC<IFilter> = ({subCategories, categories, products}) => {
       <FormControl>
         <FormLabel>{categories[0].label} ({subCategories.length})</FormLabel>
         {subCategories.map((subCategory =>
-            <FilterItem key={subCategory.id} subCategory={subCategory} products={products} categories={categories}/>
+            <FilterItem key={subCategory.id} subCategory={subCategory} categories={categories}/>
         ))}
       </FormControl>
     </VStack>

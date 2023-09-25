@@ -1,17 +1,15 @@
 import {ChangeEvent, FC, useEffect, useState} from 'react'
 import {Checkbox} from '@chakra-ui/checkbox'
 import {ISubCategoryState} from '../../../../interface/subCategory'
-import {IProductState} from '../../../../interface/product'
 import {useRouter, useSearchParams} from 'next/navigation'
 import {ICategoryState} from '../../../../interface/category'
 
 interface IFilterItem {
   subCategory: ISubCategoryState
-  products: IProductState[]
   categories: ICategoryState[]
 }
 
-const FilterItem: FC<IFilterItem> = ({subCategory, categories, products}) => {
+const FilterItem: FC<IFilterItem> = ({subCategory, categories}) => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [checkedInput, setCheckedInput] = useState(false)

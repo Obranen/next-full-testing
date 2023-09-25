@@ -7,7 +7,7 @@ import {useCategoryStore} from '../../../store/category'
 
 const CreateCategoryForm = () => {
   const [isLoading, setIsLoading] = useState(false)
-  const setCategoryUpdate = useCategoryStore(state => state.setCategoryUpdate)
+  const setUpdateCategoryAfterCreate = useCategoryStore(state => state.setUpdateCategoryAfterCreate)
 
   const {
     handleSubmit,
@@ -19,7 +19,7 @@ const CreateCategoryForm = () => {
   const {errors} = useFormState({control})
   const onSubmit: SubmitHandler<ICategoryState> = async (data) => {
     setIsLoading(true)
-    setCategoryUpdate(true)
+    setUpdateCategoryAfterCreate(true)
 
     await createCategory({
       id: data.id,
@@ -27,7 +27,7 @@ const CreateCategoryForm = () => {
       label: data.label,
     }).finally(() => {
       setIsLoading(false)
-      setCategoryUpdate(false)
+      setUpdateCategoryAfterCreate(false)
       reset()
     })
   }

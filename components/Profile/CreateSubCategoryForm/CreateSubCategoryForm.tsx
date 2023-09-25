@@ -16,7 +16,7 @@ interface ICreateSubCategoryForm {
 const CreateSubCategoryForm: FC<ICreateSubCategoryForm> = ({categories}) => {
   const [isLoading, setIsLoading] = useState(false)
   const [optionCategory, setOptionCategory] = useState<ICategoryState>({id: '', value: '', label: ''})
-  const categoryUpdate = useCategoryStore(state => state.categoryUpdate)
+  const updateCategoryAfterCreate = useCategoryStore(state => state.updateCategoryAfterCreate)
   const [category, setCategory] = useState(categories)
 
   const getCurrentOptionCategory = (option: any) => {
@@ -27,7 +27,7 @@ const CreateSubCategoryForm: FC<ICreateSubCategoryForm> = ({categories}) => {
     fetchCategories().then(data => {
       setCategory(data)
     })
-  }, [categoryUpdate])
+  }, [updateCategoryAfterCreate])
 
   const {
     handleSubmit,

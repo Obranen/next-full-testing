@@ -1,11 +1,11 @@
 import {create} from 'zustand'
 
 interface IUseCategoryStore {
-  categoryUpdate: boolean,
-  setCategoryUpdate: (isState: boolean) => void,
+  updateCategoryAfterCreate: boolean,
+  setUpdateCategoryAfterCreate: (isState: boolean) => void,
 }
 
 export const useCategoryStore = create<IUseCategoryStore>((set) => ({
-  categoryUpdate: false,
-  setCategoryUpdate: (isState: boolean) => set({categoryUpdate: isState})
+  updateCategoryAfterCreate: false,
+  setUpdateCategoryAfterCreate: (isState: boolean) => set({updateCategoryAfterCreate: isState})
 }))

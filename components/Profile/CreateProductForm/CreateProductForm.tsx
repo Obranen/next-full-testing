@@ -46,7 +46,7 @@ const CreateProductForm: FC<ICreateProductForm> = ({categories, subCategories}) 
   const [isVisibleUa, setIsVisibleUa] = useState(false)
   const [optionCategory, setOptionCategory] = useState<ICategoryState>({id: '', value: '', label: ''})
   const [optionSubCategory, setOptionSubCategory] = useState<ICategoryState>({id: '', value: '', label: ''})
-  const categoryUpdate = useCategoryStore(state => state.categoryUpdate)
+  const updateCategoryAfterCreate = useCategoryStore(state => state.updateCategoryAfterCreate)
   const [category, setCategory] = useState(categories)
 
   const flags: IFlagCountryState[] = [
@@ -176,7 +176,7 @@ const CreateProductForm: FC<ICreateProductForm> = ({categories, subCategories}) 
     fetchCategories().then(data => {
       setCategory(data)
     })
-  }, [categoryUpdate])
+  }, [updateCategoryAfterCreate])
 
   return (
     <Container>

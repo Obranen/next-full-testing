@@ -12,6 +12,7 @@ import {
 import {AiOutlineMenu, AiOutlineMenuFold} from 'react-icons/ai'
 import {usePathname} from 'next-intl/client'
 import NavbarItem from './NavbarItem/NavbarItem'
+import ToggleTheme from '../ToggleTheme/ToggleTheme'
 
 export interface INavigation {
   id: number
@@ -78,6 +79,7 @@ const Navbar = () => {
   return (
     <nav>
       <Button variant={'ghost'} colorScheme="blue" onClick={onOpen}><AiOutlineMenu/></Button>
+      <ToggleTheme/>
       <Drawer placement={'left'} onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay/>
         <DrawerContent>

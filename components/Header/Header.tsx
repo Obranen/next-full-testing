@@ -3,6 +3,7 @@
 import Navbar from './Navbar/Navbar'
 import {Box, SimpleGrid} from '@chakra-ui/react'
 import Language from './Language/Language'
+import ToggleTheme from './ToggleTheme/ToggleTheme'
 
 const Header = () => {
   return (

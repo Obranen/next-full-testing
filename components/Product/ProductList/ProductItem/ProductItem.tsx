@@ -19,16 +19,19 @@ const ProductItem: FC<IProductItem> = ({product}) => {
           <Image
             src={`/images/product/${product.imageSrc}`}
             alt={product.imageAlt}
-            width={500}
-            height={500}
+            width={324}
+            height={202}
+            style={{maxWidth: '324px', maxHeight: '202px'}}
           />
           <Stack mt="6" spacing="3">
-            <Heading size="md">
+            <Heading
+              minHeight={'58px'}
+            >
               {locale === 'en' && product.titleEn}
               {locale === 'ru' && product.titleRu}
               {locale === 'ua' && product.titleUa}
             </Heading>
-            <Text>
+            <Text noOfLines={3} minHeight={'72px'}>
               {locale === 'en' && product.descEn}
               {locale === 'ru' && product.descRu}
               {locale === 'ua' && product.descUa}

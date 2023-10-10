@@ -1,5 +1,5 @@
 import {FC} from 'react'
-import {FormControl, FormLabel, VStack} from '@chakra-ui/react'
+import {FormControl, FormLabel, GridItem} from '@chakra-ui/react'
 import {IFilterState} from '../../../interface/filter'
 import FilterItem from './FilterItem/FilterItem'
 import {ICategoryState} from '../../../interface/category'
@@ -16,14 +16,14 @@ const Filter: FC<IFilter> = ({filtersCategory, categories}) => {
   }
 
   return (
-    <VStack align="stretch">
+    <GridItem colSpan={1}>
       <FormControl>
         <FormLabel>{categories[0].label} ({filtersCategory.length})</FormLabel>
         {filtersCategory.map((filterCategory =>
             <FilterItem key={filterCategory.id} filterCategory={filterCategory} categories={categories}/>
         ))}
       </FormControl>
-    </VStack>
+    </GridItem>
   )
 }
 

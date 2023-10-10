@@ -1,4 +1,14 @@
-import {Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, useDisclosure} from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
+  Text,
+  useDisclosure
+} from '@chakra-ui/react'
 import {AiOutlineMenu, AiOutlineMenuFold} from 'react-icons/ai'
 import {usePathname} from 'next-intl/client'
 import NavbarItem from './NavbarItem/NavbarItem'
@@ -72,10 +82,16 @@ const Navbar = () => {
         <DrawerOverlay/>
         <DrawerContent>
           <DrawerHeader borderBottomWidth="1px">
-            <Button variant={'ghost'} colorScheme="blue" onClick={onClose}>
-              <AiOutlineMenuFold/>
-            </Button>
-            Menu
+            <div onClick={onClose} style={{cursor: 'pointer'}}>
+              <AiOutlineMenuFold fontSize={'56px'} style={{display: 'inline'}}/>
+              <Text
+                bgClip="text"
+                fontSize="6xl"
+                fontWeight="extrabold"
+                bgGradient="linear(to-l, red, orange)"
+                display={'inline'}
+              >Menu</Text>
+            </div>
           </DrawerHeader>
           <DrawerBody padding={0}>
             {navigation.map((nav) =>

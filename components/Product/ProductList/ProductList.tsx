@@ -1,6 +1,6 @@
 import {FC, useEffect} from 'react'
 import {IProductState} from '../../../interface/product'
-import {Heading} from '@chakra-ui/react'
+import {GridItem, Heading, SimpleGrid} from '@chakra-ui/react'
 import ProductItem from './ProductItem/ProductItem'
 import {useFilterProductStore} from '../../../store/filterProduct'
 import {useSearchParams} from 'next/navigation'
@@ -39,16 +39,18 @@ const ProductList: FC<IProductList> = ({products}) => {
   }
 
   return (
-    <>
-      {productsFilter.length === 0 ?
-        products.map((product: IProductState) =>
-          <ProductItem key={product.id} product={product}/>
-        ) :
-        productsFilter.map((product: IProductState) =>
-          <ProductItem key={product.id} product={product}/>
-        )
-      }
-    </>
+    <GridItem colSpan={4}>
+      <SimpleGrid columns={4} spacing={4} marginRight={'15px'}>
+        {productsFilter.length === 0 ?
+          products.map((product: IProductState) =>
+            <ProductItem key={product.id} product={product}/>
+          ) :
+          productsFilter.map((product: IProductState) =>
+            <ProductItem key={product.id} product={product}/>
+          )
+        }
+      </SimpleGrid>
+    </GridItem>
   )
 }
 

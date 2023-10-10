@@ -3,7 +3,7 @@
 import {FC} from 'react'
 import {IProductState} from '../../interface/product'
 import ProductList from './ProductList/ProductList'
-import {SimpleGrid} from '@chakra-ui/react'
+import {Grid} from '@chakra-ui/react'
 import Filter from './Filter/Filter'
 import {IFilterState} from '../../interface/filter'
 import {ICategoryState} from '../../interface/category'
@@ -18,10 +18,14 @@ interface IProductProps {
 const Product: FC<IProductProps> = ({products, filtersCategory, categories}) => {
   return (
     <>
-      <SimpleGrid columns={5} spacing={3}>
+      <Grid
+        templateRows='repeat(1, 1fr)'
+        templateColumns='repeat(5, 1fr)'
+        gap={2}
+      >
         <Filter filtersCategory={filtersCategory} categories={categories}/>
         <ProductList products={products}/>
-      </SimpleGrid>
+      </Grid>
     </>
   )
 }
